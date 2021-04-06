@@ -1,8 +1,8 @@
 module.exports = {
-    HOST: "64.225.52.26",
-    USER: "super_admin",
-    PASSWORD: "DientesBlancos_2020",
-    DB: "dental_friends",
+    HOST: "67.205.165.126",
+    USER: "admin",
+    PASSWORD: "dentalfriends",
+    DB: "dentalfriends",
     dialect: "postgres",
     pool: {
       max: 5,

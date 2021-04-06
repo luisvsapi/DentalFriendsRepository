@@ -3,7 +3,7 @@ const db = require('./db');
 const appointment = require('./appointment')
 
 var pacient = db.define('pacient', {
-    id: { type: Sequelize.STRING, primaryKey: true, autoIncrement: true },
+    id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
     id_card_pacient: { type: Sequelize.STRING },
     name_pacient: { type: Sequelize.STRING},
     lastname_pacient: { type: Sequelize.STRING},
