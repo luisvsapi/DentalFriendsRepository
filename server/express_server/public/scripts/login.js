@@ -21,7 +21,7 @@ $("#formLogin").submit(function (e) {
                 sessionStorage.setItem("username", res.username) 
                 sessionStorage.setItem("token", res.token) 
                 sessionStorage.setItem("idUser", res.idUser) 
-                location.replace(`/home`)            
+                location.replace(`./`)            
             } else {
                 alertify.error('Credenciales invalidas');             
                 resetCredentials();      

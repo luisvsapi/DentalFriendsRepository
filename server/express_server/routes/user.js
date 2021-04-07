@@ -209,9 +209,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.put('/formRecord', jwtSecurity.authenticateJWT , async (req, res, next) => { 
-  console.log();('entre aqui')
   let requestBody = req.body;
-  console.log(requestBody.id_card_pacient); 
   pacientModel.update(
     {id_card_pacient: requestBody.id_card_pacient,
      name_pacient: requestBody.name_pacient,

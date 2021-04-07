@@ -52,14 +52,19 @@
                     </div><br>
                     <div class="form-row">
                         <div class="col-md-1"></div>
-                        <input id="sendLogin" class="btn btn-primary center col-md-10" type="submit" name="commit" value="Login">
+                        <% if(action=='register') { %>
+                            <input id="sendLogin" class="btn btn-primary center col-md-10" type="submit" name="commit" value="Registrarse">
+                        <% } else { %>
+                            <input id="sendLogin" class="btn btn-primary center col-md-10" type="submit" name="commit" value="Ingresar">
+                        <% } %>
                         <div class="col-md-1"></div>
                      </div><br>
+                     
                     <% if(action!='register') { %> 
                         <div class="form-row">
                             <div class="col-md-1"></div>
                             <label class="col-form-label col-md-10 d-flex justify-content-between">
-                                <a href="/register">Registrarse</a> - <a href="/home">Modo invitado</a> 
+                                <a href="/register">Registrarse</a> - <a href="/">Modo invitado</a> 
                             </label>
                             <div class="col-md-1"></div>
                         </div> 

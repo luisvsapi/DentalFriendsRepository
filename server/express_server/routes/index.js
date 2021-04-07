@@ -9,15 +9,18 @@ const userDetailsModel = require('../models/userDetails');
  GET METHODS 
 */
 router.get('/', function (req, res, next) {
+  //consultrar en db con el token, que tipod  de user para decidir entre las 3 interfaces
+  //si esta logeado mostrar el boton Salir
+  //else 
+  res.render(`home`, {})
+});
+
+router.get('/login', function (req, res, next) {
   res.render('login', { action: 'login' })
 });
 
 router.get('/register', function (req, res, next) {
   res.render('login', { action: 'register' })
-});
-
-router.get('/home', function (req, res, next) {
-  res.render(`home`, {})
 });
 
 router.get('/aboutus', function (req, res, next) {  
@@ -105,9 +108,4 @@ router.post('/register', async (req, res, next) => {
   }
 })
 
-
-
 module.exports = router;
-
- 
-
