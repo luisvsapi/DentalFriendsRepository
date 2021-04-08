@@ -23,7 +23,7 @@ router.get('/register', function (req, res, next) {
   res.render('login', { action: 'register' })
 });
 
-router.get('/aboutus', function (req, res, next) {  
+router.get('/aboutus', jwtSecurity.authenticateJWT, function (req, res, next) {  
   res.render(`aboutus`, {})
 });
 

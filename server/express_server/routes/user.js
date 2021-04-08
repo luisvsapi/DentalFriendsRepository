@@ -20,6 +20,7 @@ router.get('/profile', function (req, res, next) {
 })
 
 router.get('/medicalRecord', function (req, res, next) {
+  
   res.render(`medicalRecord`, {})
 });
 
@@ -33,6 +34,7 @@ router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
  POST METHODS 
 */
 router.put('/formProfile', jwtSecurity.authenticateJWT , async (req, res, next) => { //cambio a put, prueba
+  
   let requestBody = req.body;
   let dict = {
     "birthday": requestBody.birth,
