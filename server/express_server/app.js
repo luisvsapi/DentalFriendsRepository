@@ -38,7 +38,9 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: 'FBC71CE36CC20790F2EEED2197898E71', resave: false,
+  secret: 'FBC71CE36CC20790F2EEED2197898E71',
+  resave: false,
+  httpOnly: true,
   saveUninitialized: true,
   cookie: { secure: true }, cookie: { maxAge: 60000 }
 }))
