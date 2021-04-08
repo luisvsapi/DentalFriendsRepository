@@ -24,9 +24,13 @@ router.get('/medicalRecord', function (req, res, next) {
   res.render(`medicalRecord`, {})
 });
 
-router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
+router.get('/home', function (req,res,next){
+  res.render(`homeUser`,{})
+})
+
+/*router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.send({ message: 'Tu estas autorizado' })
-});
+});*/
 
 
 
