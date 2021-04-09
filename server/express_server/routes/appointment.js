@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+const jwtSecurity = require('../configs/jwtAuth.js')
 const userModel = require('../models/user')
 const userDetailsModel = require("../models/userDetails")
 const pacientModel = require('../models/pacient')
@@ -8,7 +9,7 @@ var validator = require('validator');
 const { Op } = require("sequelize");
 const utils = require('../scripts/utils.js');
 
-router.get('/byUser/:idUser', async (req, res, next) => {
+router.get('/byUser/:idUser', jwtSecurity.authenticateJWT , async (req, res, next) => {
   try {
     if (validator.isInt(req.params.idUser)) {
       let appointments = await appointment.findAll(
@@ -31,7 +32,7 @@ router.get('/byUser/:idUser', async (req, res, next) => {
   }
 })
 
-router.post('/setAppointment', async (req, res, next) => {
+router.post('/setAppointment', jwtSecurity.authenticateJWT , async (req, res, next) => {
   let requestBody = req.body
   console.log(requestBody);
   try {
@@ -55,7 +56,7 @@ router.post('/setAppointment', async (req, res, next) => {
   }
 })
 
-router.post('/insert', async (req, res, next) => {
+router.post('/insert', jwtSecurity.authenticateJWT, async (req, res, next) => {
   let requestBody = req.body
   try {
     requestBody.state = 0
@@ -75,7 +76,7 @@ router.post('/insert', async (req, res, next) => {
   }
 })
 
-router.delete('/delete', async (req, res, next) => {
+router.delete('/delete', jwtSecurity.authenticateJWT, async (req, res, next) => {
   let requestBody = req.body
   console.log(requestBody);
   try { 

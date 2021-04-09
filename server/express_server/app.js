@@ -9,7 +9,7 @@ var session = require('express-session')
 // ENRUTADORES
 /////////////////////////
 /////////////////////////
-var adminRouter = require('./routes/adminRoute')
+//var adminRouter = require('./routes/adminRoute')
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var appointmentRouter = require('./routes/appointment');
@@ -49,7 +49,7 @@ app.use(session({
 /////////////////////////
 /////////////////////////
 
-app.use('/admin', adminRouter);
+//app.use('/admin', adminRouter);
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/appointment', appointmentRouter);

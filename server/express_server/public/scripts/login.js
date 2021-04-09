@@ -18,7 +18,7 @@ $("#formLogin").submit(function (e) {
             username: $("#username").val(), password: $("#password").val()
         }).then((res) => { 
             if (res.token !== undefined) {   
-                location.replace(`./`)            
+                location.replace(`./user/home`)            
             } else {
                 alertify.error('Credenciales invalidas');             
                 resetCredentials();      

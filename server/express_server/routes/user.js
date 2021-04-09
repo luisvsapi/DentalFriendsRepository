@@ -28,7 +28,7 @@ router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
   res.render(`homeUser`,{})
 })
 
-router.post('/', function (req, res, next) {
+router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.send({ message: 'Tu estas autorizado' })
 });
 
@@ -50,7 +50,7 @@ router.put('/formProfile', jwtSecurity.authenticateJWT , async (req, res, next) 
   };
   //search the user in the db req.user.username usar .id_details
   const doctor=  await userModel.findOne({
-    where: {user_name: req.user.username},
+    where: {user_name: req.cookies.user},
     raw: true
   }).then(dbresponse => {
     if(dbresponse){
@@ -84,7 +84,7 @@ router.put('/formProfile', jwtSecurity.authenticateJWT , async (req, res, next) 
   });
 })
 
-router.post('/medicalResume', async (req, res, next) => {
+router.post('/medicalResume', jwtSecurity.authenticateJWT, async (req, res, next) => {
   try {
     let requestBody = req.body;
     const medicalResume = await appointment.findAll({
@@ -165,7 +165,7 @@ router.post('/medicalResume', async (req, res, next) => {
   }
 })
 
-router.post('/medicalResume/details', async (req, res, next) => {
+router.post('/medicalResume/details',  jwtSecurity.authenticateJWT, async (req, res, next) => {
   try {
     let requestBody = req.body;
     const detalles = await appointment.findOne({
@@ -181,7 +181,7 @@ router.post('/medicalResume/details', async (req, res, next) => {
   }
 })
 
-router.get('/all', async (req, res, next) => {
+router.get('/all', jwtSecurity.authenticateJWT , async (req, res, next) => {
   try {
     const users = await userModel.findAll({attributes: { exclude: ['password'] }, 
       include: [userDetailsModel]}); 
@@ -192,7 +192,7 @@ router.get('/all', async (req, res, next) => {
   }
 })
 
-router.get('/allAppoinment', async (req, res, next) => {
+router.get('/allAppoinment', jwtSecurity.authenticateJWT , async (req, res, next) => {
   try {
     const users = await userModel.findAll({attributes: { exclude: ['password'] }}); 
     res.send(users)
@@ -202,7 +202,7 @@ router.get('/allAppoinment', async (req, res, next) => {
   }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', jwtSecurity.authenticateJWT , async (req, res, next) => {
   try {
     if(validator.isInt(req.params.id)){
       let user = await userModel.findOne({ where: { id: req.params.id }, attributes: { exclude: ['password'] } })
