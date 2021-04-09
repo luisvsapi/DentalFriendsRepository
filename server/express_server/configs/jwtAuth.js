@@ -3,21 +3,23 @@ const keySecret = "FBC71CE36CC20790F2EEED2197898E71"
 
 const authenticateJWT = (req, res, next) => {
     if (req.cookies && req.cookies.token) {
+        console.log("entro al if de cookies");
         jwt.verify(req.cookies.token, keySecret, (err, user) => {
             if (err) {
-                //res.locals.message = 'Forbidden';
-                //res.locals.error = { status: '403', stack: 'Acceso no permitido' }
-                //res.render('error')
                 return res.sendStatus(403);
             }
+            console.log("entro midd")
             req.user = user;
             next();   
         })
     } else {
-        //res.locals.message = 'Forbidden';
+        console.log("entro al else de cookies");
+        //res.locals.message = 'No authorized';
         //res.locals.error = { status: '403', stack: 'Acceso no permitido' }
         //res.render('error')
+        //res.sendStatus(401);
         res.sendStatus(401);
+        
     }
 }
 /*

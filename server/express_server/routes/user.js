@@ -11,26 +11,26 @@ const jwtSecurity = require('../configs/jwtAuth.js')
 const user = require('../models/user')
 const pacient = require('../models/pacient') 
 
-router.get('/medicalResume', function (req, res, next) {
+router.get('/medicalResume', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.render(`medicalResume`, {resume: {}})
 })
 
-router.get('/profile', function (req, res, next) {
+router.get('/profile', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.render(`profile`, {})
 })
 
-router.get('/medicalRecord', function (req, res, next) {
-  
+router.get('/medicalRecord', jwtSecurity.authenticateJWT, function (req, res, next) {
+  console.log('medical');
   res.render(`medicalRecord`, {})
 });
 
-router.get('/home', function (req,res,next){
+router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
   res.render(`homeUser`,{})
 })
 
-/*router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
+router.post('/', function (req, res, next) {
   res.send({ message: 'Tu estas autorizado' })
-});*/
+});
 
 
 

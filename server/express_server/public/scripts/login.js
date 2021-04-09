@@ -8,7 +8,7 @@ $("#formLogin").submit(function (e) {
         }).then((res) => { 
             console.log(res);
             if (res.message == 1) {  
-                location.replace('/')            
+                location.replace('/login')            
             } else {
                 alertify.error('Un error al crear usuario');
             }  
@@ -17,10 +17,7 @@ $("#formLogin").submit(function (e) {
         postFetch("/login", {
             username: $("#username").val(), password: $("#password").val()
         }).then((res) => { 
-            if (res.token !== undefined) {  
-                sessionStorage.setItem("username", res.username) 
-                sessionStorage.setItem("token", res.token) 
-                sessionStorage.setItem("idUser", res.idUser) 
+            if (res.token !== undefined) {   
                 location.replace(`./`)            
             } else {
                 alertify.error('Credenciales invalidas');             
