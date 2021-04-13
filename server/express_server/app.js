@@ -75,4 +75,7 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
 module.exports = app;

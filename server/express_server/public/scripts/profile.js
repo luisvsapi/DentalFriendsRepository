@@ -1,6 +1,6 @@
 $("#formProfile").submit(function(e){
     e.preventDefault();
-    putFetch("/user/formProfile", {//cambi post a put
+    putFetch("/user/formProfile", {
         idCard: $("#id_card").val(),
         picture_url: $("#picture_url").val(),
         address: $("#address").val(),
