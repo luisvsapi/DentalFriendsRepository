@@ -22,6 +22,7 @@ let storage = multer.diskStorage({
   }
 })
 const upload = multer({storage});
+const {treatments} = require("../scripts/constants.js");
 
 
 
@@ -207,6 +208,26 @@ router.get('/allAppoinment', jwtSecurity.authenticateJWT , async (req, res, next
   try {
     const users = await userModel.findAll({attributes: { exclude: ['password'] }}); 
     res.send(users)
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500)
+  }
+})
+
+router.get('/allDoctors', jwtSecurity.authenticateJWT , async (req, res, next) => {
+  try {
+    const users = await userModel.findAll({attributes: { exclude: ['password'] }}); 
+    res.send(users)
+  } catch (error) {
+    console.log(error)
+    res.sendStatus(500)
+  }
+})
+
+router.get('/allTreatments', async (req, res, next) => {
+  try {
+    console.log("Tratamientos:",treatments)
+    res.send(treatments)
   } catch (error) {
     console.log(error)
     res.sendStatus(500)
