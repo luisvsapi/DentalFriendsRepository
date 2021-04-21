@@ -81,7 +81,15 @@
           </div>
 
           <div class="mt-5 mt-lg-0">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form id="saveAppointment" method="post" role="form" class="php-email-form">
+              <div class="form-row">
+                <div class="col-md-2"></div>
+                <label class="col-form-label col-md-2">Cédula:</label>
+                <div class="col-md-6 form-group">
+                  <input class="form-control" id="cedPac"/>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
               <div class="form-row">
                 <div class="col-md-2"></div>
                 <label class="col-form-label col-md-2">Nombres:</label>
@@ -130,6 +138,13 @@
                 <div class="col-md-6 form-group">
                   <p>Calendario</p>
                 </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-2"></div>
+                <button type="submit" class="form-group btn btn-primary">
+                  Agendar
+                </button>
                 <div class="col-md-2"></div>
               </div>
             </form>

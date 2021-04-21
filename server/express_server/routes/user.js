@@ -206,7 +206,7 @@ router.get('/all', jwtSecurity.authenticateJWT , async (req, res, next) => {
 
 router.get('/allAppoinment', jwtSecurity.authenticateJWT , async (req, res, next) => {
   try {
-    const users = await userModel.findAll({attributes: { exclude: ['password'] }}); 
+    const users = await userModel.findAll({attributes: { exclude: ['password'] }});
     res.send(users)
   } catch (error) {
     console.log(error)
@@ -214,9 +214,9 @@ router.get('/allAppoinment', jwtSecurity.authenticateJWT , async (req, res, next
   }
 })
 
-router.get('/allDoctors', jwtSecurity.authenticateJWT , async (req, res, next) => {
+router.get('/allDoctors', async (req, res, next) => {
   try {
-    const users = await userModel.findAll({attributes: { exclude: ['password'] }}); 
+    const users = await userModel.findAll({attributes: { exclude: ['password'] }});
     res.send(users)
   } catch (error) {
     console.log(error)
@@ -226,7 +226,6 @@ router.get('/allDoctors', jwtSecurity.authenticateJWT , async (req, res, next) =
 
 router.get('/allTreatments', async (req, res, next) => {
   try {
-    console.log("Tratamientos:",treatments)
     res.send(treatments)
   } catch (error) {
     console.log(error)

@@ -32,23 +32,33 @@ router.get('/byUser/:idUser', jwtSecurity.authenticateJWT , async (req, res, nex
   }
 })
 
-router.post('/setAppointment', jwtSecurity.authenticateJWT , async (req, res, next) => {
+router.post('/setAppointment', async (req, res, next) => {
   let requestBody = req.body
-  console.log(requestBody);
+  //console.log(requestBody);
   try {
     let pacient = await pacientModel.findOne({ where: { id_card_pacient: requestBody.id_card_pacient } });
     if (pacient == null) {
       pacient = await pacientModel.create(req.body);
       await pacient.save()
     }
-    let appointmentTmp = await appointment.findOne({ where: { id: requestBody.idAppointment, state: false } })
+    let appointmentTmp = await appointment.findOne({ where: { id: requestBody.id_card_pacient, state: 'PENDING' } })
+    console.log("1",pacient.id);
     if (appointmentTmp != null) {
-      appointmentTmp.id_pacient = pacient.id
-      appointmentTmp.state = true
-      await appointmentTmp.save()
-      res.send({ message: 1, infoAppointment: appointmentTmp });
+      console.log("2");
+      res.send({ message: 2});
     } else {
-      res.send({ message: 2 });
+      console.log("3");
+      const dataTemp = {
+        state:'PENDING',
+        date: '[2010-01-01 11:30, 2010-01-01 15:00]',
+        details:{},
+        id_user:0,
+        id_pacient:pacient.id,
+        treatment:requestBody.treat,
+      };
+      let appointmentNew = await appointment.create(dataTemp);
+      await appointmentNew.save()
+      res.send({ message: 1, infoAppointment: 'Ok' });
     }
   } catch (err) {
     console.log(err);

@@ -9,7 +9,8 @@ var appointment = db.define('appointment', {
     date: {type: Sequelize.DATE, allowNull: false},
     details: {type: Sequelize.JSON},
     id_user: Sequelize.INTEGER,
-    id_pacient: Sequelize.INTEGER
+    id_pacient: Sequelize.INTEGER,
+    treatment: {type: Sequelize.STRING },
 }, {
     timestamps: false,
     freezeTableName: true

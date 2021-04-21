@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    //loadDoctors();
+    loadDoctors();
     loadTreatments();
 });
 
@@ -26,20 +26,42 @@ async function loadTreatments() {
         console.log("Error en loadTreatments:",error)
     }
     let htmlSelect = `<option value=''>Seleccione tratamiento</option>`
+    
     listTreatments.forEach(element => {
-        htmlSelect += `<option value=${element.id}>${element.descr}</option>`
+        htmlSelect += `<option value=${element.descr.replace(/\s+/g, '')}>${element.descr}</option>`
     })
     $('#tratPac').html(htmlSelect);
 }
 
 $('#saveAppointment').submit(function (e) {
-    e.preventDefault()  
-    postFetch(`/appointment/setAppointment`, objectifyForm($(this).serializeArray())).then((res) => { 
-        if(res.message==1){ 
-            alertify.success('Cita reservada exitosamente'); 
-            getAvaliablesAppointment()
-        } 
-    })   
+    e.preventDefault()
+    const data = {
+        id_card_pacient: $('#cedPac').val(),
+        name_pacient: $('#nombrePac').val(),
+        lastname_pacient: $('#apellidoPac').val(),
+        age_pacient: 0,
+        gender_pacient: 'M',
+        address_pacient: '',
+        phone_pacient: '0',
+        email_pacient: $('#emailPac').val(),
+        details_pacient: {},
+        treat: $('#tratPac').val(),
+        doctor: $('#doctorPac').val(),
+
+    }
+    //console.log(data)
+    try{
+        postFetch(`/appointment/setAppointment`, data).then((res) => { 
+            if(res.message==1){ 
+                alertify.success('Cita reservada exitosamente'); 
+            }else{
+                alertify.error('Error en reservación de cita');
+            }
+        })   
+    }catch(error){
+        console.log("Error en guardar cita.",error)
+    }
+    
 });
 /*function initPage() {
     loadDoctors()
