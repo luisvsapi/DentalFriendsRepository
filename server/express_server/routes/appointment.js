@@ -41,20 +41,18 @@ router.post('/setAppointment', async (req, res, next) => {
       pacient = await pacientModel.create(req.body);
       await pacient.save()
     }
-    let appointmentTmp = await appointment.findOne({ where: { id: requestBody.id_card_pacient, state: 'PENDING' } })
-    console.log("1",pacient.id);
+    let appointmentTmp = await appointment.findOne({ where: { id: pacient.id, state: 'PENDING' } })
+    console.log("1",appointmentTmp);
     if (appointmentTmp != null) {
-      console.log("2");
-      res.send({ message: 2});
+      res.send({ message: 2, infoAppointment: 'Ya existe cita' });
     } else {
-      console.log("3");
       const dataTemp = {
         state:'PENDING',
-        date: '[2010-01-01 11:30, 2010-01-01 15:00]',
         details:{},
-        id_user:0,
+        id_user:requestBody.doctor,
         id_pacient:pacient.id,
         treatment:requestBody.treat,
+        date: new Date(),
       };
       let appointmentNew = await appointment.create(dataTemp);
       await appointmentNew.save()

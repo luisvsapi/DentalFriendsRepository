@@ -6,11 +6,11 @@ const pacient = require('./pacient');
 var appointment = db.define('appointment', {
     id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
     state: {type: Sequelize.STRING },
-    date: {type: Sequelize.DATE, allowNull: false},
     details: {type: Sequelize.JSON},
     id_user: Sequelize.INTEGER,
     id_pacient: Sequelize.INTEGER,
     treatment: {type: Sequelize.STRING },
+    date: {type: Sequelize.DATE, allowNull: false},
 }, {
     timestamps: false,
     freezeTableName: true

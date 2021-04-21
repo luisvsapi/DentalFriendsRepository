@@ -55,7 +55,7 @@ $('#saveAppointment').submit(function (e) {
             if(res.message==1){ 
                 alertify.success('Cita reservada exitosamente'); 
             }else{
-                alertify.error('Error en reservación de cita');
+                alertify.error('Error en reservación de cita: '+res.infoAppointment);
             }
         })   
     }catch(error){
