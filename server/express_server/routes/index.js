@@ -9,6 +9,13 @@ const { render } = require('../app');
 /* 
  GET METHODS 
 */
+router.get('profilePicture/:img', async (req, res, next) => {
+  let filePath ='../'+req.params.img;
+  console.log("entro a la route");
+  console.log(filePath);
+  res.sendFile(filePath);
+})
+
 router.get('/', function (req, res, next) { 
   res.render(`home`, {})
 });

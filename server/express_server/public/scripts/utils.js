@@ -3,6 +3,20 @@ function resetCredentials() {
     sessionStorage.setItem("token", null);
 }
 
+async function postFileFetch(url = "", form) {
+    var formData = new FormData(form);
+    let response = await fetch(
+        url,
+        {
+            method: "POST",
+            body: formData,
+        }
+    )
+    console.log(formData);
+    var data = await response.json()
+    return data
+}
+
 async function postFetch(url = "", objectSend = {}) {
     let response = await fetch(
         url,

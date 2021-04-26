@@ -15,10 +15,10 @@ const path = require('path')
 const multer = require('multer')
 let storage = multer.diskStorage({
   destination:(req, file, cb)=>{
-    cb(null, './subidas')
+    cb(null, './avatar')
   },
   filename:(req, file, cb)=>{
-    cb(null, file.fieldname + '-' + Date.extname(file.originalname));
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   }
 })
 const upload = multer({storage});
@@ -52,8 +52,9 @@ router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
 /* 
  POST METHODS 
 */
-router.put('/formProfile', upload.single('file') , jwtSecurity.authenticateJWT , async (req, res, next) => { //cambio a put, prueba
-  
+
+router.post('/formProfile', upload.single('picture_url') , jwtSecurity.authenticateJWT , async (req, res, next) => { //cambio a put, prueba
+  console.log(req.file);
   let requestBody = req.body;
   let dict = {
     "birthday": requestBody.birth,
@@ -73,7 +74,7 @@ router.put('/formProfile', upload.single('file') , jwtSecurity.authenticateJWT ,
           address: requestBody.address,
           speciality: requestBody.degree,
           details: dict,
-          picture_url: req.file.path},
+          picture_url:  req.file.path},
         {returning: true, where:{id_details: doc.id_details} }
 
       ).then(dbresponse => {
