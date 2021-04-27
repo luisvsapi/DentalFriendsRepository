@@ -1,0 +1,15 @@
+# docker-compose.yml
+version: '3'
+services:
+  web:
+    build:
+      context: ./
+      target: dev
+    volumes:
+      - .:/app
+    command: npm run start:dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DEBUG: nodejs-docker-express:*
