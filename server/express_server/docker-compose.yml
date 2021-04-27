@@ -2,14 +2,11 @@
 version: '3'
 services:
   web:
-    build:
-      context: ./
-      target: dev
+    image: node-docker
     volumes:
-      - .:/app
-    command: npm run start:dev
+      - expressServer:/app
+    command: npm start
     ports:
       - "3000:3000"
-    environment:
-      NODE_ENV: development
-      DEBUG: nodejs-docker-express:*
+volumes:
+  expressServer:
