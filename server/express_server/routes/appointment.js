@@ -42,7 +42,6 @@ router.post('/setAppointment', async (req, res, next) => {
       await pacient.save()
     }
     let appointmentTmp = await appointment.findOne({ where: { id: pacient.id, state: 'PENDING' } })
-    console.log("1",appointmentTmp);
     if (appointmentTmp != null) {
       res.send({ message: 2, infoAppointment: 'Ya existe cita' });
     } else {

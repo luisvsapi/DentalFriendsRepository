@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    //$( "#datepicker" ).datepicker();
     loadDoctors();
     loadTreatments();
 });
