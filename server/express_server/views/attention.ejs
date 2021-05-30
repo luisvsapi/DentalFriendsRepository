@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Resumen Medico de Pacientes - DentalFriends</title>
+    <title>Atention de Pacientes - DentalFriends</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
@@ -70,8 +70,8 @@
         <nav class="nav-menu d-none d-lg-block">
           <ul>
             <li><a href="home">Inicio</a></li>
-            <li><a href="attention">Atencion</a></li>
-            <li class="active"><a href="medicalResume">Resumen Medico</a></li>
+            <li class="active"><a href="attention">Atencion</a></li>
+            <li><a href="medicalResume">Resumen Medico</a></li>
             <li><a href="profile">Perfil</a></li>
           </ul>
         </nav><!-- .nav-menu -->
@@ -96,94 +96,39 @@
         <div class="container" data-aos="fade-up">
 
           <div class="section-title">
-            <h2>Resumen Medico de Pacientes</h2>
+            <h2>Atención Diaria de Pacientes</h2>
           </div>
           
-          <div class="mt-5 mt-lg-0">
-            <form id="searchMedicalResume" action="/medicalResume" method="post" role="form" >
-              <div class="form-row">
-                  <label class="col-form-label">Buscar Paciente:</label>
-                  <div class="col-md-5 form-group col-8">
-                    <input id="filterMedicalResume" placeholder="Cédula/NombrePaciente/CorreoPaciente" maxlength="10" minlength="3" class="form-control" type="text">
-                  </div>
-                  <div class="col-md-2 col-4" >
-                    <button id="buttonSearchMedicalResume" type="submit" class="btn btn-primary">Buscar</button>
-                  </div>
-                  <div class="col-md-2"></div>
-              </div>
-            </form><br>
-          </div>
-
           <div>
-            <table id="medicalResumeTable" class="table">
+            <table id="atencionTable" class="table">
               <tr>
                 <th>Id</th>
                 <th>Fecha</th>
-                <th>Paciente</th>
-                <th class="d-flex justify-content-center">Detalles</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Motivo</th>
+                <th class="d-flex justify-content-center">Ficha Medica</th>
               </tr>
               <tr>
+                <td>1</td>
                 <td>2021-01-19</td>
-                <td>Pabelco</td>
-                <td></td>
-                <td class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Detalles
-                  </button>
+                <td>Emilia</td>
+                <td>Cuenca</td>
+                <td>Blanqueamiento Dental</td>
+                <td class="d-flex justify-content-center"><a href="javascript:popUp('medicalRecord')">Abrir Ficha Medica</a></td>
                 </td>
               </tr>
               <tr>
+                <td>2</td>
                 <td>2021-01-19</td>
-                <td>luis</td>
-                <td></td>
-                <td class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Detalles
-                  </button>
-                </td>
+                <td>Abraham</td>
+                <td>Aguilar</td>
+                <td>Blanqueamiento Dental</td>
+                <td class="d-flex justify-content-center"><a href="javascript:popUp('medicalRecord')">Abrir Ficha Medica</a></td>
               </tr>
-              <tr>
-                <td>2021-01-19</td>
-                <td>rogwi</td>
-                <td></td>
-                <td class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Detalles
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2021-01-19</td>
-                <td>Bryan</td>
-                <td></td>
-                <td class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Detalles
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2021-01-19</td>
-                <td>Issac</td>
-                <td></td>
-                <td class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Detalles
-                  </button>
-                </td>
-              </tr>
-              <% if (resume) { %>
-                <% console.log(resume) %>
-                <% for(var i = 0; i < resume.length; i++) { %>
-                  <% if (resume[i] != null) { %>
-                    <tr>
-                      <td><%= resume[i].date %></td>
-                      <td><%= resume[i].id_user %></td>
-                    </tr>
-                  <% } %>
-                <% } %>
-              <% } %>
-              </table>
+              
+              
+            </table>
           </div>
         </div>
       </section><!-- End Portfolio Section -->
@@ -206,9 +151,22 @@
       </div>
     </footer><!-- End  Footer -->
 
+
+    <script type="text/javascript">
+      function popUp(URL) {
+          window.open(URL, 'Ficha Medica', 'fullscreen=0','toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,width=600,height=400,left = 390,top = 50');
+      }
+    </script>
+
+  <style type="text/css">
+    a {
+      color: #1c475a;
+      font-weight: bold; }
+  </style>
+
     <div id="preloader"></div>
     <a href="#" class="back-to-top"><i class="bx bx-up-arrow-alt"></i></a>
-
+    
     <!-- Vendor JS Files -->
     <script src="../assets/vendor/jquery/jquery.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

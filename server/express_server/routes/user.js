@@ -35,8 +35,11 @@ router.get('/profile', jwtSecurity.authenticateJWT, function (req, res, next) {
 })
 
 router.get('/medicalRecord', jwtSecurity.authenticateJWT, function (req, res, next) {
-  console.log('medical');
   res.render(`medicalRecord`, {})
+});
+
+router.get('/attention', jwtSecurity.authenticateJWT, function (req, res, next) {
+  res.render(`attention`, {})
 });
 
 router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
