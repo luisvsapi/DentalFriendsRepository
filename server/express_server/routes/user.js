@@ -4,28 +4,28 @@ const userModel = require('../models/user')
 const userDetailsModel = require("../models/userDetails")
 const pacientModel = require('../models/pacient')
 const appointment = require('../models/appointment')
-var validator = require('validator');
-const { Op } = require("sequelize");
+var validator = require('validator')
+const { Op } = require("sequelize")
 
 const jwtSecurity = require('../configs/jwtAuth.js')
 const user = require('../models/user')
 const pacient = require('../models/pacient')
+const utils = require('../scripts/utils')
 
 const path = require('path')
 const multer = require('multer')
+
 let storage = multer.diskStorage({
   destination:(req, file, cb)=>{
     cb(null, './avatar')
   },
   filename:(req, file, cb)=>{
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
   }
 })
-const upload = multer({storage});
-const {treatments} = require("../scripts/constants.js");
-
-
-
+const upload = multer({storage})
+const {treatments} = require("../scripts/constants.js")
+ 
 router.get('/medicalResume', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.render(`medicalResume`, {resume: {}})
 })
@@ -36,11 +36,11 @@ router.get('/profile', jwtSecurity.authenticateJWT, function (req, res, next) {
 
 router.get('/medicalRecord', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.render(`medicalRecord`, {})
-});
+})
 
 router.get('/attention', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.render(`attention`, {})
-});
+})
 
 router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
   res.render(`homeUser`,{})
@@ -48,7 +48,7 @@ router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
 
 router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.send({ message: 'Tu estas autorizado' })
-});
+})
 
 
 
@@ -57,8 +57,8 @@ router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
 */
 
 router.post('/formProfile', upload.single('picture_url') , jwtSecurity.authenticateJWT , async (req, res, next) => { //cambio a put, prueba
-  console.log(req.file);
-  let requestBody = req.body;
+  console.log(req.file)
+  let requestBody = req.body
   let dict = {
     "birthday": requestBody.birth,
     "age": requestBody.age,
@@ -66,7 +66,7 @@ router.post('/formProfile', upload.single('picture_url') , jwtSecurity.authentic
     "recognitions": [requestBody.recog],
     "university": requestBody.school,
     "frase": requestBody.phrase
-  };
+  }
   const doctor =  await userModel.findOne({
     where: {user_name: req.cookies.user},
     raw: true
@@ -78,31 +78,29 @@ router.post('/formProfile', upload.single('picture_url') , jwtSecurity.authentic
           speciality: requestBody.degree,
           details: dict,
           picture_url:  req.file.path},
-        {returning: true, where:{id_details: doc.id_details} }
-
+        {returning: true, where:{id_details: doc.id_details} } 
       ).then(dbresponse => {
         if(dbresponse){
-          res.send({message:1});  
+          res.send({message:1})  
         }else{
-          res.send({message:0});
+          res.send({message:0})
         }
       }).catch(err => {
         res.status(500).send({
           message:
             err.message || "Database failure."
-        });
-      });
-
+        })
+      }) 
     }else{
-      res.send({message:0});
+      res.send({message:0})
     }
-  });
+  })
   
 })
 
 router.post('/medicalResume', jwtSecurity.authenticateJWT, async (req, res, next) => {
   try {
-    let requestBody = req.body;
+    let requestBody = req.body
     const medicalResume = await appointment.findAll({
       attributes: ['id', 'date',],
       where: {
@@ -123,50 +121,11 @@ router.post('/medicalResume', jwtSecurity.authenticateJWT, async (req, res, next
         attributes: [ 'name_pacient', 'lastname_pacient']
       }],
       raw: true,
-    });
+    })
     for (element in medicalResume){
       var dateAppointment = medicalResume[element].date
-      var dateToJson = dateAppointment.getDay()+" "
-      switch (dateAppointment.getMonth()){
-        case 0:
-          dateToJson += "Enero";
-          break;
-        case 1:
-          dateToJson += "Febrero";
-          break;
-        case 2:
-          dateToJson += "Marzo";
-          break;
-        case 3:
-          dateToJson += "Abril";
-          break;
-        case 4:
-          dateToJson += "Mayo";
-          break;
-        case 5:
-          dateToJson += "Junio";
-          break;
-        case 6:
-          dateToJson += "Julio";
-          break;
-        case 7:
-          dateToJson += "Agosto";
-          break;
-        case 8:
-          dateToJson += "Septiembre";
-          break;
-        case 9:
-          dateToJson += "Octubre";
-          break;
-        case 10:
-          dateToJson += "Noviembre";
-          break;
-        case 11:
-          dateToJson += "Diciembre";
-          break;
-        default:
-          dateToJson += "Indet.";
-      }
+      var dateToJson = dateAppointment.getDay() + " "
+      dateToJson = utils.addNameMonth(dateAppointment, dateToJson)      
       dateToJson += " "+dateAppointment.getFullYear()
       medicalResume[element].date = dateToJson
       var fullName = medicalResume[element]['pacient.name_pacient']+" "+medicalResume[element]['pacient.lastname_pacient']
@@ -183,13 +142,13 @@ router.post('/medicalResume', jwtSecurity.authenticateJWT, async (req, res, next
 
 router.post('/medicalResume/details',  jwtSecurity.authenticateJWT, async (req, res, next) => {
   try {
-    let requestBody = req.body;
+    let requestBody = req.body
     const detalles = await appointment.findOne({
       attributes: ['details'],
       where:{
         id: requestBody.idAppointment
       },
-    });
+    })
     res.send(detalles)
   } catch (error) {
     console.log(error)
@@ -200,7 +159,7 @@ router.post('/medicalResume/details',  jwtSecurity.authenticateJWT, async (req, 
 router.get('/all', jwtSecurity.authenticateJWT , async (req, res, next) => {
   try {
     const users = await userModel.findAll({attributes: { exclude: ['password'] }, 
-      include: [userDetailsModel]}); 
+      include: [userDetailsModel]}) 
     res.send(users)
   } catch (error) {
     console.log(error)
@@ -210,7 +169,7 @@ router.get('/all', jwtSecurity.authenticateJWT , async (req, res, next) => {
 
 router.get('/allAppoinment', jwtSecurity.authenticateJWT , async (req, res, next) => {
   try {
-    const users = await userModel.findAll({attributes: { exclude: ['password'] }});
+    const users = await userModel.findAll({attributes: { exclude: ['password'] }})
     res.send(users)
   } catch (error) {
     console.log(error)
@@ -220,7 +179,7 @@ router.get('/allAppoinment', jwtSecurity.authenticateJWT , async (req, res, next
 
 router.get('/allDoctors', async (req, res, next) => {
   try {
-    const users = await userModel.findAll({attributes: { exclude: ['password'] }});
+    const users = await userModel.findAll({attributes: { exclude: ['password'] }})
     res.send(users)
   } catch (error) {
     console.log(error)
@@ -240,8 +199,8 @@ router.get('/allTreatments', async (req, res, next) => {
 router.get('/:id', jwtSecurity.authenticateJWT , async (req, res, next) => {
   try {
     if(validator.isInt(req.params.id)){
-      let user = await userModel.findOne({ where: { id: req.params.id }, attributes: { exclude: ['password'] } })
-      res.json(user)
+      let userTmp = await userModel.findOne({ where: { id: req.params.id }, attributes: { exclude: ['password'] } })
+      res.json(userTmp)
     } 
   } catch (error) {
       console.log(error)
@@ -250,7 +209,7 @@ router.get('/:id', jwtSecurity.authenticateJWT , async (req, res, next) => {
 })
 
 router.put('/formRecord', jwtSecurity.authenticateJWT , async (req, res, next) => { 
-  let requestBody = req.body;
+  let requestBody = req.body
   pacientModel.update(
     {id_card_pacient: requestBody.id_card_pacient,
      name_pacient: requestBody.name_pacient,
@@ -262,20 +221,18 @@ router.put('/formRecord', jwtSecurity.authenticateJWT , async (req, res, next) =
     {returning: true, where:{id_card_pacient: requestBody.id_card_pacient} }
   ).then(dbresponse => {
     if(dbresponse){
-      res.send({message:1});  
+      res.send({message:1})  
     }else{
-      res.send({message:0});
+      res.send({message:0})
     }
   }).catch(err => {
     res.status(500).send({
       message:
         err.message || "Database failure."
-    });
-  });
+    })
+  })
 })
 
-
-
- 
-
 module.exports = router;
+
+
