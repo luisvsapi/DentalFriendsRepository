@@ -98,9 +98,11 @@ router.post('/formProfile', upload.single('picture_url') , jwtSecurity.authentic
   
 })
 
-router.post('/medicalResume', jwtSecurity.authenticateJWT, async (req, res, next) => {
+//jwtSecurity.authenticateJWT,
+router.post('/medicalResume',  async (req, res, next) => {
   try {
     let requestBody = req.body
+    console.log("Body recibido:",req.body)
     const medicalResume = await appointment.findAll({
       attributes: ['id', 'date',],
       where: {
@@ -122,8 +124,10 @@ router.post('/medicalResume', jwtSecurity.authenticateJWT, async (req, res, next
       }],
       raw: true,
     })
+    
     for (element in medicalResume){
-      var dateAppointment = medicalResume[element].date
+      let dateAppointment = new Date();
+      dateAppointment.setTime(Date.parse(medicalResume[element].date));
       var dateToJson = dateAppointment.getDay() + " "
       dateToJson = utils.addNameMonth(dateAppointment, dateToJson)      
       dateToJson += " "+dateAppointment.getFullYear()
@@ -133,14 +137,16 @@ router.post('/medicalResume', jwtSecurity.authenticateJWT, async (req, res, next
       delete medicalResume[element]['pacient.lastname_pacient']
       medicalResume[element]['nombrePaciente'] = fullName
     }
+    console.log("Medical Resume:",medicalResume)
     res.send(medicalResume)
   } catch (error) {
-    console.log(error)
+    console.log("\nError en medicalResume:",error)
     res.sendStatus(500)
   }
 })
 
-router.post('/medicalResume/details',  jwtSecurity.authenticateJWT, async (req, res, next) => {
+//jwtSecurity.authenticateJWT,
+router.post('/medicalResume/details', async (req, res, next) => {
   try {
     let requestBody = req.body
     const detalles = await appointment.findOne({

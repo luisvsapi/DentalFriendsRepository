@@ -1,5 +1,11 @@
 let resume = {}
 
+$(document).ready(function() {
+    let htmlSelect = `<tr> <th>Id</th> <th>Fecha</th> <th>Paciente</th> <th>Detalles</th></tr>`
+    htmlSelect += `<tr><td>1</td><td>01/06/2021</td><td>Nombre</td><td><button type="button" id=1 onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`
+    $('#medicalResumeTable').html(htmlSelect);
+});
+
 $("#searchMedicalResume").submit(async function (e) {
     e.preventDefault();
     let resume = await postFetch("/user/medicalResume",{
@@ -9,7 +15,7 @@ $("#searchMedicalResume").submit(async function (e) {
     }).catch(function() {
         alert("Error contacte con administrador");
     });
-    console.log(resume)
+    console.log("Datos recuperados:", resume)
     let htmlSelect = `<tr> <th>Id</th> <th>Fecha</th> <th>Paciente</th> <th>Detalles</th></tr>`
     resume.forEach(element => {
         htmlSelect += `<tr><td>${element.id}</td><td>${element.date}</td><td>${element.nombrePaciente}</td><td><button type="button" id=${element.id} onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`
@@ -27,10 +33,15 @@ async function mostrarDetalles(id,e){
         alert("Error en detalles contacte con administrador");
     });
     console.log(detalles)
-    let htmlSelect = `<p>No existen detalles de la cita</p>`
-    if(detalles.details!=null){
-        htmlSelect = `<p>Detalles en implementacion</p>`
+    let htmlSelect = "";
+    if(detalles.details==null){
+        htmlSelect = `<p>Detalles no existe</p>`
     }
+    htmlSelect += "Temporalmente trabajando"
+    /*detalles.details.forEach((detalle)=>{
+        htmlSelect += `${element.id}`;
+    });*/
+    
     $('#modalBodyMedicalResume').html(htmlSelect);
 
 }
