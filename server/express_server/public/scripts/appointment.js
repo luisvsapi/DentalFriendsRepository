@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    //$( "#datepicker" ).datepicker();
     loadDoctors();
     loadTreatments();
 });
@@ -64,8 +63,3 @@ $('#saveAppointment').submit(function (e) {
     }
     
 });
-/*function initPage() {
-    loadDoctors()
-}*/
-
-//initPage()
