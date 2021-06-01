@@ -1,14 +1,23 @@
 import 'package:dental_friends_app/constants/strings.dart';
-import 'package:flutter/material.dart';
 import 'package:dental_friends_app/constants/theme.dart';
+import 'package:dental_friends_app/utils/utils.dart';
 import 'package:dental_friends_app/widgets/card-horizontal.dart';
 import 'package:dental_friends_app/widgets/card-square.dart';
 import 'package:dental_friends_app/widgets/drawer.dart';
-//widgets
 import 'package:dental_friends_app/widgets/navbar.dart';
+import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-  // final GlobalKey _scaffoldKey = new GlobalKey();
+  Home() {
+    initClass();
+  }
+
+  Future<String> initClass() async {
+    String token = await getSecureStorage("token");
+    showCenterShortToast("Usuario con token $token");
+    return "";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

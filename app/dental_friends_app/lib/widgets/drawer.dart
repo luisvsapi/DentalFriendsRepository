@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
 import 'package:dental_friends_app/constants/theme.dart';
-
 import 'package:dental_friends_app/widgets/drawer-tile.dart';
+import 'package:flutter/material.dart';
 
 class MaterialDrawer extends StatelessWidget {
   final String currentPage;
@@ -115,7 +114,7 @@ class MaterialDrawer extends StatelessWidget {
                 icon: Icons.exit_to_app,
                 onTap: () {
                   if (currentPage != "Sign In")
-                    Navigator.pushReplacementNamed(context, '/signin');
+                    Navigator.pushReplacementNamed(context, '/signIn');
                 },
                 iconColor: Colors.black,
                 title: "Sign In",

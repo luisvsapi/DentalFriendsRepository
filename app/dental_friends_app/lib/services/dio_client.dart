@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:dental_friends_app/constants/config.dart';
-import 'package:dental_friends_app/models/user.dart';
 import "package:dio/dio.dart";
 
 class DioClient {
@@ -18,14 +18,12 @@ class DioClient {
       Dio client = this.init();
       client.options.baseUrl = url ?? apiUrl;
       final response = await client.get(method,
-          options: Options(
-            headers: {"token": tokenValue},
-          ));
+          options: Options(headers: {"token": tokenValue}));
       return json.decode(response.toString());
     } on DioError catch (ex) {
-      String errorMessage = json.decode(ex.response.toString())["error"];
-      throw new Exception(errorMessage);
+      print("getJsonRequest " + ex.message);
     }
+    return null;
   }
 
   Future<Map<String, dynamic>> postJsonRequest(String method, dynamic dataValue,
@@ -38,15 +36,12 @@ class DioClient {
           options: Options(
             headers: {"token": tokenValue},
           ));
-      print(User.fromJson(json.decode(response.toString())));
       return json.decode(response.toString());
     } on DioError catch (ex) {
-      print(ex.message);
+      print("postJsonRequest " + ex.message);
     }
+    return null;
   }
 }
 
 class ApiInterceptors extends Interceptor {}
-
-
-

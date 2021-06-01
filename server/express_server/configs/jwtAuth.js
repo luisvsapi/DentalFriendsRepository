@@ -10,7 +10,11 @@ const authenticateJWT = (req, res, next) => {
             req.user = user;
             next();
         }); 
-    } 
+    }  else {
+        res.locals.message = 'Forbidden';
+        res.locals.error = { status: '403', stack: 'Acceso no permitido' }
+        res.render('error') 
+    }
     if (req.cookies && req.cookies.token) {
         jwt.verify(req.cookies.token, keySecret, (err, user) => {
             if (err) {
@@ -23,9 +27,6 @@ const authenticateJWT = (req, res, next) => {
             }     
         })
     } 
-    res.locals.message = 'Forbidden';
-    res.locals.error = { status: '403', stack: 'Acceso no permitido' }
-    res.render('error') 
 }
 /*
 const authenticateJWT = (req, res, next) => {

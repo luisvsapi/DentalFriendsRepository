@@ -95,13 +95,14 @@ router.post('/loginApp', async (req, res, next) => {
   if (results.length > 0) {
     const newUser = {
       username: requestBody.username,
-      token: jwtSecurity.jwt.sign({ username: requestBody.username, role: requestBody.password },
+      token: jwtSecurity.jwt.sign({ username: requestBody.username, role: requestBody.password, id: results[0].login_user },
         jwtSecurity.keySecret)
     };
-    req.session.user = newUser
+    req.session.user = newUser 
     res.send(newUser)
   } else {
-    res.send({})
+    res.status(400)
+    res.send({})    
   }
 })
 
@@ -117,10 +118,10 @@ router.post('/register', async (req, res, next) => {
           await userDetails.save()
           user = await userModel.findOne({ where: { user_name: requestBody.username }, attributes: { exclude: ['password'] } })
           user.id_details = userDetails.id_details
-          await user.save()
+          await user.save()  
           res.send({ message: 1 })
         })
-    } else {
+    } else {      
       res.send({ message: 2 })
     }
   } catch (err) {
