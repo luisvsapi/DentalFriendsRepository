@@ -34,16 +34,15 @@ router.get('/byUser/:idUser', jwtSecurity.authenticateJWT , async (req, res, nex
 
 router.post('/setAppointment', async (req, res, next) => {
   let requestBody = req.body
-  //console.log(requestBody);
   try {
     let pacient = await pacientModel.findOne({ where: { id_card_pacient: requestBody.id_card_pacient } });
     if (pacient == null) {
       pacient = await pacientModel.create(req.body);
       await pacient.save()
     }
-    let appointmentTmp = await appointment.findOne({ where: { id: pacient.id, state: 'PENDING' } })
+    let appointmentTmp = await appointment.findOne({ where: { id_pacient: pacient.id, state: 'PENDING' } })
     if (appointmentTmp != null) {
-      res.send({ message: 2, infoAppointment: 'Ya existe cita' });
+      res.send({ message: 2, infoAppointment: 'Ya existe una cita a su nombre!' });
     } else {
       const dataTemp = {
         state:'PENDING',
