@@ -1,5 +1,6 @@
 const sendMailController = {};
 const nodemailer = require('nodemailer');
+const CryptoJS = require("crypto-js")
 const pacientModel = require('../models/pacient')
 const constantsProject = require('./constants')
 
@@ -13,8 +14,8 @@ sendMailController.sendMail = (req, res) => {
         console.log(res.json(pacient))
         console.log(res.json(appointmentTmp))
         console.log(res.json(userTmp))
-        console.log(appointmentOptions)    
-            
+        console.log(appointmentOptions)   
+        console.log(CryptoJS.AES.decrypt(constantsProject.mailCredentials.passwordHash, constantsProject.mailCredentials.key).toString(CryptoJS.enc.Utf8)) 
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
             host : 'smtp.dentalfriends.ec',
@@ -22,7 +23,7 @@ sendMailController.sendMail = (req, res) => {
             secure : false, // true for 465, false for other ports
             auth : {
                 user: constantsProject.mailCredentials.mail, // generated ethereal user
-                pass: constantsProject.mailCredentials.password // generated ethereal password
+                pass: CryptoJS.AES.decrypt(constantsProject.mailCredentials.passwordHash, constantsProject.mailCredentials.key).toString(CryptoJS.enc.Utf8) // generated ethereal password
             },
             tls : {
             rejectUnauthorized : false

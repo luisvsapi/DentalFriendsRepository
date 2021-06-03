@@ -11,6 +11,8 @@ module.exports = {
     MAX_AGE_COOKIE: 1000 * 60 * 10,
     mailCredentials: {
         mail: 'info@dentalfriends.ec',
-        password: ''
+        passwordHash: 'Bd6JUrv8nD30OGfwBQOF+g==', 
+        key: 'dentalfriends.ec'
     }
+
 }
