@@ -9,7 +9,8 @@ var validator = require('validator');
 const { Op } = require("sequelize");
 const utils = require('../scripts/utils.js');
 
-router.get('/byUser/:idUser', jwtSecurity.authenticateJWT , async (req, res, next) => {
+//jwtSecurity.authenticateJWT
+router.get('/byUser/:idUser' , async (req, res, next) => {
   try {
     if (validator.isInt(req.params.idUser)) {
       let appointments = await appointment.findAll(
@@ -50,7 +51,7 @@ router.post('/setAppointment', async (req, res, next) => {
         id_user:requestBody.doctor,
         id_pacient:pacient.id,
         treatment:requestBody.treat,
-        date: new Date(),
+        date: new Date(requestBody.date),
       };
       let appointmentNew = await appointment.create(dataTemp);
       await appointmentNew.save()
