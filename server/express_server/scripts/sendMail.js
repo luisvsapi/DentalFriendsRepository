@@ -1,24 +1,13 @@
-const sendMailController = {};
 const nodemailer = require('nodemailer');
-const CryptoJS = require("crypto-js")
-const pacientModel = require('../models/pacient')
-const constantsProject = require('./constants')
+const CryptoJS = require("crypto-js");
+const constantsProject = require('./constants');
 
-sendMailController.sendMail = (req, res) => {
-    let requestBody = req.body
+function sendMail(pacient, dentist, appointment) {
     try {
-        let pacient = await pacientModel.findOne({ where: { id: requestBody.id } });
-        let appointmentTmp = await appointment.findOne({ where: { id: requestBody.idAppointment} });
-        let userTmp = await user.findOne({ where: { id: appointmentTmp.id_user} });
-        let appointmentOptions = requestBody.appointmentStatus
-        console.log(res.json(pacient))
-        console.log(res.json(appointmentTmp))
-        console.log(res.json(userTmp))
-        console.log(appointmentOptions)   
-        console.log(CryptoJS.AES.decrypt(constantsProject.mailCredentials.passwordHash, constantsProject.mailCredentials.key).toString(CryptoJS.enc.Utf8)) 
+
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
-            host : 'smtp.dentalfriends.ec',
+            host : constantsProject.mailCredentials.host,
             port : 587,
             secure : false, // true for 465, false for other ports
             auth : {
@@ -33,29 +22,29 @@ sendMailController.sendMail = (req, res) => {
         let mailParams = {
             subject : '',
             message : '',
-            appointmentDate: ''
+            appointment: ''
         }
         // setup email data with unicode symbols
-        switch (appointmentOptions) {
+        switch (appointment.status) {
             case 0 :
                 mailParams.subject = 'Asignación';
                 mailParams.message = 'Su cita fue asignada con éxito'
-                mailParams.appointmentDate = appointmentTmp.date
+                mailParams.appointment = appointment
                 break
             case 2 :
                 mailParams.subject = 'Finalización';
                 mailParams.message = 'Su cita se efectuó, con éxito'
-                mailParams.appointmentDate = appointmentTmp.date
+                mailParams.appointment = appointment
                 break
             case 3:
                 mailParams.subject = 'Cancelación';
                 mailParams.message = 'Su cita fue cancelada, por motivos de fuerza mayor. Favor vuelva a agendar otra cita si desea, su petición tendrá la mayor prioridad'
-                mailParams.appointmentDate = appointmentTmp.date
+                mailParams.appointment = appointment
                 break
             default:
                 mailParams.subject = 'Pendiente';
                 mailParams.message = 'Su cita está pendiente de confirmación, para su inmediata asignación de la hora, en el día que acaba de seleccionar'               
-                mailParams.appointmentDate = 'Pendiente'
+                mailParams.appointment = 'Pendiente'
         }
         let mailOptions = {
             from: `<${constantsProject.mailCredentials.mail}>`, // sender address
@@ -67,8 +56,8 @@ sendMailController.sendMail = (req, res) => {
             <ul>  
                 <li>Nombre: ${pacient.name_pacient} ${pacient.lastname_pacient} de cédula ${pacient.id_card_pacient}</li>
                 <li>Email: ${pacient.email_pacient}</li>
-                <li>Fecha: ${mailParams.appointmentDate}</li>
-                <li>Odontólogo: ${userTmp.user_name}</li>
+                <li>Fecha: ${mailParams.appointment.date} en las de ${mailParams.appointment.beginHour} - ${mailParams.appointment.endHour}</li>
+                <li>Odontólogo: ${dentist.user_name}</li>
             </ul>
             <h3>Mensaje</h3>
             <p>${mailParams.message}</p>
@@ -93,4 +82,4 @@ sendMailController.sendMail = (req, res) => {
         res.sendStatus(500)
     }
   }
-module.exports = sendMailController;
+module.exports = sendMail;

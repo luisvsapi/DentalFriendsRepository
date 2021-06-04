@@ -12,7 +12,8 @@ module.exports = {
     mailCredentials: {
         mail: 'info@dentalfriends.ec',
         passwordHash: 'Bd6JUrv8nD30OGfwBQOF+g==', 
-        key: 'dentalfriends.ec'
+        key: 'dentalfriends.ec', 
+        host: 'smtp.dentalfriends.ec'
     }
 
 }
