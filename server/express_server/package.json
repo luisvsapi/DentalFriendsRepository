@@ -10,6 +10,7 @@
     "@admin-bro/sequelize": "^1.1.2",
     "@popperjs/core": "^2.9.2",
     "admin-bro": "^3.4.0",
+    "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
     "crypto-js": "^4.0.0",
     "debug": "~2.6.9",

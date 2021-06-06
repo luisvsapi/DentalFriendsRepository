@@ -7,6 +7,10 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:get/get.dart';
 
 class Login extends StatelessWidget {
+  Login() {
+    restartSecureStorage();
+  }
+
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(

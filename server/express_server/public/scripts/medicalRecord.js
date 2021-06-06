@@ -21,8 +21,7 @@ $("#formRecord").submit(function(e){
       } else {
           alertify.error('Hubo un error al guardar los datos!!');
       }
-  }).catch(err=>{
-      console.log('aqui es el error')
+  }).catch(err=>{ 
       console.log(err.message);
   })
 });

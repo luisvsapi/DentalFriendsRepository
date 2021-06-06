@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    let url ="http://localhost:3000/appointment/state/PENDING";
+    let url = "/appointment/PENDING";
     getFetch(url, {}).then((res) => {
         if (res) {
             loadAppointment(res);

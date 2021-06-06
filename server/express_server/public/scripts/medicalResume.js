@@ -14,8 +14,7 @@ $("#searchMedicalResume").submit(async function (e) {
         return res
     }).catch(function() {
         alert("Error contacte con administrador");
-    });
-    console.log("Datos recuperados:", resume)
+    }); 
     let htmlSelect = `<tr> <th>Id</th> <th>Fecha</th> <th>Paciente</th> <th>Detalles</th></tr>`
     resume.forEach(element => {
         htmlSelect += `<tr><td>${element.id}</td><td>${element.date}</td><td>${element.nombrePaciente}</td><td><button type="button" id=${element.id} onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`
@@ -31,8 +30,7 @@ async function mostrarDetalles(id,e){
         return res
     }).catch(function() {
         alert("Error en detalles contacte con administrador");
-    });
-    console.log(detalles)
+    }); 
     let htmlSelect = "";
     if(detalles.details==null){
         htmlSelect = `<p>Detalles no existe</p>`

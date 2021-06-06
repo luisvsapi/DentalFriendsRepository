@@ -123,7 +123,7 @@ class MaterialDrawer extends StatelessWidget {
                 icon: Icons.open_in_browser,
                 onTap: () {
                   if (currentPage != "Sign Up")
-                    Navigator.pushReplacementNamed(context, '/signup');
+                    Navigator.pushReplacementNamed(context, '/signIn');
                 },
                 iconColor: Colors.black,
                 title: "Sign Up",
