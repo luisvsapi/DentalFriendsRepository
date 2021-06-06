@@ -35,7 +35,7 @@ router.get('/profile', jwtSecurity.authenticateJWT, function (req, res, next) {
 })
 
 router.get('/medicalRecord', jwtSecurity.authenticateJWT, function (req, res, next) {
-  res.render(`medicalRecord`, {})
+   res.render(`medicalRecord`, {})
 })
 
 router.get('/attention', jwtSecurity.authenticateJWT, function (req, res, next) {
@@ -125,8 +125,7 @@ router.post('/medicalResume',  async (req, res, next) => {
         attributes: [ 'name_pacient', 'lastname_pacient']
       }],
       raw: true,
-    })
-    
+    }) 
     for (element in medicalResume){
       let dateAppointment = new Date();
       dateAppointment.setTime(Date.parse(medicalResume[element].date));
@@ -138,8 +137,7 @@ router.post('/medicalResume',  async (req, res, next) => {
       delete medicalResume[element]['pacient.name_pacient']
       delete medicalResume[element]['pacient.lastname_pacient']
       medicalResume[element]['nombrePaciente'] = fullName
-    }
-    console.log("Medical Resume:",medicalResume)
+    } 
     res.send(medicalResume)
   } catch (error) {
     console.log("\nError en medicalResume:",error)

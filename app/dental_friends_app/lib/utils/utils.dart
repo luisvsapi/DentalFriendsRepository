@@ -23,6 +23,17 @@ Future<String> getSecureStorage(String key) async {
   return null;
 }
 
+Future<bool> restartSecureStorage() async {
+  try {
+    final storage = new FlutterSecureStorage();
+    storage.deleteAll();
+    return true;
+  } on Exception catch (ex) {
+    print("restartSecureStorage " + ex.toString());
+  }
+  return false;
+}
+
 void showCenterShortToast(String message, {Color colorValue}) {
   Fluttertoast.cancel();
   Fluttertoast.showToast(

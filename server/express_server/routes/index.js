@@ -5,11 +5,10 @@ var sequelize = require('../models/db')
 const jwtSecurity = require('../configs/jwtAuth')
 const userModel = require('../models/user')
 const userDetailsModel = require('../models/userDetails')
+const utils = require('../scripts/utils')
 
 router.get('profilePicture/:img', async (req, res, next) => {
-  let filePath = '../' + req.params.img
-  console.log("entro a la route")
-  console.log(filePath)
+  let filePath = '../' + req.params.img 
   res.sendFile(filePath)
 })
 
@@ -78,14 +77,15 @@ router.post('/login', async (req, res, next) => {
   let requestBody = req.body
   const [results, metadata] = await sequelize.query(`select login_user ('${requestBody.username}', '${requestBody.password}')`)
   if (results.length > 0) {
-    const token = jwtSecurity.sign(requestBody.username, requestBody.password)    
+    let encryptPassword = await utils.cryptPassword(requestBody.password)
+    const token = jwtSecurity.sign(requestBody.username, encryptPassword)    
     res.cookie('token', token, { maxAge: constants.MAX_AGE_COOKIE, httpOnly: true })
     res.cookie('idUser', results[0].login_user, { maxAge: constants.MAX_AGE_COOKIE, httpOnly: true })
-    res.cookie('user', requestBody.username, { maxAge: constants.MAX_AGE_COOKIE, httpOnly: true })
-    const respuesta = { token: token }
-    res.send(respuesta)
+    res.cookie('user', requestBody.username, { maxAge: constants.MAX_AGE_COOKIE, httpOnly: true }) 
+    res.send({ username: requestBody.username, token: token } )
   } else {
-    res.send({})
+    res.status(400)
+    res.send({}) 
   }
 })
 
@@ -93,13 +93,9 @@ router.post('/loginApp', async (req, res, next) => {
   let requestBody = req.body 
   const [results, metadata] = await sequelize.query(`select login_user ('${requestBody.username}', '${requestBody.password}')`)
   if (results.length > 0) {
-    const newUser = {
-      username: requestBody.username,
-      token: jwtSecurity.jwt.sign({ username: requestBody.username, role: requestBody.password, id: results[0].login_user },
-        jwtSecurity.keySecret)
-    };
-    req.session.user = newUser 
-    res.send(newUser)
+    let encryptPassword = await utils.cryptPassword(requestBody.password)
+    const token = jwtSecurity.sign(requestBody.username, encryptPassword)   
+    res.send({ username: requestBody.username, token: token } )
   } else {
     res.status(400)
     res.send({})    

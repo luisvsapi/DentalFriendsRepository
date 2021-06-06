@@ -1,10 +1,10 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:dental_friends_app/constants/theme.dart';
 import 'package:dental_friends_app/widgets/drawer.dart';
+import 'package:dental_friends_app/widgets/input.dart';
 import 'package:dental_friends_app/widgets/navbar.dart';
-import 'package:dental_friends_app/widgets/photo-album.dart';
+import 'package:flutter/material.dart';
 
 List<String> imgArray = [
   "https://images.unsplash.com/photo-1508264443919-15a31e1d9c1a?fit=crop&w=240&q=80",
@@ -70,18 +70,7 @@ class Profile extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 8.0),
-                            child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 6),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: MaterialColors.label),
-                                child: Text("Pro",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 16))),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: Text("Seller",
+                            child: Text("Esp. cirugia",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 16)),
                           ),
@@ -89,7 +78,7 @@ class Profile extends StatelessWidget {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(right: 4.0),
-                                child: Text("4.8",
+                                child: Text("5",
                                     style: TextStyle(
                                         color: MaterialColors.warning,
                                         fontSize: 16)),
@@ -107,7 +96,7 @@ class Profile extends StatelessWidget {
                             child: Icon(Icons.pin_drop,
                                 color: MaterialColors.muted),
                           ),
-                          Text("Los Angeles, CA",
+                          Text("Ecuador",
                               style: TextStyle(color: MaterialColors.muted))
                         ],
                       )
@@ -119,77 +108,132 @@ class Profile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Container(
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
-                            spreadRadius: 8,
-                            blurRadius: 10,
-                            offset: Offset(0, 0))
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(13.0),
-                        topRight: Radius.circular(13.0),
-                      )),
-                  margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.58,
-                  ),
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 18.0, vertical: 12.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Column(
-                              children: [
-                                Text("36",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600)),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                Text("Orders",
-                                    style:
-                                        TextStyle(color: MaterialColors.muted))
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text("5",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600)),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                Text("Bids & Offers",
-                                    style:
-                                        TextStyle(color: MaterialColors.muted))
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Text("2",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600)),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                Text("Messages",
-                                    style:
-                                        TextStyle(color: MaterialColors.muted))
-                              ],
-                            ),
-                          ],
-                        ),
-                        PhotoAlbum(imgArray: imgArray)
-                      ],
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          spreadRadius: 8,
+                          blurRadius: 10,
+                          offset: Offset(0, 0))
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(13.0),
+                      topRight: Radius.circular(13.0),
+                    )),
+                margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.60,
+                ),
+                child: ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8, bottom: 8),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: Text("This is a muted paragraph.",
+                            style: TextStyle(
+                                fontSize: 16, color: MaterialColors.muted)),
+                      ),
                     ),
-                  )),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Input(
+                          placeholder: "icon right",
+                          outlineBorder: true,
+                          borderColor: MaterialColors.muted,
+                          focusedBorderColor: MaterialColors.muted,
+                          enabledBorderColor: MaterialColors.muted,
+                          textColor: MaterialColors.muted,
+                          hintTextColor: MaterialColors.muted,
+                          suffixIcon: Icon(Icons.camera_enhance),
+                        )),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 8, top: 8, bottom: 8),
+                      child: Align(
+                        child: Text("This is a muted paragraph.",
+                            style: TextStyle(
+                                fontSize: 16, color: MaterialColors.muted)),
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Input(
+                          placeholder: "icon right",
+                          outlineBorder: true,
+                          borderColor: MaterialColors.muted,
+                          focusedBorderColor: MaterialColors.muted,
+                          enabledBorderColor: MaterialColors.muted,
+                          textColor: MaterialColors.muted,
+                          hintTextColor: MaterialColors.muted,
+                          suffixIcon: Icon(Icons.camera_enhance),
+                        )),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 8, top: 8, bottom: 8),
+                      child: Align(
+                        child: Text("This is a muted paragraph.",
+                            style: TextStyle(
+                                fontSize: 16, color: MaterialColors.muted)),
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Input(
+                          placeholder: "icon right",
+                          outlineBorder: true,
+                          borderColor: MaterialColors.muted,
+                          focusedBorderColor: MaterialColors.muted,
+                          enabledBorderColor: MaterialColors.muted,
+                          textColor: MaterialColors.muted,
+                          hintTextColor: MaterialColors.muted,
+                          suffixIcon: Icon(Icons.camera_enhance),
+                        )),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 8, top: 8, bottom: 8),
+                      child: Align(
+                        child: Text("This is a muted paragraph.",
+                            style: TextStyle(
+                                fontSize: 16, color: MaterialColors.muted)),
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Input(
+                          placeholder: "icon right",
+                          outlineBorder: true,
+                          borderColor: MaterialColors.muted,
+                          focusedBorderColor: MaterialColors.muted,
+                          enabledBorderColor: MaterialColors.muted,
+                          textColor: MaterialColors.muted,
+                          hintTextColor: MaterialColors.muted,
+                          suffixIcon: Icon(Icons.camera_enhance),
+                        )),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 8, top: 8, bottom: 8),
+                      child: Align(
+                        child: Text("This is a muted paragraph.",
+                            style: TextStyle(
+                                fontSize: 16, color: MaterialColors.muted)),
+                      ),
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 8, right: 8),
+                        child: Input(
+                          placeholder: "icon right",
+                          outlineBorder: true,
+                          borderColor: MaterialColors.muted,
+                          focusedBorderColor: MaterialColors.muted,
+                          enabledBorderColor: MaterialColors.muted,
+                          textColor: MaterialColors.muted,
+                          hintTextColor: MaterialColors.muted,
+                          suffixIcon: Icon(Icons.camera_enhance),
+                        ))
+                  ],
+                ),
+              ),
             )
           ],
         ));

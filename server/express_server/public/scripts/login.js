@@ -5,8 +5,7 @@ $("#formLogin").submit(function (e) {
     if($("#register").length > 0){
         postFetch("/register", {
             username: $("#username").val(), password: $("#password").val(), email: $("#email").val()
-        }).then((res) => { 
-            console.log(res);
+        }).then((res) => {  
             if (res.message == 1) {  
                 location.replace('/login')            
             } else {
@@ -18,10 +17,12 @@ $("#formLogin").submit(function (e) {
             username: $("#username").val(), password: $("#password").val()
         }).then((res) => { 
             if (res.token !== undefined) {   
-                location.replace(`./user/home`)            
+                sessionStorage.setItem("username", res.username) 
+                sessionStorage.setItem("token", res.token) 
+                location.replace(`./user/home`)                            
             } else {
-                alertify.error('Credenciales invalidas');             
-                resetCredentials();      
+                alertify.error('Credenciales invalidas')              
+                resetCredentials()      
             }
         })        
     } 

@@ -1,6 +1,6 @@
 function resetCredentials() {
-    sessionStorage.setItem("username", null);
-    sessionStorage.setItem("token", null);
+    sessionStorage.setItem("username", null)
+    sessionStorage.setItem("token", null)
 }
 
 async function postFileFetch(url = "", form) {
@@ -11,10 +11,8 @@ async function postFileFetch(url = "", form) {
             method: "POST",
             body: formData,
         }
-    )
-    console.log(formData);
-    var data = await response.json()
-    return data
+    )  
+    return response.json()
 }
 
 async function postFetch(url = "", objectSend = {}) {
@@ -25,9 +23,8 @@ async function postFetch(url = "", objectSend = {}) {
             body: JSON.stringify(objectSend),
             headers: { 'Content-Type': 'application/json', token: sessionStorage.getItem("token") }
         }
-    )
-    var data = await response.json()
-    return data
+    ) 
+    return response.json()
 }
   
 async function getFetch(url = "", objeto = {}) {
@@ -36,8 +33,7 @@ async function getFetch(url = "", objeto = {}) {
         encodeURIComponent(parametros[k])).join('&')
     let urlEnviar = url + '?' + query
     let respuesta = await fetch(urlEnviar, { method: "GET", headers: { 'Content-Type': 'application/json', token: sessionStorage.getItem("token") } })
-    var data = await respuesta.json()
-    return data;
+    return respuesta.json()
 }
   
 async function putFetch(url = "", objectoEnviar = {}) {
@@ -48,9 +44,8 @@ async function putFetch(url = "", objectoEnviar = {}) {
             body: JSON.stringify(objectoEnviar),
             headers: { 'Content-Type': 'application/json', token: sessionStorage.getItem("token") }
         }
-    )
-    var data = await response.json()
-    return data
+    ) 
+    return response.json()
 }
 
 async function deleteFetch(url = "", objectoEnviar = {}) {
@@ -61,16 +56,15 @@ async function deleteFetch(url = "", objectoEnviar = {}) {
             body: JSON.stringify(objectoEnviar),
             headers: { 'Content-Type': 'application/json', token: sessionStorage.getItem("token") }
         }
-    )
-    var data = await response.json()
-    return data
+    ) 
+    return response.json()
 }
 
 function objectifyForm(formArray) { 
-    var returnArray = {};
-    for (var i = 0; i < formArray.length; i++){
-        returnArray[formArray[i]['name']] = formArray[i]['value'];
-    }
+    var returnArray = {}; 
+    formArray.forEach(element => {
+        returnArray[element['name']] = element['value']; 
+    });
     return returnArray;
 }
 
