@@ -41,15 +41,21 @@ router.get('/medicalRecord', jwtSecurity.authenticateJWT, function (req, res, ne
 router.get('/attention', jwtSecurity.authenticateJWT, function (req, res, next) { 
   res.render(`attention`, {})
 })
+/**
+ * This router renders the principal view of the user. Which shows the appointment requests from pacients.
+ */
+router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
+  res.render(`homeUser`,{})
+})
 
 /**
  * This router renders the apointment acceptance view
  */
-router.get('/adminAppointment/:action/:id', jwtSecurity.authenticateJWT, async function (req, res, next) {
+router.get('/appointments/:action/:id', jwtSecurity.authenticateJWT, async function (req, res, next) {
   let action = req.params.action;
   if(action === 'Accept'){
-    res.render(`adminAppointment`, {id: req.params.id})
-  }else if (action === 'Cancell' ){
+    res.render(`appointmentUser`, {id: req.params.id})
+  }else if (action === 'Cancel' ){
     let appointmentInstance =await appointment.update(
       {state: "CANCELLED"},
       {returning: true, where:{id: req.params.id} } 
@@ -68,19 +74,14 @@ router.get('/adminAppointment/:action/:id', jwtSecurity.authenticateJWT, async f
   } 
 })
 
-/**
- * This router renders the principal view of the user. Which shows the appointment requests from pacients.
- */
-router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
-  res.render(`homeUser`,{})
-})
-
 router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.send({ message: 'Tu estas autorizado' })
 })
 
 /* 
+ * -------------------------------------------------------------------------------------------------
  POST METHODS 
+ * -------------------------------------------------------------------------------------------------
 */
 
 router.post('/formProfile', upload.single('picture_url') , jwtSecurity.authenticateJWT , async (req, res, next) => { //cambio a put, prueba
@@ -239,29 +240,49 @@ router.get('/:id', jwtSecurity.authenticateJWT , async (req, res, next) => {
   } 
 })
 
-router.put('/formRecord', jwtSecurity.authenticateJWT , async (req, res, next) => { 
-  let requestBody = req.body
-  pacientModel.update(
-    {id_card_pacient: requestBody.id_card_pacient,
-     name_pacient: requestBody.name_pacient,
-     lastname_pacient: requestBody.lastname_pacient,
-     age_pacient: requestBody.age_pacient,
-     gender_pacient: requestBody.gender_pacient,
-     address_pacient: requestBody.address_pacient,
-     phone_pacient: requestBody.phone_pacient},
-    {returning: true, where:{id_card_pacient: requestBody.id_card_pacient} }
-  ).then(dbresponse => {
-    if(dbresponse){
-      res.send({message:1})  
-    }else{
-      res.send({message:0})
-    }
-  }).catch(err => {
-    res.status(500).send({
-      message:
-        err.message || "Database failure."
-    })
-  })
+router.post('/formRecord',jwtSecurity.authenticateJWT , async (req, res, next) => { //cambio a put, prueba
+  console.log(req.file);
+  let requestBody = req.body;
+  let dict = {
+    "reason": requestBody.reason,
+    "enfermedad": requestBody.enfermedad,
+    "embarazo": requestBody.embarazo,
+    "alergiaAntibiotico": requestBody.antecedente1,
+    "alergia Anestesia": requestBody.antecedente2,
+    "hemorragias": requestBody.antecedente3,
+    "SIDA": requestBody.antecedente4,
+    "asma": requestBody.antecedente5,
+    "diabetes": requestBody.antecedente6,
+    "hipertension": requestBody.antecedente7,
+    "tuberculosis": requestBody.antecedente8,
+    "otraenfermdad": requestBody.otraenfermdad,
+    "presion": requestBody.presion,
+    "frecuenciac": requestBody.frecuenciac,
+    "frecuenciar": requestBody.frecuenciar,
+    "temperatura": requestBody.temperatura,
+    "diagnostico": requestBody.diagnostico,
+    "tratamiento": requestBody.tratamiento  
+  };
+    console.log(requestBody.reason)
+
+    pacientModel.update(
+        {details_pacient: dict},
+        {returning: true, where:{id_card_pacient: requestBody.id_card} }
+
+      ).then(dbresponse => {
+        if(dbresponse){
+          res.send({message:1});  
+        }else{
+          res.send({message:0});
+        }
+      }).catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Database failure."
+        });
+      });
+      res.send({ message: 1 }); 
+  
 })
 
 module.exports = router;

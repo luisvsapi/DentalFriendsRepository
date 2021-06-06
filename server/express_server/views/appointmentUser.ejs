@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="../../../assets/img/favicon.png" rel="icon">
-    <link href="../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="../../../../assets/img/favicon.png" rel="icon">
+    <link href="../../../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -43,60 +43,15 @@
 
     <script src="../../../scripts/fullCalendar.js"></script>
 
-
-    <div class="modal fade" id="modalAppointment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ingrese sus datos para la cita</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form id="modalForm"> 
-              <div class="form-group">
-                <label for="id_card_pacient" >Cedula</label>
-                <input type="text" class="form-control input-block" name="id_card_pacient" id="id_card_pacient" placeholder="Su cedula" required pattern="[a-zA-Z0-9]{10}" >
-              </div>
-              <div class="form-group">
-                <label for="email_pacient" >Email</label>
-                <input type="email" class="form-control input-block" name="email_pacient" id="email_pacient" placeholder="Su correo" required >
-              </div>
-              <div class="form-group">
-                <label for="phone_pacient" >Nro. celular</label>
-                <input type="text" class="form-control input-block" name="phone_pacient" id="phone_pacient" placeholder="Su numero celular" required pattern="[0-9]{1,15}" >
-              </div>
-              <div class=" form-group">
-                <label for="message" >Mensaje</label>
-                <textarea class="form-control input-block" name="message" id="message" maxlength="500"
-                  placeholder="Escriba algun mensaje"></textarea>
-              </div> 
-              <input type="hidden" name="idAppointment" id="idAppointment" value="0">
-              <input type="submit" class="btn btn-primary" value='Agendar' id='saveAppointment'> 
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
       <div class="container-fluid d-flex justify-content-between align-items-center">
 
         <h1 class="logo"><a href="home">DentalFriends</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
         <nav class="nav-menu d-none d-lg-block">
           <ul>
-            <li><a href="home">Inicio</a></li>
-            <li><a href="professional">Profesionales</a></li>
-            <li><a href="dentalcare">Cuidado dental</a></li>
-            <li><a href="treatment">Tratamientos</a></li>
-            <li><a href="aboutus">Contáctenos</a></li>
-            <li class="active"><a href="appointment">Agendamiento de Citas</a></li>
+            <!-- Momento no se que poner aqui-->
           </ul>
         </nav><!-- .nav-menu -->
 
@@ -117,7 +72,9 @@
             <h2>Agendamiento de Citas</h2>
             <p>Por favor, administre su horario para atencion de citas</p>
           </div>
-          <p>Cita n# <%= id %></p>
+
+          
+  
           <div id='calendarElement'></div>
 
         </div>
@@ -157,13 +114,11 @@
     <script src="../../../assets/vendor/aos/aos.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="../../../scripts/constants.js"></script>
     <script src="../../../assets/js/main.js"></script>
-    <script src="../../../scripts/utils.js"></script>
     <script src="../../../scripts/alertify.min.js"></script>
-
-    <script src="../../../scripts/adminAppointment.js"></script>
- 
+    <script src="../../../scripts/utils.js"></script>
+    <script src="../../../scripts/appointmentUser.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   </body>
 
 </html>
