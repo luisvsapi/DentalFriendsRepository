@@ -41,15 +41,21 @@ router.get('/medicalRecord', jwtSecurity.authenticateJWT, function (req, res, ne
 router.get('/attention', jwtSecurity.authenticateJWT, function (req, res, next) { 
   res.render(`attention`, {})
 })
+/**
+ * This router renders the principal view of the user. Which shows the appointment requests from pacients.
+ */
+router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
+  res.render(`homeUser`,{})
+})
 
 /**
  * This router renders the apointment acceptance view
  */
-router.get('/adminAppointment/:action/:id', jwtSecurity.authenticateJWT, async function (req, res, next) {
+router.get('/appointments/:action/:id', jwtSecurity.authenticateJWT, async function (req, res, next) {
   let action = req.params.action;
   if(action === 'Accept'){
-    res.render(`adminAppointment`, {id: req.params.id})
-  }else if (action === 'Cancell' ){
+    res.render(`appointmentUser`, {id: req.params.id})
+  }else if (action === 'Cancel' ){
     let appointmentInstance =await appointment.update(
       {state: "CANCELLED"},
       {returning: true, where:{id: req.params.id} } 
@@ -68,19 +74,14 @@ router.get('/adminAppointment/:action/:id', jwtSecurity.authenticateJWT, async f
   } 
 })
 
-/**
- * This router renders the principal view of the user. Which shows the appointment requests from pacients.
- */
-router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
-  res.render(`homeUser`,{})
-})
-
 router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.send({ message: 'Tu estas autorizado' })
 })
 
 /* 
+ * -------------------------------------------------------------------------------------------------
  POST METHODS 
+ * -------------------------------------------------------------------------------------------------
 */
 
 router.post('/formProfile', upload.single('picture_url') , jwtSecurity.authenticateJWT , async (req, res, next) => { //cambio a put, prueba

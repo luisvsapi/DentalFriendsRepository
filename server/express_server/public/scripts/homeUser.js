@@ -1,6 +1,5 @@
-
 $(document).ready(function() {
-    let url = "/appointment/state/PENDING";
+    let url = "../appointment/state/PENDING";
     getFetch(url, {}).then((res) => {
         if (res) {
             loadAppointment(res);
@@ -17,7 +16,6 @@ let loadAppointment = (data) => {
     let table = document.getElementById('homeUserTable');
     for(let appointment of data){
         let tr = document.createElement('tr');
-
         let date = document.createElement('td');
         date.innerText = appointment.date;
         let name = document.createElement('td');
@@ -52,7 +50,7 @@ let loadAppointment = (data) => {
  * @param {*} appointmentId 
  */
 function acceptRequest (appointmentId) {
-    let url = "./adminAppointment/" + "Accept/" + appointmentId; 
+    let url = "./appointments/" + "Accept/" + appointmentId; 
     location.replace(url);
 }
 /**
@@ -60,7 +58,7 @@ function acceptRequest (appointmentId) {
  * @param {*} appointmentId 
  */
 function cancellRequest (appointmentId)  {
-    let url = "http://localhost:3000/user/adminAppointment/" + "Cancell/" + appointmentId; 
+    let url = "./appointments/" + "Cancel/" + appointmentId; 
     getFetch(url, {}).then((res) => {
         if (res.message) {
             location.reload();
