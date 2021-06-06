@@ -45,11 +45,12 @@ $('#saveAppointment').submit(function (e) {
         phone_pacient: '0',
         email_pacient: $('#emailPac').val(),
         details_pacient: {},
+        date: $('#datepicker').val(),
         treat: $('#tratPac').val(),
         doctor: $('#doctorPac').val(),
 
     }
-    //console.log(data)
+    console.log("Datos a enviar al service:",data)
     try{
         postFetch(`/appointment/setAppointment`, data).then((res) => { 
             if(res.message==1){ 

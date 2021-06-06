@@ -106,7 +106,7 @@ function printUserDetails(userDetails = {}) {
 }
 
 function createAppointment(dateIso = '') {
-    postFetch(`/appointment/insert`, { id_user: sessionStorage.getItem('idUser'), date: dateIso }).then((res) => {
+    postFetch(`/appointment/insert`, { id_user: document.cookie.user, date: dateIso }).then((res) => {
         fillCalendar();
     })
 }
@@ -124,7 +124,7 @@ function clearCalendar() {
 
 function getAvaliablesAppointment() {
     appointmentAvaliable = new Map()
-    getFetch(`/appointment/byUser/${sessionStorage.getItem('idUser')}`).then((res) => {
+    getFetch(`/appointment/byUser/${document.cookie.user}`).then((res) => {
         res.forEach(element => {
             appointmentAvaliable.set(new Date(element.date).getTime(), element)
         })
