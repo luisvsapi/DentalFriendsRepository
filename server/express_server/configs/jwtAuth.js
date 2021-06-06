@@ -15,14 +15,14 @@ const authenticateJWT = (req, res, next) => {
             }     
         })
     }
-    if (token) { 
+    else if (token) { 
         jwt.verify(token, keySecret, (err, user) => {
             if (err) 
-                return res.sendStatus(403)
+                return res.sendStatus(403);
             req.user = user;
             next();
         }); 
-    }  
+    } 
     else {
         res.locals.message = 'Forbidden';
         res.locals.error = { status: '403', stack: 'Acceso no permitido' }

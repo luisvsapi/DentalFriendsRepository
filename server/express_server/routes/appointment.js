@@ -9,6 +9,28 @@ var validator = require('validator');
 const { Op } = require("sequelize");
 const utils = require('../scripts/utils.js');
 
+/**
+ * This router returns appointments per state AND user
+ */
+router.get('/:state', jwtSecurity.authenticateJWT, async function (req,res,next){
+  let value = req.params.state;
+  let user = req.cookies.idUser[1];
+  console.log(req.cookies.idUser[1])
+  let appointmentList = await appointment.findAll({
+      where: {
+        state: value,
+        id_user: user
+      }
+  }).then(data => {
+    res.json(data)
+  }).catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Database failure."
+    })
+  })
+})
+
 router.get('/byUser/:idUser', jwtSecurity.authenticateJWT , async (req, res, next) => {
   try {
     if (validator.isInt(req.params.idUser)) {

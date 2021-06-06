@@ -39,9 +39,13 @@ router.get('/medicalRecord', jwtSecurity.authenticateJWT, function (req, res, ne
 })
 
 router.get('/attention', jwtSecurity.authenticateJWT, function (req, res, next) {
+  
   res.render(`attention`, {})
 })
 
+/**
+ * This router renders the principal view of the user. Which shows the appointment requests from pacients.
+ */
 router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
   res.render(`homeUser`,{})
 })
@@ -49,8 +53,6 @@ router.get('/home', jwtSecurity.authenticateJWT, function (req,res,next){
 router.post('/', jwtSecurity.authenticateJWT, function (req, res, next) {
   res.send({ message: 'Tu estas autorizado' })
 })
-
-
 
 /* 
  POST METHODS 
