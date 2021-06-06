@@ -38,9 +38,34 @@ router.get('/medicalRecord', jwtSecurity.authenticateJWT, function (req, res, ne
   res.render(`medicalRecord`, {})
 })
 
-router.get('/attention', jwtSecurity.authenticateJWT, function (req, res, next) {
-  
+router.get('/attention', jwtSecurity.authenticateJWT, function (req, res, next) { 
   res.render(`attention`, {})
+})
+
+/**
+ * This router renders the apointment acceptance view
+ */
+router.get('/adminAppointment/:action/:id', jwtSecurity.authenticateJWT, async function (req, res, next) {
+  let action = req.params.action;
+  if(action === 'Accept'){
+    res.render(`adminAppointment`, {id: req.params.id})
+  }else if (action === 'Cancell' ){
+    let appointmentInstance =await appointment.update(
+      {state: "CANCELLED"},
+      {returning: true, where:{id: req.params.id} } 
+    ).then(dbresponse => {
+      if(dbresponse){
+        res.send({message:1})  
+      }else{
+        res.send({message:0})
+      }
+    }).catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Database failure."
+      })
+    }) 
+  } 
 })
 
 /**
@@ -242,5 +267,3 @@ router.put('/formRecord', jwtSecurity.authenticateJWT , async (req, res, next) =
 })
 
 module.exports = router;
-
-

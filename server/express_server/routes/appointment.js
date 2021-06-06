@@ -10,9 +10,9 @@ const { Op } = require("sequelize");
 const utils = require('../scripts/utils.js');
 
 /**
- * This router returns appointments per state AND user
+ * This router returns appointments per state
  */
-router.get('/:state', jwtSecurity.authenticateJWT, async function (req,res,next){
+router.get('/state/:state', jwtSecurity.authenticateJWT, async function (req,res,next){
   let value = req.params.state;
   let user = req.cookies.idUser[1];
   console.log(req.cookies.idUser[1])

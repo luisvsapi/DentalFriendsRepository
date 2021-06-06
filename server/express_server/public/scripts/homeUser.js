@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    let url ="http://localhost:3000/appointment/PENDING";
+    let url ="http://localhost:3000/appointment/state/PENDING";
     getFetch(url, {}).then((res) => {
         if (res) {
             loadAppointment(res);
@@ -31,10 +31,12 @@ let loadAppointment = (data) => {
         accept.className = "btn btn-info";
         accept.type = "button";
         accept.innerText = "Aceptar";
+        accept.setAttribute('onclick','acceptRequest('+appointment.id+')')
         let decline = document.createElement('button');
         decline.className = "btn btn-secondary";
         decline.type = "button";
         decline.innerText = "Rechazar";
+        decline.setAttribute('onclick','cancellRequest('+appointment.id+')')
         buttons.appendChild(accept);
         buttons.appendChild(decline);
         
@@ -45,4 +47,27 @@ let loadAppointment = (data) => {
         table.appendChild(tr);
     }
 }
-//AGREGAR FUNCION ACEPTAR RECHZAR
+/**
+ * This method uses the appointment's id to request  it to be accepted.
+ * @param {*} appointmentId 
+ */
+function acceptRequest (appointmentId) {
+    let url = "./adminAppointment/" + "Accept/" + appointmentId; 
+    location.replace(url);
+}
+/**
+ * This method uses the appointment's id to request it to be cancelled.
+ * @param {*} appointmentId 
+ */
+function cancellRequest (appointmentId)  {
+    let url = "http://localhost:3000/user/adminAppointment/" + "Cancell/" + appointmentId; 
+    getFetch(url, {}).then((res) => {
+        if (res.message) {
+            location.reload();
+        } else {
+            alertify.error('Error al eliminar solicitud');
+        }
+    }).catch(err=>{
+        console.log(err.message);
+    })
+}

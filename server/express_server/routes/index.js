@@ -40,10 +40,6 @@ router.get('/appointment', function (req, res, next) {
   res.render(`appointment`, {})
 })
 
-router.get('/adminAppointment', function (req, res, next) {
-  res.render(`adminAppointment`, {})
-})
-
 router.get('/dentalcare', function (req, res, next) {
   res.render(`dentalcare`, {})
 })

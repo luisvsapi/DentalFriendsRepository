@@ -35,7 +35,7 @@ const sign = (user, password) => {
         user: user,
         password: password
     } 
-    return jwt.sign(payload, keySecret, { expiresIn: 60 * 10 });
+    return jwt.sign(payload, keySecret, { expiresIn: 60 * 1000 });
 }
 
 module.exports = {authenticateJWT, jwt, keySecret, sign}
