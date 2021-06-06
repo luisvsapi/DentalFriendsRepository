@@ -6,10 +6,11 @@ const jwtSecurity = require('../configs/jwtAuth')
 const userModel = require('../models/user')
 const userDetailsModel = require('../models/userDetails')
 const utils = require('../scripts/utils')
+var path = require('path') 
 
-router.get('profilePicture/:img', async (req, res, next) => {
-  let filePath = '../' + req.params.img 
-  res.sendFile(filePath)
+router.get('/avatar/:dir', async (req, res, next) => {
+  let filePath =  '../avatar/' + req.params.dir
+  res.sendFile(path.join(__dirname, filePath)  );
 })
 
 router.get('/', function (req, res, next) {
