@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    let url = "/appointment/PENDING";
+    let url = "/appointment/state/PENDING";
     getFetch(url, {}).then((res) => {
         if (res) {
             loadAppointment(res);
