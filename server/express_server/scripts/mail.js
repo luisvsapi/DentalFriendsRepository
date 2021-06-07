@@ -55,7 +55,7 @@ function sendMail(pacient, dentist, appointment) {
             <ul>  
                 <li>Nombre: ${pacient.name_pacient} ${pacient.lastname_pacient} de cédula ${pacient.id_card_pacient}</li>
                 <li>Email: ${pacient.email_pacient}</li>
-                <li>Fecha: ${mailParams.appointment.date} en las de ${mailParams.appointment.beginHour} - ${mailParams.appointment.endHour}</li>
+                <li>Fecha: ${mailParams.appointment.dateBegin} en las de ${mailParams.appointment.beginHour} - ${mailParams.appointment.endHour}</li>
                 <li>Odontólogo: ${dentist.user_name}</li>
             </ul>
             <h3>Mensaje</h3>

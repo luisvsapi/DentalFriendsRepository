@@ -57,7 +57,7 @@ router.get('/appointments/:action/:id', jwtSecurity.authenticateJWT, async funct
     res.render(`appointmentUser`, {id: req.params.id})
   }else if (action === 'Cancel' ){
     let appointmentInstance =await appointment.update(
-      {state: "CANCELLED"},
+      {state: '3'},
       {returning: true, where:{id: req.params.id} } 
     ).then(dbresponse => {
       if(dbresponse){
@@ -130,9 +130,8 @@ router.post('/formProfile', upload.single('picture_url') , jwtSecurity.authentic
 router.post('/medicalResume',  async (req, res, next) => {
   try {
     let requestBody = req.body
-    console.log("Body recibido:",req.body)
     const medicalResume = await appointment.findAll({
-      attributes: ['id', 'date',],
+      attributes: ['id', 'dateBegin',],
       where: {
         [Op.or]:[
           {'$pacient.id_card_pacient$':{
@@ -154,11 +153,11 @@ router.post('/medicalResume',  async (req, res, next) => {
     }) 
     for (element in medicalResume){
       let dateAppointment = new Date();
-      dateAppointment.setTime(Date.parse(medicalResume[element].date));
+      dateAppointment.setTime(Date.parse(medicalResume[element].dateBegin));
       var dateToJson = dateAppointment.getDay() + " "
       dateToJson = utils.addNameMonth(dateAppointment, dateToJson)      
       dateToJson += " "+dateAppointment.getFullYear()
-      medicalResume[element].date = dateToJson
+      medicalResume[element].dateBegin = dateToJson
       var fullName = medicalResume[element]['pacient.name_pacient']+" "+medicalResume[element]['pacient.lastname_pacient']
       delete medicalResume[element]['pacient.name_pacient']
       delete medicalResume[element]['pacient.lastname_pacient']

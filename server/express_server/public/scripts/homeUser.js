@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    let url = "../appointment/state/PENDING";
+    let url = "../appointment/state/1";
     getFetch(url, {}).then((res) => {
         if (res) {
             loadAppointment(res);
@@ -14,10 +14,11 @@ $(document).ready(function() {
 
 let loadAppointment = (data) => {
     let table = document.getElementById('homeUserTable');
+    console.log("Datos recuperados desde BD:",data)
     for(let appointment of data){
         let tr = document.createElement('tr');
         let date = document.createElement('td');
-        date.innerText = appointment.date;
+        date.innerText = appointment.dateBegin;
         let name = document.createElement('td');
         name.innerText = appointment.id_pacient;
         let treatment = document.createElement('td');

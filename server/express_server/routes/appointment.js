@@ -14,12 +14,11 @@ const utils = require('../scripts/utils.js');
  */
 router.get('/state/:state', jwtSecurity.authenticateJWT, async function (req,res,next){
   let value = req.params.state;
-  let user = req.cookies.idUser[1];
-  console.log(req.cookies.idUser[1])
+  let user = req.cookies.idUser.split(",")[0];
   let appointmentList = await appointment.findAll({
       where: {
         state: value,
-        id_user: user
+        id_user: user.slice(1)
       }
   }).then(data => {
     res.json(data)
@@ -38,7 +37,7 @@ router.get('/byUser/:idUser', jwtSecurity.authenticateJWT , async (req, res, nex
         {
           where: {
             id_user: req.params.idUser,
-            date: {
+            dateBegin: {
               [Op.lt]: utils.modificateActualTime('day', +15),
               [Op.gt]: utils.modificateActualTime('day', -1)
             }
@@ -62,17 +61,17 @@ router.post('/setAppointment', async (req, res, next) => {
       pacient = await pacientModel.create(req.body);
       await pacient.save()
     }
-    let appointmentTmp = await appointment.findOne({ where: { id_pacient: pacient.id, state: 'PENDING' } })
+    let appointmentTmp = await appointment.findOne({ where: { id_pacient: pacient.id, state: '1' } })
     if (appointmentTmp != null) {
       res.send({ message: 2, infoAppointment: 'Ya existe una cita a su nombre!' });
     } else {
       const dataTemp = {
-        state:'PENDING',
+        state:'1',
         details:{},
         id_user:requestBody.doctor,
         id_pacient:pacient.id,
         treatment:requestBody.treat,
-        date: new Date(requestBody.date),
+        dateBegin: new Date(requestBody.date),
       };
       let appointmentNew = await appointment.create(dataTemp);
       await appointmentNew.save()
@@ -90,7 +89,7 @@ router.post('/insert', jwtSecurity.authenticateJWT, async (req, res, next) => {
     requestBody.state = 0
     console.log(req.body);
     let appointmentTmp = await appointment.findOne({ where: { id_user: requestBody.id_user, 
-        date: requestBody.date } })
+      dateBegin: requestBody.date } })
     if (appointmentTmp == null) {
       appointmentTmp = await appointment.create(req.body);
       await appointmentTmp.save()
