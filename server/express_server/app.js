@@ -13,7 +13,7 @@ const constants = require('./scripts/constants')
 var indexRouter = require('./routes/index')
 var userRouter = require('./routes/user')
 var appointmentRouter = require('./routes/appointment')
-//var sendRouter = require('./routes/send')
+var sendRouter = require('./routes/mail')
  
 
 var app = express()
@@ -47,6 +47,7 @@ app.use(session({
 app.use('/', indexRouter)
 app.use('/user', userRouter)
 app.use('/appointment', appointmentRouter)
+app.use('/mail', sendRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

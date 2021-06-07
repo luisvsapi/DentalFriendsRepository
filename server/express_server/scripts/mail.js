@@ -4,7 +4,6 @@ const constantsProject = require('./constants');
 
 function sendMail(pacient, dentist, appointment) {
     try {
-
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
             host : constantsProject.mailCredentials.host,
@@ -25,7 +24,7 @@ function sendMail(pacient, dentist, appointment) {
             appointment: ''
         }
         // setup email data with unicode symbols
-        switch (appointment.status) {
+        switch (appointment.state) {
             case 0 :
                 mailParams.subject = 'Asignación';
                 mailParams.message = 'Su cita fue asignada con éxito'
