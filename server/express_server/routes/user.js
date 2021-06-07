@@ -88,10 +88,10 @@ router.post('/formProfile', upload.single('picture_url') , jwtSecurity.authentic
   console.log(req.file)
   let requestBody = req.body
   let dict = {
-    "birthday": requestBody.birth,
+    "name": requestBody.name,
     "age": requestBody.age,
     "phone": requestBody.phone,
-    "recognitions": [requestBody.recog],
+    "recognitions": [requestBody.recognitions],
     "university": requestBody.school,
     "frase": requestBody.phrase
   }
