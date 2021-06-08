@@ -62,6 +62,35 @@ function addNameMonth(dateAppointment, dateToJson) {
   return dateToJson
 }
 
+function addNameDay(dateAppointment, dateToJson) {
+  switch (dateAppointment.getDay()) {
+    case 0:
+      dateToJson += "Domingo"
+      break    
+    case 1:
+      dateToJson += "Lunes"
+      break
+    case 2:
+      dateToJson += "Martes"
+      break
+    case 3:
+      dateToJson += "Miércoles"
+      break
+    case 4:
+      dateToJson += "Jueves"
+      break
+    case 5:
+      dateToJson += "Viernes"
+      break
+    case 6:
+      dateToJson += "Sábado"
+      break
+    default:
+      dateToJson += "Indet."
+  }
+  return dateToJson
+}
+
 async function cryptPassword(password = '') {  
   const salt = await bcrypt.genSalt(10)
   return bcrypt.hash(password, salt)
@@ -73,4 +102,4 @@ function comparePassword(plainPass = '', hashword = '') {
   });
 }  
 
-module.exports = { modificateActualTime, addNameMonth, cryptPassword, comparePassword }
+module.exports = { modificateActualTime, addNameMonth, addNameDay, cryptPassword, comparePassword }

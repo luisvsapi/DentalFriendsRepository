@@ -58,8 +58,8 @@ function acceptRequest (appointmentId) {
  * This method uses the appointment's id to request it to be cancelled.
  * @param {*} appointmentId 
  */
-function cancellRequest (appointmentId)  {
-    let url = "./appointments/" + "Cancel/" + appointmentId; 
+function cancellRequest (appointmentIdCancel)  {
+    let url = "./appointments/" + "Cancel/" + appointmentIdCancel; 
     getFetch(url, {}).then((res) => {
         if (res.message) {
             location.reload();
@@ -69,4 +69,12 @@ function cancellRequest (appointmentId)  {
     }).catch(err=>{
         console.log(err.message);
     })
+    // let url = "/mail/send"; 
+    // postFetch( url,{
+    //     appointmentId: appointmentIdCancel,
+    // }).then((res) => {
+    //     return res
+    // }).catch(function() {
+    //     alert("Error contacte con administrador");
+    // }); 
 }
