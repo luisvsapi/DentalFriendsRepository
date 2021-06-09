@@ -1,5 +1,5 @@
 const noActionAllert = function () {
-    alertify.error('No se realizo ninguna accion');
+  alertify.error("No se realizo ninguna accion");
 };
 
-const aceptOrNot = { labels: { ok: 'Aceptar', cancel: 'Cancelar' } };
+const aceptOrNot = { labels: { ok: "Aceptar", cancel: "Cancelar" } };
