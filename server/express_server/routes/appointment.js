@@ -35,14 +35,16 @@ router.get(
 );
 
 router.get(
-  "/byUser/:idUser",
+  "/byUser",
   jwtSecurity.authenticateJWT,
   async (req, res, next) => {
+    let user = req.cookies.idUser.split(",")[0];
     try {
-      if (validator.isInt(req.params.idUser)) {
+      if (validator.isInt(user.slice(1))) {
         let appointments = await appointment.findAll({
           where: {
-            id_user: req.params.idUser,
+            id_user: user.slice(1),
+            state: '0',
             dateBegin: {
               [Op.lt]: utils.modificateActualTime("day", +15),
               [Op.gt]: utils.modificateActualTime("day", -1),
@@ -57,7 +59,7 @@ router.get(
         res.json(appointments);
       }
     } catch (error) {
-      console.log(error);
+      console.log("Error en recuperacion de datos",error);
       res.sendStatus(500);
     }
   }
@@ -140,4 +142,5 @@ router.delete(
     }
   }
 );
+
 module.exports = router;

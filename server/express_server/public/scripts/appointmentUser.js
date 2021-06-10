@@ -1,66 +1,12 @@
-var appointmentSelect = -1;
-var appointmentAvaliable = new Map();
-var calendar;
-
-$(document).ready(function () {
-  startCalendar();
-  fillCalendar();
-});
-
-function momentoCargarxD() {
-  let data = [
-    {
-      title: "All Day Event",
-      start: "2021-06-01",
-    },
-    {
-      title: "Long Event",
-      start: "2021-06-07",
-      end: "2021-06-10",
-    },
-    {
-      groupId: "999",
-      title: "Repeating Event",
-      start: "2021-06-09T16:00:00",
-    },
-    {
-      groupId: "999",
-      title: "Repeating Event",
-      start: "2021-06-16T16:00:00",
-    },
-    {
-      title: "Conference",
-      start: "2021-06-11",
-      end: "2021-06-13",
-    },
-    {
-      title: "Meeting",
-      start: "2021-06-12T10:30:00",
-      end: "2021-06-12T12:30:00",
-    },
-    {
-      title: "Lunch",
-      start: "2021-06-12T12:00:00",
-    },
-    {
-      title: "Meeting",
-      start: "2021-06-12T14:30:00",
-    },
-    {
-      title: "Birthday Party",
-      start: "2021-06-13T07:00:00",
-    },
-    {
-      title: "Click for Google",
-      start: "2021-06-28",
-    },
-  ];
-  return data;
-}
-
+let calendar;
 document.addEventListener("DOMContentLoaded", function () {
   var calendarEl = document.getElementById("calendarElement");
 
+  initializeCalendar(calendarEl);
+  getAvaliablesAppointment();
+});
+
+function initializeCalendar(calendarEl){
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "timeGridWeek",
     locale: "es",
@@ -85,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
       omitZeroMinute: false,
       meridiem: "short",
     },
-    events: momentoCargarxD(),
+    events: [],
     /* dateClick: function(info){
         alert("Momento")
         console.log("Recuperado:",info)
@@ -98,9 +44,30 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     editable: true,
   });
+}
 
-  calendar.render();
-});
+async function getAvaliablesAppointment() {
+  let resp = await getFetch(`/appointment/byUser`)
+    .then((res) => {
+      res.forEach(element => {
+        console.log("Registro retornado:",element)
+        calendar.addEvent({
+          title: element.treatment,
+          start: element.dateBegin+"T07:00:00",
+          end: modificateActualTime('minute', element.dateBegin, 15),
+          backgroundColor: element.state == 1 ? 'red' : 'blue',
+        });
+      });
+    })
+    .then(()=>{
+      calendar.addEvent({
+        title:"GAgag",
+        start:"2021-06-10T10:00:00"
+      });
+      calendar.render();
+    })
+    .catch(err=>console.log("Error en recuperación de las citas",err));
+}
 
 /* function deleteAppointment(startDate = '') {
   let startDateTmp = dateToInt(startDate);
@@ -152,25 +119,5 @@ function fillCalendar() {
 function clearCalendar() {
     calendar.getEvents().forEach(element => {
         element.remove();
-    });
-}
-
-function getAvaliablesAppointment() {
-    appointmentAvaliable = new Map()
-    getFetch(`/appointment/byUser/${document.cookie.user}`).then((res) => {
-        res.forEach(element => {
-            appointmentAvaliable.set(new Date(element.date).getTime(), element)
-        })
-        addEventsCalendar();
-    })
-}
-
-function addEventsCalendar() {
-    appointmentAvaliable.forEach(element => {
-        calendar.addEvent({
-            start: element.date,
-            end: modificateActualTime('minute', element.date, 15),
-            backgroundColor: element.state == 1 ? 'red' : 'blue',
-        });
     });
 } */
