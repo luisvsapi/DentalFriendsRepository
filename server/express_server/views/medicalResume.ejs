@@ -87,106 +87,105 @@
     </div>
 
   </header>
-    <!-- End Header -->
+  <!-- End Header -->
 
-    <main id="main">
+  <main id="main">
+    <!-- ======= Portfolio Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
 
-      <!-- ======= Portfolio Section ======= -->
-      <section id="about" class="about">
-        <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Resumen Medico de Pacientes</h2>
+        </div>
+        
+        <div class="mt-5 mt-lg-0"><!--mt-5 mt-lg-0"-->
+          <form id="searchMedicalResume" action="/medicalResume" method="post" role="form"  >
+            <div class="form-row">
+                <label class="col-form-label">Buscar Paciente:</label>
+                <div class="col-md-5 form-group col-8">
+                  <input id="filterMedicalResume" placeholder="Cédula/NombrePaciente/CorreoPaciente" maxlength="10" minlength="3" class="form-control" type="text">
+                </div>
+                <div class="col-md-2 col-3" >
+                  <button id="buttonSearchMedicalResume" type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+          </form><br>
+        </div>
 
-          <div class="section-title">
-            <h2>Resumen Medico de Pacientes</h2>
-          </div>
-          
-          <div class="row"><!--mt-5 mt-lg-0"-->
-            <form id="searchMedicalResume" action="/medicalResume" method="post" role="form"  >
-              <div class="form-row">
-                  <label class="col-form-label">Buscar Paciente:</label>
-                  <div class="col-md-5 form-group col-8">
-                    <input id="filterMedicalResume" placeholder="Cédula/NombrePaciente/CorreoPaciente" maxlength="10" minlength="3" class="form-control" type="text">
-                  </div>
-                  <div class="col-md-2 col-3" >
-                    <button id="buttonSearchMedicalResume" type="submit" class="btn btn-primary">Buscar</button>
-                  </div>
-                  <div class="col-md-2"></div>
-              </div>
-            </form><br>
-          </div>
-
-          <div class="row">
-            <table id="medicalResumeTable" class="table">
-              <tr>
-                <th>Id</th>
-                <th>Fecha</th>
-                <th>Paciente</th>
-                <th class="d-flex justify-content-center">Detalles</th>
-              </tr>
-              <tr>
-                <td>2021-01-19</td>
-                <td>Pabelco</td>
-                <td></td>
-                <td class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Detalles
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2021-01-19</td>
-                <td>luis</td>
-                <td></td>
-                <td class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Detalles
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2021-01-19</td>
-                <td>rogwi</td>
-                <td></td>
-                <td class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Detalles
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2021-01-19</td>
-                <td>Bryan</td>
-                <td></td>
-                <td class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Detalles
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2021-01-19</td>
-                <td>Issac</td>
-                <td></td>
-                <td class="d-flex justify-content-center">
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Detalles
-                  </button>
-                </td>
-              </tr>
-              <% if (resume) { %>
-                <% console.log(resume) %>
-                <% for(var i = 0; i < resume.length; i++) { %>
-                  <% if (resume[i] != null) { %>
-                    <tr>
-                      <td>
-                        <%= resume[i].date %>
-                      </td>
-                      <td>
-                        <%= resume[i].id_user %>
-                      </td>
-                    </tr>
+        <div class="row">
+          <table id="medicalResumeTable" class="table">
+            <tr>
+              <th>Id</th>
+              <th>Fecha</th>
+              <th>Paciente</th>
+              <th class="d-flex justify-content-center">Detalles</th>
+            </tr>
+            <tr>
+              <td>2021-01-19</td>
+              <td>Pabelco</td>
+              <td></td>
+              <td class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  Detalles
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>2021-01-19</td>
+              <td>luis</td>
+              <td></td>
+              <td class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  Detalles
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>2021-01-19</td>
+              <td>rogwi</td>
+              <td></td>
+              <td class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  Detalles
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>2021-01-19</td>
+              <td>Bryan</td>
+              <td></td>
+              <td class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  Detalles
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>2021-01-19</td>
+              <td>Issac</td>
+              <td></td>
+              <td class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  Detalles
+                </button>
+              </td>
+            </tr>
+            <% if (resume) { %>
+              <% console.log(resume) %>
+              <% for(var i = 0; i < resume.length; i++) { %>
+                <% if (resume[i] != null) { %>
+                  <tr>
+                    <td>
+                      <%= resume[i].date %>
+                    </td>
+                    <td>
+                      <%= resume[i].id_user %>
+                    </td>
+                  </tr>
+                  <% } %>
                     <% } %>
                       <% } %>
-                        <% } %>
           </table>
         </div>
       </div>
