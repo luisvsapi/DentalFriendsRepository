@@ -37,7 +37,9 @@ function initializeCalendar(calendarEl){
         console.log("Recuperado:",info)
       }, */
     select: function (info) {
-      alert("Momento insertar rango");
+      //dfuncion modal per id
+      showConfirmation(info);
+      //alert("Momento insertar rango");
       console.log("Recuperado:", info);
       //Agregar a la Base De Datos nueva cita con estado ACEPTADO
       //reenderizar el /user/home
@@ -121,3 +123,23 @@ function clearCalendar() {
         element.remove();
     });
 } */
+
+async function showConfirmation(content){
+  //hace visible el modal, le manda una data
+  let confirmation = document.getElementById('modalAppointment');
+  confirmation.getElementsByClassName('modal-title')[0].textContent = "Confirmación";
+  confirmation.getElementsByClassName('modal-body')[0].textContent = "¿Esta usted seguro?";
+  confirmation.getElementsByClassName('m-confirm')[0].setAttribute("onclick", confirmate(content));
+  confirmation.getElementsByClassName('m-cancel')[0].setAttribute("onclick", "cancel()");
+  confirmation.style.display= 'block';
+}
+function confirmate(content){
+  let confirmation = document.getElementById('modalAppointment');
+  confirmation.style.display= 'none';
+  console.log('aceptado');
+}
+function cancel(){
+  let confirmation = document.getElementById('modalAppointment');
+  confirmation.style.display= 'none';
+  console.log('cancelado');
+}
