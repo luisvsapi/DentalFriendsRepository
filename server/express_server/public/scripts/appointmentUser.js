@@ -126,14 +126,15 @@ function clearCalendar() {
 
 async function showConfirmation(content){
   //hace visible el modal, le manda una data
+  console.log(content);
   let confirmation = document.getElementById('modalAppointment');
-  confirmation.getElementsByClassName('modal-title')[0].textContent = "Confirmación";
-  confirmation.getElementsByClassName('modal-body')[0].textContent = "¿Esta usted seguro?";
-  confirmation.getElementsByClassName('m-confirm')[0].setAttribute("onclick", confirmate(content));
+  confirmation.getElementsByClassName('modal-title')[0].textContent = "Confirmar Cita";
+  confirmation.getElementsByClassName('m-details')[0].innerHTML = "<h5>Detalles</h5></br><p>Fecha inicio: " + content.start + "</p><p>Fecha fin: " + content.end + "</p></br>";
+  confirmation.getElementsByClassName('m-confirm')[0].setAttribute("onclick", "confirmate()");
   confirmation.getElementsByClassName('m-cancel')[0].setAttribute("onclick", "cancel()");
   confirmation.style.display= 'block';
 }
-function confirmate(content){
+function confirmate(){
   let confirmation = document.getElementById('modalAppointment');
   confirmation.style.display= 'none';
   console.log('aceptado');
