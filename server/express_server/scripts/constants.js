@@ -9,7 +9,7 @@ module.exports = {
     2: "Completed",
     3: "Cancelled",
   },
-  MAX_AGE_COOKIE: 1000 * 60 * 10,
+  MAX_AGE_COOKIE: 1000 * 60 * 100,
   mailCredentials: {
     mail: "dentalfriends.ec@gmail.com",
     clientId:
