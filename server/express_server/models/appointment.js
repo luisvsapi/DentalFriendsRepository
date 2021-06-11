@@ -12,8 +12,8 @@ var appointment = db.define(
     id_user: Sequelize.INTEGER,
     id_pacient: Sequelize.INTEGER,
     treatment: { type: Sequelize.STRING },
-    dateBegin: { type: Sequelize.DATE, allowNull: false },
-    dateFinish: { type: Sequelize.DATE },
+    dateBegin: { type: 'TIMESTAMP', allowNull: false },
+    dateFinish: { type:'TIMESTAMP' },
   },
   {
     timestamps: false,

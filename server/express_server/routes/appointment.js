@@ -49,8 +49,6 @@ router.put("/changeState", jwtSecurity.authenticateJWT,  async function (req, re
       {returning: true, where: {id: requestBody.id}}
     ).then((dbresponse) => {
       if(dbresponse) {
-        console.log("response ingreso:",dbresponse);
-        console.log("response begin sin date():",requestBody.dateBegin);
         res.send({message: 1});
       }
     })
@@ -81,8 +79,6 @@ router.get(
             },
           ],
         });
-        console.log("Si esta recuperando:\n");
-        console.log("appointment server: ",appointments);
         res.json(appointments);
       }
     } catch (error) {
@@ -139,7 +135,7 @@ router.post("/setAppointment", async (req, res, next) => {
       res.send({ message: 1, infoAppointment: "Ok" });
     }
   } catch (err) {
-    console.log(err);
+    console.log("Error en guardar cita",err);
     res.send({ message: 0 });
   }
 });
@@ -148,7 +144,6 @@ router.post("/insert", jwtSecurity.authenticateJWT, async (req, res, next) => {
   let requestBody = req.body;
   try {
     requestBody.state = 0;
-    console.log(req.body);
     let appointmentTmp = await appointment.findOne({
       where: { id_user: requestBody.id_user, dateBegin: requestBody.date },
     });
@@ -170,7 +165,6 @@ router.delete(
   jwtSecurity.authenticateJWT,
   async (req, res, next) => {
     let requestBody = req.body;
-    console.log(requestBody);
     try {
       await appointment.destroy({
         where: {
@@ -179,7 +173,7 @@ router.delete(
       });
       res.send({ message: 1, messageHuman: "Borrado exitoso" });
     } catch (err) {
-      console.log(err);
+      console.log("Error en borrar cita",err);
       res.send({ message: 0 });
     }
   }

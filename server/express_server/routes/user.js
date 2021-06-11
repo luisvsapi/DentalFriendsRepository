@@ -110,7 +110,6 @@ router.post(
   jwtSecurity.authenticateJWT,
   async (req, res, next) => {
     //cambio a put, prueba
-    console.log(req.file);
     let requestBody = req.body;
     let dict = {
       name: requestBody.name,
@@ -317,7 +316,6 @@ router.post("/setRecord", async (req, res, next) => {
     diagnostico: requestBody.diagnostico,
     tratamiento: requestBody.tratamiento,
   };
-  console.log(dict);
   try {
     await pacientModel.findOne({
       where: { id_card_pacient: requestBody.id_card_pacient },
