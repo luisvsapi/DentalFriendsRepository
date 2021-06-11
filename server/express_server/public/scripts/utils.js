@@ -96,3 +96,65 @@ function modificateActualTime(mode = "minute", date = "", value = 1) {
   }
   return new Date(dateTmp);
 }
+/**
+ * This method generates a user friendly date
+ * @param {*} dateUTC 
+ * @returns date 
+ */
+function parseUtcDate(dateUTC){
+  let date = new Date();
+  date.setTime(Date.parse(dateUTC));
+  var dateToJson = date.getDay() + " ";
+  dateToJson = addNameMonth(date, dateToJson);
+  dateToJson += " " + date.getFullYear();
+  return dateToJson;
+}
+/**
+ * This method asign the name of the month with the month number
+ * @param {*} dateAppointment 
+ * @param {*} dateToJson 
+ * @returns 
+ */
+function addNameMonth(dateAppointment, dateToJson) {
+  switch (dateAppointment.getMonth()) {
+    case 0:
+      dateToJson += "Enero";
+      break;
+    case 1:
+      dateToJson += "Febrero";
+      break;
+    case 2:
+      dateToJson += "Marzo";
+      break;
+    case 3:
+      dateToJson += "Abril";
+      break;
+    case 4:
+      dateToJson += "Mayo";
+      break;
+    case 5:
+      dateToJson += "Junio";
+      break;
+    case 6:
+      dateToJson += "Julio";
+      break;
+    case 7:
+      dateToJson += "Agosto";
+      break;
+    case 8:
+      dateToJson += "Septiembre";
+      break;
+    case 9:
+      dateToJson += "Octubre";
+      break;
+    case 10:
+      dateToJson += "Noviembre";
+      break;
+    case 11:
+      dateToJson += "Diciembre";
+      break;
+    default:
+      dateToJson += "Indet.";
+  }
+  return dateToJson;
+}

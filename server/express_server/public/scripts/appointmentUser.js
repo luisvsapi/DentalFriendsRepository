@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeCalendar(calendarEl);
   getAvaliablesAppointment();
 });
-
+/**
+ * This method loads the FullCalendar element and configs.
+ * @param {*} calendarEl html element 
+ */
 function initializeCalendar(calendarEl){
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "timeGridWeek",
@@ -34,13 +37,10 @@ function initializeCalendar(calendarEl){
         console.log("Recuperado:",info)
       }, */
     select: function (info) {
-      //dfuncion modal per id
       showConfirmation(info);
       console.log("Recuperado:", info);
-      //Agregar a la Base De Datos nueva cita con estado ACEPTADO
-      //reenderizar el /user/home
-    },
-    editable: true,
+    }
+    
   });
 }
 
@@ -58,11 +58,8 @@ async function getAvaliablesAppointment() {
       });
     })
     .then(()=>{
-      calendar.addEvent({
-        title:"GAgag",
-        start:"2021-06-10T10:00:00"
-      });
       calendar.render();
+      //agregar alertify
     })
     .catch(err=>console.log("Error en recuperación de las citas",err));
 }
