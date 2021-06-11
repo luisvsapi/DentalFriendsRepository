@@ -39,8 +39,6 @@
       -->
 
 
-
-
   <!-- =======================================================
   * Template Name: Kelly - v2.0.0
   * Template URL: https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/
@@ -76,7 +74,13 @@
   <header id="header" class="fixed-top">
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <h1 class="logo"><a href="../home">DentalFriends</a></h1>
+    
+      <div class="header-social-links">
+        <button type="button" onclick="goAttention()" class="btn btn-info">Salir</button><br>
+      </div>      
     </div>
+
+
 
   </header><!-- End Header -->
 
@@ -100,7 +104,7 @@
             <li><a href="#four" class="panes-isaac">Diagnostico</a></li>
           </ul><br>
 
-          <form id="formRecord" action="" method="post">
+          <form id="formRecord" action="" role="form" method="post">
             <div class="tab-content">
               <div class="tab-pane active" id="one">
                 <div class="form-row">
@@ -113,7 +117,7 @@
                 <div class="form-row">
                   <div class="col-md-2"></div>
                   <label for="reason" class="col-form-label col-md-2 labels-isaac">Motivo de la Consulta:</label>
-                  <textarea class="form-control col-md-6" name="reason" id="reason" rows="5"
+                  <textarea class="form-control col-md-6" name="reason" maxlength="200" id="reason" rows="5"
                     cols="10">Motivo de la Consulta</textarea><br>
                   <div class="col-md-2"></div>
                 </div><br>
@@ -121,21 +125,21 @@
                   <div class="col-md-2"></div>
                   <label for="enfermdad" class="col-form-label col-md-2 labels-isaac">Enfermedad Actual:</label>
                   <input class="form-control col-md-6" type="text" maxlength="200" name="enfermedad" id="enfermedad"
-                    placeholder="Ingrese la enfermdad actual del paciente" required />
-                  <div class="col-md-2"></div>
-                </div><br>
-                <div class="form-row">
-                  <div class="col-md-2"></div>
-                  <label for="embarazo" class="col-form-label col-md-2 labels-isaac">Embarazo:</label>
-                  <input type="checkbox" class="col-form-label col-md-2" id="embarazo" name="embarazo" value="true">
+                    placeholder="Ingrese la enfermdad actual del paciente"  />
                   <div class="col-md-2"></div>
                 </div><br>
               </div>
               <div class="tab-pane" id="two">
+                <div class="form-row">
+                  <div class="col-md-2"></div>
+                  <input type="checkbox" class="col-1" id="embarazo" name="embarazo">
+                  <label for="embarazo" class="col-form-label col-md-2 labels-isaac">Embarazo:</label>
+                  <div class="col-md-2"></div>
+                </div><br>
 
                 <div class="form-row">
                   <div class="col-md-2"></div>
-                  <input type="checkbox" class="col-1" id="antecedente1" name="antecedente1" value="true">
+                  <input type="checkbox" class="col-1" id="antecedente1" name="antecedente1" >
                   <label for="antecedente1" class="col-form-label col-md-2 labels-isaac col-9">Alergia
                     Antibiotico</label><br>
                   <div class="col-md-2"></div>
@@ -143,51 +147,51 @@
 
                 <div class="form-row">
                   <div class="col-md-2"></div>
-                  <input type="checkbox" class="col-1" id="antecedente2" name="antecedente2" value="true">
+                  <input type="checkbox" class="col-1" id="antecedente2" name="antecedente2" >
                   <label for="antecedente2" class="col-form-label col-md-2 labels-isaac col-9">Alergia
                     Anestesia</label><br>
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
-                  <input type="checkbox" class="col-1" id="antecedente3" name="antecedente3" value="true">
+                  <input type="checkbox" class="col-1" id="antecedente3" name="antecedente3" >
                   <label for="antecedente3" class="col-form-label col-md-2 labels-isaac col-9">Hemorragias</label><br>
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
-                  <input type="checkbox" class="col-1" id="antecedente4" name="antecedente4" value="true">
+                  <input type="checkbox" class="col-1" id="antecedente4" name="antecedente4" >
                   <label for="antecedente4" class="col-form-label col-md-2 labels-isaac col-9">VHI/SIDA</label><br>
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
-                  <input type="checkbox" class="col-1" id="antecedente5" name="antecedente5" value="true">
+                  <input type="checkbox" class="col-1" id="antecedente5" name="antecedente5">
                   <label for="antecedente5" class="col-form-label col-md-2 labels-isaac col-9">Asma</label><br>
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
-                  <input type="checkbox" class="col-1" id="antecedente6" name="antecedente6" value="true">
+                  <input type="checkbox" class="col-1" id="antecedente6" name="antecedente6" >
                   <label for="antecedente6" class="col-form-label col-md-2 labels-isaac col-9">Diabetes</label><br>
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
-                  <input type="checkbox" class="col-1" id="antecedente7" name="antecedente7" value="true">
+                  <input type="checkbox" class="col-1" id="antecedente7" name="antecedente7">
                   <label for="antecedente7" class="col-form-label col-md-2 labels-isaac col-9">HiperTension</label><br>
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
-                  <input type="checkbox" class="col-1" id="antecedente8" name="antecedente8" value="true">
+                  <input type="checkbox" class="col-1" id="antecedente8" name="antecedente8" >
                   <label for="antecedente8" class="col-form-label col-md-2 labels-isaac col-9">Enfermedades
                     Cardiacas</label><br>
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
-                  <input type="checkbox" class="col-1" id="antecedente9" name="antecedente9" value="true">
+                  <input type="checkbox" class="col-1" id="antecedente9" name="antecedente9">
                   <label for="antecedente9" class="col-form-label col-md-2 labels-isaac col-9">Tuberculosis</label><br>
                   <div class="col-md-2"></div>
                 </div><br>
@@ -195,7 +199,7 @@
                   <div class="col-md-2"></div>
                   <label for="otraenfermdad" class="col-form-label col-md-2">Otras:</label>
                   <input class="form-control col-md-6" type="text" maxlength="200" name="otraenfermdad"
-                    id="otraenfermdad" placeholder="Ingrese otras emfermedades del paciente" required />
+                    id="otraenfermdad" placeholder="Ingrese otras emfermedades del paciente"  />
                   <div class="col-md-2"></div>
                 </div><br>
               </div><br>
@@ -207,28 +211,28 @@
                   <div class="col-md-2"></div>
                   <label for="presion" class="col-form-label col-md-2 labels-isaac">Presion Arterial:</label>
                   <input class="form-control col-md-6" type="text" maxlength="10" name="presion" id="presion"
-                    placeholder="Ingrese el valor" required />
+                    placeholder="Ingrese el valor"  />
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
                   <label for="frecuenciac" class="col-form-label col-md-2 labels-isaac">Frecuencia Cardiaca:</label>
                   <input class="form-control col-md-6" type="text" maxlength="200" name="frecuenciac" id="frecuenciac"
-                    placeholder="Ingrese el valor en minutos" required />
+                    placeholder="Ingrese el valor en minutos"  />
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
                   <label for="frecuenciar" class="col-form-label col-md-2 labels-isaac">Frecuencia Respiratoria:</label>
                   <input class="form-control col-md-6" type="text" maxlength="200" name="frecuenciar" id="frecuenciar"
-                    placeholder="Ingrese el valor en minutos" required />
+                    placeholder="Ingrese el valor en minutos"  />
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
                   <label for="temperatura" class="col-form-label col-md-2 labels-isaac">Temperatura Corporal:</label>
                   <input class="form-control col-md-6" type="text" maxlength="200" name="temperatura" id="temperatura"
-                    placeholder="Ingrese el valor en C" required />
+                    placeholder="Ingrese el valor en C"  />
                   <div class="col-md-2"></div>
                 </div><br>
               </div>
@@ -237,20 +241,20 @@
                 <div class="form-row">
                   <div class="col-md-2"></div>
                   <label for="diagnostico" class="col-form-label col-md-2 labels-isaac">Diagnostico:</label>
-                  <textarea class="form-control col-md-6" name="diagnostico" id="diagnostico" rows="5"
+                  <textarea class="form-control col-md-6" name="diagnostico" maxlength="200" id="diagnostico" rows="5"
                     cols="10">Diagnostico para el Paciente</textarea><br>
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-2"></div>
                   <label for="tratamiento" class="col-form-label col-md-2 labels-isaac">Tratamiento:</label>
-                  <textarea class="form-control col-md-6" name="tratamiento" id="tratamiento" rows="5"
+                  <textarea class="form-control col-md-6" name="tratamiento" id="tratamiento" maxlength="200" rows="5"
                     cols="10">Tratamiento para el Paciente</textarea><br><br>
                   <div class="col-md-2"></div>
                 </div><br>
                 <div class="form-row">
                   <div class="col-md-4"></div>
-                  <button type="submit" class="btn btn-primary col-md-4">Guardar</button>
+                  <button type="submit" class="btn btn-primary">Guardar</button><br>
                   <div class="col-md-4"></div>
                 </div><br>
               </div>
