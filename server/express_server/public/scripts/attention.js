@@ -27,9 +27,9 @@ let loadAppointment = (data) => {
     let treatment = document.createElement("td");
     treatment.innerText = appointment.treatment;
 
-    let link = document.createElement("a");
-    link.className = "d-flex justify-content-center";
-    link.href = "javascript:popUp('medicalRecord')";
+    let link = document.createElement("button");
+    link.className = "btn btn-info";
+    link.setAttribute("onclick", "goMedicalRecord()");
     link.innerText = "LLenarr Ficha";
 
     tr.appendChild(date);
@@ -38,4 +38,11 @@ let loadAppointment = (data) => {
     tr.appendChild(link);
     table.appendChild(tr);
   }
+  
 };
+
+
+function goMedicalRecord() {
+  let url = "./medicalRecord";
+  location.replace(url);
+}
