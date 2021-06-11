@@ -49,6 +49,8 @@ router.put("/changeState", jwtSecurity.authenticateJWT,  async function (req, re
       {returning: true, where: {id: requestBody.id}}
     ).then((dbresponse) => {
       if(dbresponse) {
+        console.log("response ingreso:",dbresponse);
+        console.log("response begin sin date():",requestBody.dateBegin);
         res.send({message: 1});
       }
     })
@@ -79,6 +81,8 @@ router.get(
             },
           ],
         });
+        console.log("Si esta recuperando:\n");
+        console.log("appointment server: ",appointments);
         res.json(appointments);
       }
     } catch (error) {

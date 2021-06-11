@@ -16,7 +16,6 @@ $(document).ready(function () {
 
 let loadAppointment = (data) => {
   let table = document.getElementById("homeUserTable");
-  console.log("Datos recuperados desde BD:", data);
   for (let appointment of data) {
     let tr = document.createElement("tr");
     let date = document.createElement("td");

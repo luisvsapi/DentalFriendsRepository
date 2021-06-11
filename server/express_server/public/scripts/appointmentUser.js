@@ -9,21 +9,18 @@ document.addEventListener("DOMContentLoaded", function () {
 function initializeCalendar(calendarEl){
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "timeGridWeek",
+    allDaySlot: false,
     locale: "es",
     nowIndicator: true,
     contentHeight: "auto",
     initialDate: Date.now(),
-    slotMinTime: "07:00",
+    slotMinTime: "00:00",
     slotMaxTime: "20:00",
     selectable: true,
     headerToolbar: {
       left: "prev,next today",
       center: "title",
       right: "dayGridMonth,timeGridWeek,timeGridDay",
-    },
-    validRange: {
-      start: Date.now(),
-      end: modificateActualTime("day", new Date(), 15),
     },
     slotLabelFormat: {
       hour: "numeric",
@@ -51,12 +48,12 @@ async function getAvaliablesAppointment() {
   let resp = await getFetch(`/appointment/byUser`)
     .then((res) => {
       res.forEach(element => {
-        console.log("Registro retornado:",element)
+        console.log("fecha retornada inicio:", new Date(element.dateBegin));
         calendar.addEvent({
           title: element.treatment,
-          start: element.dateBegin+"T07:00:00",
-          end: modificateActualTime('minute', element.dateBegin, 15),
-          backgroundColor: element.state == 1 ? 'red' : 'blue',
+          start: new Date(element.dateBegin),
+          end: new Date(element.dateEnd),
+          backgroundColor: element.state == 1 ? 'crimson' : 'darkcyan',
         });
       });
     })
@@ -138,10 +135,9 @@ async function confirmate(id, state, dateBegin, dateFinish){
   let body = {
     id: id,
     state: state,
-    dateBegin: dateBegin,
-    dateFinish: dateFinish
+    dateBegin: new Date(dateBegin),
+    dateFinish: new Date(dateFinish)
   }
-  console.log(body);
   await putFetch(`/appointment/changeState`, body)
   .then((res) => {
     if(res){
