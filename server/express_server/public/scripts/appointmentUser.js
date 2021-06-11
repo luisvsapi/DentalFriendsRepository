@@ -39,7 +39,6 @@ function initializeCalendar(calendarEl){
     select: function (info) {
       //dfuncion modal per id
       showConfirmation(info);
-      //alert("Momento insertar rango");
       console.log("Recuperado:", info);
       //Agregar a la Base De Datos nueva cita con estado ACEPTADO
       //reenderizar el /user/home
@@ -137,7 +136,8 @@ async function showConfirmation(content){
 function confirmate(){
   let confirmation = document.getElementById('modalAppointment');
   confirmation.style.display= 'none';
-  console.log('aceptado');
+  //Aqui va putfetch a la base, para cambiar state y setear fechas
+  //al recibir un dbresponse debe renderizar get(/home) o relocate()
 }
 function cancel(){
   let confirmation = document.getElementById('modalAppointment');
