@@ -33,6 +33,29 @@ router.get(
       });
   }
 );
+/**
+ * This method receives state, idAppointment, dateBegin, dateFinish to 
+ * changue the appointment status.
+ * returns mmessage 1, 0
+ */
+router.put("/changeState", jwtSecurity.authenticateJWT,  async function (req, res, next) {
+  let requestBody = req.body;
+  try{
+    await appointment.update(
+      {state: requestBody.state,
+       dateBegin: requestBody.dateBegin,
+       dateFinish: requestBody.dateFinish,
+      },
+      {returning: true, where: {id: requestBody.id}}
+    ).then((dbresponse) => {
+      if(dbresponse) {
+        res.send({message: 1});
+      }
+    })
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
 
 router.get(
   "/byUser",
@@ -64,7 +87,10 @@ router.get(
     }
   }
 );
-
+/**
+ * this method creates an appoiment request
+ * It only creates a request if the pacient has no associated state 0,1 appointments
+ */
 router.post("/setAppointment", async (req, res, next) => {
   let requestBody = req.body;
   try {
@@ -75,10 +101,22 @@ router.post("/setAppointment", async (req, res, next) => {
       pacient = await pacientModel.create(req.body);
       await pacient.save();
     }
-    let appointmentTmp = await appointment.findOne({
-      where: { id_pacient: pacient.id, state: "1" },
+    let {count, appointmentTmp} = await appointment.findAndCountAll({
+      where: { 
+        id_pacient: pacient.id, 
+        [Op.or]: [
+          {
+            state: '0'
+          },
+          {
+            state: '1'
+          },
+        ] 
+      },
+      offset: 10,
+      limit: 2
     });
-    if (appointmentTmp != null) {
+    if (count > 0) {
       res.send({
         message: 2,
         infoAppointment: "Ya existe una cita a su nombre!",
@@ -142,5 +180,6 @@ router.delete(
     }
   }
 );
+
 
 module.exports = router;

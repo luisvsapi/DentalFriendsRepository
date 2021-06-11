@@ -124,20 +124,31 @@ function clearCalendar() {
 } */
 
 async function showConfirmation(content){
-  //hace visible el modal, le manda una data
-  console.log(content);
   let confirmation = document.getElementById('modalAppointment');
   confirmation.getElementsByClassName('modal-title')[0].textContent = "Confirmar Cita";
   confirmation.getElementsByClassName('m-details')[0].innerHTML = "<h5>Detalles</h5></br><p>Fecha inicio: " + content.start + "</p><p>Fecha fin: " + content.end + "</p></br>";
-  confirmation.getElementsByClassName('m-confirm')[0].setAttribute("onclick", "confirmate()");
+  let id = document.getElementById('appointmentId').innerText;
+  confirmation.getElementsByClassName('m-confirm')[0].setAttribute("onclick", "confirmate(" + id + ",0,'" + content.startStr + "','" + content.endStr + "')");
   confirmation.getElementsByClassName('m-cancel')[0].setAttribute("onclick", "cancel()");
   confirmation.style.display= 'block';
 }
-function confirmate(){
+
+async function confirmate(id, state, dateBegin, dateFinish){
   let confirmation = document.getElementById('modalAppointment');
-  confirmation.style.display= 'none';
-  //Aqui va putfetch a la base, para cambiar state y setear fechas
-  //al recibir un dbresponse debe renderizar get(/home) o relocate()
+  let body = {
+    id: id,
+    state: state,
+    dateBegin: dateBegin,
+    dateFinish: dateFinish
+  }
+  console.log(body);
+  await putFetch(`/appointment/changeState`, body)
+  .then((res) => {
+    if(res){
+      confirmation.style.display= 'none';
+      location.replace('./../../home');
+    }
+  })
 }
 function cancel(){
   let confirmation = document.getElementById('modalAppointment');
