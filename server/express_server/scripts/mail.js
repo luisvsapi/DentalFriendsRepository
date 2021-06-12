@@ -50,17 +50,17 @@ async function sendMail(pacient, dentistDetails, appointment) {
     };
     // setup email data with unicode symbols
     switch (appointment.state) {
-      case 0:
+      case '0':
         mailParams.subject = "Asignación";
         mailParams.message = "Su cita fue asignada con éxito";
         mailParams.date = `${dateToStringBegin} en el horario de: ${hourBegin} - ${hourFinish}`;
         break;
-      case 2:
+      case '2':
         mailParams.subject = "Finalización";
         mailParams.message = "Su cita se efectuó, con éxito";
         mailParams.date = `${dateToStringBegin} en el horario de: ${hourBegin} - ${hourFinish}`;
         break;
-      case 3:
+      case '3':
         mailParams.subject = "Cancelación";
         mailParams.message =
           "Su cita fue cancelada, por motivos de fuerza mayor. Favor vuelva a agendar otra cita si desea, su petición tendrá la mayor prioridad";

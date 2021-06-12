@@ -138,6 +138,7 @@ async function confirmate(id, state, dateBegin, dateFinish){
   await putFetch(`/appointment/changeState`, body)
   .then((res) => {
     if(res){
+      // sendNotification(appointmentId)
       confirmation.style.display= 'none';
       location.replace('./../../home');
     }
@@ -148,3 +149,13 @@ function cancel(){
   confirmation.style.display= 'none';
   console.log('cancelado');
 }
+// function sendNotification(appointmentIdCancel) {
+//   let urlNotify = "/mail/send";
+//   postFetch(urlNotify, {
+//     appointmentId: appointmentIdCancel,
+//   }).then((res) => {
+//     return res;
+//   }).catch(function () {
+//     alert("Error contacte con administrador");
+//   });
+// }
