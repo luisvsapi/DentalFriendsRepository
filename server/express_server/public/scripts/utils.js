@@ -103,8 +103,10 @@ function modificateActualTime(mode = "minute", date = "", value = 1) {
  */
 function parseUtcDate(dateUTC){
   let date = new Date();
-  date.setTime(Date.parse(dateUTC));
-  var dateToJson = date.getDay() + " ";
+  date.setTime(new Date (dateUTC));
+  console.log("sin formato",dateUTC);
+  console.log("con formato",date);
+  var dateToJson = date.getDate() + " ";
   dateToJson = addNameMonth(date, dateToJson);
   dateToJson += " " + date.getFullYear();
   return dateToJson;

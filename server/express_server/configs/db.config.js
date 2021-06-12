@@ -11,7 +11,7 @@ module.exports = {
     idle: 10000,
   },
   "dialectOptions": {
-    "useUTC": false
+    "useUTC": true
   },
   "timezone": "-05:00"
 

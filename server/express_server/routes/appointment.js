@@ -130,16 +130,18 @@ router.post("/setAppointment", async (req, res, next) => {
         infoAppointment: "Ya existe una cita a su nombre!",
       });
     } else {
+      let date =new Date(requestBody.date).setUTCHours(12);
       const dataTemp = {
         state: "1",
         details: {},
         id_user: requestBody.doctor,
         id_pacient: pacient.id,
         treatment: requestBody.treat,
-        dateBegin: new Date(requestBody.date),
+        dateBegin: new Date(date),
       };
       let appointmentNew = await appointment.create(dataTemp);
       await appointmentNew.save();
+      
       res.send({ message: 1, infoAppointment: "Ok" });
     }
   } catch (err) {
