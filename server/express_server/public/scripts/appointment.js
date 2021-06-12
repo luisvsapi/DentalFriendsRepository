@@ -12,7 +12,7 @@ async function loadDoctors() {
   }
   let htmlSelect = `<option value=''>Seleccione doctor</option>`;
   listDoctors.forEach((element) => {
-    htmlSelect += `<option value=${element.id}>${element.user_name}</option>`;
+    htmlSelect += `<option value=${element.id}>${element['user_detail.details'].name}</option>`;
   });
   $("#doctorPac").html(htmlSelect);
 }
@@ -27,7 +27,7 @@ async function loadTreatments() {
   let htmlSelect = `<option value=''>Seleccione tratamiento</option>`;
 
   listTreatments.forEach((element) => {
-    htmlSelect += `<option value=${element.descr.replace(/\s+/g, "")}>${
+    htmlSelect += `<option value=${element.descr.replace(/\s+/g, " ")}>${
       element.descr
     }</option>`;
   });

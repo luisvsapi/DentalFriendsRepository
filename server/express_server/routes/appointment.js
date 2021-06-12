@@ -6,6 +6,7 @@ const appointment = require("../models/appointment");
 var validator = require("validator");
 const { Op } = require("sequelize");
 const utils = require("../scripts/utils.js");
+const pacient = require("../models/pacient");
 
 /**
  * This router returns appointments per state
@@ -22,6 +23,13 @@ router.get(
           state: value,
           id_user: user.slice(1),
         },
+        include: [
+          {
+            model: pacient,
+            attributes: ["name_pacient", "lastname_pacient"],
+          },
+        ],
+        raw: true,
       })
       .then((data) => {
         res.json(data);

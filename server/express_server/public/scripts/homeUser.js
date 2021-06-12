@@ -13,7 +13,10 @@ $(document).ready(function () {
       console.log(err.message);
     });
 });
-
+/**
+ * This method loads the appointment requests
+ * @param {*} data 
+ */
 let loadAppointment = (data) => {
   let table = document.getElementById("homeUserTable");
   for (let appointment of data) {
@@ -21,10 +24,9 @@ let loadAppointment = (data) => {
     let date = document.createElement("td");
     date.innerText = parseUtcDate(appointment.dateBegin);
     let name = document.createElement("td");
-    name.innerText = appointment.id_pacient;
+    name.innerText = appointment['pacient.name_pacient'] + " " + appointment['pacient.lastname_pacient'];
     let treatment = document.createElement("td");
     treatment.innerText = appointment.treatment;
-
     let buttons = document.createElement("td");
     buttons.className = "d-flex justify-content-around";
     let accept = document.createElement("button");

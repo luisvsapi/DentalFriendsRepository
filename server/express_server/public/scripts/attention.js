@@ -23,14 +23,14 @@ let loadAppointment = (data) => {
     let date = document.createElement("td");
     date.innerText = parseUtcDate(appointment.dateBegin);
     let name = document.createElement("td");
-    name.innerText = appointment.id_pacient;
+    name.innerText = appointment['pacient.name_pacient'] + " " + appointment['pacient.lastname_pacient'];
     let treatment = document.createElement("td");
     treatment.innerText = appointment.treatment;
 
     let link = document.createElement("button");
     link.className = "btn btn-info";
     link.setAttribute("onclick", "goMedicalRecord()");
-    link.innerText = "LLenarr Ficha";
+    link.innerText = "Llenar ficha";
 
     tr.appendChild(date);
     tr.appendChild(name);

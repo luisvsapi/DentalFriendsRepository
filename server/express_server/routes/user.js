@@ -256,11 +256,21 @@ router.get(
     }
   }
 );
-
+//validar que solo se muestren ls doctores con true, y hacder include para sacar name y apellido
 router.get("/allDoctors", async (req, res, next) => {
   try {
     const users = await userModel.findAll({
       attributes: { exclude: ["password"] },
+      where: {
+        active: true,
+      },
+      include: [
+        {
+          model: userDetailsModel,
+          attribute: ["details"],
+        },
+      ],
+      raw:true,
     });
     res.send(users);
   } catch (error) {

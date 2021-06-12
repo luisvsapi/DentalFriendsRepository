@@ -2,6 +2,9 @@ module.exports = {
   treatments: [
     { descr: "Limpieza Dental" },
     { descr: "Blanqueamiento de Dientes" },
+    { descr: "Calces Dentales"},
+    { descr: "Checkeo Rutinario"},
+
   ],
   states: {
     0: "Approved",
