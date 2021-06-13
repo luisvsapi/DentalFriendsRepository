@@ -73,9 +73,27 @@ router.get(
     if (action === "Accept") {
       res.render(`appointmentUser`, { id: req.params.id });
     } else if (action === "Cancel") {
+        await appointment
+          .update(
+            { state: "3" },
+            { returning: true, where: { id: req.params.id } }
+          )
+          .then((dbresponse) => {
+            if (dbresponse) {
+              res.send({ message: 1 });
+            } else {
+              res.send({ message: 0 });
+            }
+          })
+          .catch((err) => {
+            res.status(500).send({
+              message: err.message || "Database failure.",
+            });
+          });
+    } else if (action === "Completed") {
       await appointment
         .update(
-          { state: "3" },
+          { state: "2" },
           { returning: true, where: { id: req.params.id } }
         )
         .then((dbresponse) => {
@@ -90,7 +108,7 @@ router.get(
             message: err.message || "Database failure.",
           });
         });
-    }
+  }
   }
 );
 
@@ -107,8 +125,8 @@ router.post("/", jwtSecurity.authenticateJWT, function (req, res, next) {
 router.post(
   "/formProfile",
   upload.single("picture_url"),
-  jwtSecurity.authenticateJWT,
-  async (req, res, next) => { 
+  jwtSecurity.authenticateJWT, 
+  async (req, res, next) => {  
     let requestBody = req.body;
     let dict = {
       name: requestBody.name,
@@ -255,11 +273,21 @@ router.get(
     }
   }
 );
-
+//validar que solo se muestren ls doctores con true, y hacder include para sacar name y apellido
 router.get("/allDoctors", async (req, res, next) => {
   try {
     const users = await userModel.findAll({
       attributes: { exclude: ["password"] },
+      where: {
+        active: true,
+      },
+      include: [
+        {
+          model: userDetailsModel,
+          attribute: ["details"],
+        },
+      ],
+      raw:true,
     });
     res.send(users);
   } catch (error) {
@@ -292,54 +320,44 @@ router.get("/:id", jwtSecurity.authenticateJWT, async (req, res, next) => {
   }
 });
 
-router.post(
-  "/formRecord",
-  jwtSecurity.authenticateJWT,
-  async (req, res, next) => {
-    //cambio a put, prueba
-    console.log(req.file);
-    let requestBody = req.body;
-    let dict = {
-      reason: requestBody.reason,
-      enfermedad: requestBody.enfermedad,
-      embarazo: requestBody.embarazo,
-      alergiaAntibiotico: requestBody.antecedente1,
-      "alergia Anestesia": requestBody.antecedente2,
-      hemorragias: requestBody.antecedente3,
-      SIDA: requestBody.antecedente4,
-      asma: requestBody.antecedente5,
-      diabetes: requestBody.antecedente6,
-      hipertension: requestBody.antecedente7,
-      tuberculosis: requestBody.antecedente8,
-      otraenfermdad: requestBody.otraenfermdad,
-      presion: requestBody.presion,
-      frecuenciac: requestBody.frecuenciac,
-      frecuenciar: requestBody.frecuenciar,
-      temperatura: requestBody.temperatura,
-      diagnostico: requestBody.diagnostico,
-      tratamiento: requestBody.tratamiento,
-    };
-    console.log(requestBody.reason);
-
-    pacientModel
-      .update(
-        { details_pacient: dict },
-        { returning: true, where: { id_card_pacient: requestBody.id_card } }
-      )
-      .then((dbresponse) => {
-        if (dbresponse) {
-          res.send({ message: 1 });
-        } else {
-          res.send({ message: 0 });
-        }
-      })
-      .catch((err) => {
-        res.status(500).send({
-          message: err.message || "Database failure.",
-        });
-      });
-    res.send({ message: 1 });
+router.post("/setRecord", async (req, res, next) => {
+  let requestBody = req.body;
+  let dict = {
+    reason: requestBody.reason,
+    enfermedad: requestBody.enfermedad,
+    embarazo: requestBody.embarazo,
+    alergiaAntibiotico: requestBody.alergiaAntibiotico,
+    alergiaAnestesia: requestBody.alergiaAnestesia,
+    hemorragias: requestBody.hemorragias,
+    SIDA: requestBody.SIDA,
+    asma: requestBody.asma,
+    diabetes: requestBody.diabetes,
+    hipertension: requestBody.hipertension,
+    tuberculosis: requestBody.tuberculosis,
+    enfermedadCardiaca: requestBody.enfermedadCardiaca,
+    otraenfermdad: requestBody.otraenfermdad,
+    presion: requestBody.presion,
+    frecuenciac: requestBody.frecuenciac,
+    frecuenciar: requestBody.frecuenciar,
+    temperatura: requestBody.temperatura,
+    diagnostico: requestBody.diagnostico,
+    tratamiento: requestBody.tratamiento,
+  };
+  try {
+    await pacientModel.findOne({
+      where: { id_card_pacient: requestBody.id_card_pacient },
+    });
+      await pacientModel.update(
+      {
+        details_pacient: dict,
+      },
+      {where: {  id_card_pacient: requestBody.id_card_pacient },
+    });
+    } catch (err) {
+    console.log(err);
+    res.send({ message: 0 });
   }
-);
+  res.send({ message: 1 });
+});
 
 module.exports = router;

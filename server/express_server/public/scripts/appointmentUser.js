@@ -1,73 +1,23 @@
-var appointmentSelect = -1;
-var appointmentAvaliable = new Map();
-var calendar;
-
-$(document).ready(function () {
-  startCalendar();
-  fillCalendar();
-});
-
-function momentoCargarxD() {
-  let data = [
-    {
-      title: "All Day Event",
-      start: "2021-06-01",
-    },
-    {
-      title: "Long Event",
-      start: "2021-06-07",
-      end: "2021-06-10",
-    },
-    {
-      groupId: "999",
-      title: "Repeating Event",
-      start: "2021-06-09T16:00:00",
-    },
-    {
-      groupId: "999",
-      title: "Repeating Event",
-      start: "2021-06-16T16:00:00",
-    },
-    {
-      title: "Conference",
-      start: "2021-06-11",
-      end: "2021-06-13",
-    },
-    {
-      title: "Meeting",
-      start: "2021-06-12T10:30:00",
-      end: "2021-06-12T12:30:00",
-    },
-    {
-      title: "Lunch",
-      start: "2021-06-12T12:00:00",
-    },
-    {
-      title: "Meeting",
-      start: "2021-06-12T14:30:00",
-    },
-    {
-      title: "Birthday Party",
-      start: "2021-06-13T07:00:00",
-    },
-    {
-      title: "Click for Google",
-      start: "2021-06-28",
-    },
-  ];
-  return data;
-}
-
+let calendar;
 document.addEventListener("DOMContentLoaded", function () {
   var calendarEl = document.getElementById("calendarElement");
 
+  initializeCalendar(calendarEl);
+  getAvaliablesAppointment();
+});
+/**
+ * This method loads the FullCalendar element and configs.
+ * @param {*} calendarEl html element 
+ */
+function initializeCalendar(calendarEl){
   calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "timeGridWeek",
+    allDaySlot: false,
     locale: "es",
     nowIndicator: true,
     contentHeight: "auto",
     initialDate: Date.now(),
-    slotMinTime: "07:00",
+    slotMinTime: "00:00",
     slotMaxTime: "20:00",
     selectable: true,
     headerToolbar: {
@@ -75,32 +25,44 @@ document.addEventListener("DOMContentLoaded", function () {
       center: "title",
       right: "dayGridMonth,timeGridWeek,timeGridDay",
     },
-    validRange: {
-      start: Date.now(),
-      end: modificateActualTime("day", new Date(), 15),
-    },
     slotLabelFormat: {
       hour: "numeric",
       minute: "2-digit",
       omitZeroMinute: false,
       meridiem: "short",
     },
-    events: momentoCargarxD(),
+    events: [],
     /* dateClick: function(info){
         alert("Momento")
         console.log("Recuperado:",info)
       }, */
     select: function (info) {
-      alert("Momento insertar rango");
+      showConfirmation(info);
       console.log("Recuperado:", info);
-      //Agregar a la Base De Datos nueva cita con estado ACEPTADO
-      //reenderizar el /user/home
-    },
-    editable: true,
+    }
+    
   });
+}
 
-  calendar.render();
-});
+async function getAvaliablesAppointment() {
+  let resp = await getFetch(`/appointment/byUser`)
+    .then((res) => {
+      res.forEach(element => {
+        console.log("fecha retornada inicio:", new Date(element.dateBegin));
+        calendar.addEvent({
+          title: element.treatment,
+          start: new Date(element.dateBegin),
+          end: new Date(element.dateEnd),
+          backgroundColor: element.state == 1 ? 'crimson' : 'darkcyan',
+        });
+      });
+    })
+    .then(()=>{
+      calendar.render();
+      //agregar alertify
+    })
+    .catch(err=>console.log("Error en recuperación de las citas",err));
+}
 
 /* function deleteAppointment(startDate = '') {
   let startDateTmp = dateToInt(startDate);
@@ -153,24 +115,47 @@ function clearCalendar() {
     calendar.getEvents().forEach(element => {
         element.remove();
     });
-}
-
-function getAvaliablesAppointment() {
-    appointmentAvaliable = new Map()
-    getFetch(`/appointment/byUser/${document.cookie.user}`).then((res) => {
-        res.forEach(element => {
-            appointmentAvaliable.set(new Date(element.date).getTime(), element)
-        })
-        addEventsCalendar();
-    })
-}
-
-function addEventsCalendar() {
-    appointmentAvaliable.forEach(element => {
-        calendar.addEvent({
-            start: element.date,
-            end: modificateActualTime('minute', element.date, 15),
-            backgroundColor: element.state == 1 ? 'red' : 'blue',
-        });
-    });
 } */
+
+async function showConfirmation(content){
+  let confirmation = document.getElementById('modalAppointment');
+  confirmation.getElementsByClassName('modal-title')[0].textContent = "Confirmar Cita";
+  confirmation.getElementsByClassName('m-details')[0].innerHTML = "<h5>Detalles</h5></br><p>Fecha inicio: " + content.start + "</p><p>Fecha fin: " + content.end + "</p></br>";
+  let id = document.getElementById('appointmentId').innerText;
+  confirmation.getElementsByClassName('m-confirm')[0].setAttribute("onclick", "confirmate(" + id + ",0,'" + content.startStr + "','" + content.endStr + "')");
+  confirmation.getElementsByClassName('m-cancel')[0].setAttribute("onclick", "cancel()");
+  confirmation.style.display= 'block';
+}
+
+async function confirmate(id, state, dateBegin, dateFinish){
+  let confirmation = document.getElementById('modalAppointment');
+  let body = {
+    id: id,
+    state: state,
+    dateBegin: new Date(dateBegin),
+    dateFinish: new Date(dateFinish)
+  }
+  await putFetch(`/appointment/changeState`, body)
+  .then((res) => {
+    if(res){
+      // sendNotification(appointmentId)
+      confirmation.style.display= 'none';
+      location.replace('./../../home');
+    }
+  })
+}
+function cancel(){
+  let confirmation = document.getElementById('modalAppointment');
+  confirmation.style.display= 'none';
+  console.log('cancelado');
+}
+// function sendNotification(appointmentIdCancel) {
+//   let urlNotify = "/mail/send";
+//   postFetch(urlNotify, {
+//     appointmentId: appointmentIdCancel,
+//   }).then((res) => {
+//     return res;
+//   }).catch(function () {
+//     alert("Error contacte con administrador");
+//   });
+// }

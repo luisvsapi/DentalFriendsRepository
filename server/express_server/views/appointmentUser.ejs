@@ -42,7 +42,29 @@
 </head>
 
 <body>
-
+  <div class="modal" id="modalAppointment" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Detalles de Cita</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="modalBody" class="modal-body">
+          <p>Número de Cita:</p>
+          <p id="appointmentId"><%= id %></p>
+          <div class = "m-details">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary m-confirm" data-dismiss="modal">Confirmar</button>
+          <button type="button" class="btn btn-secondary m-cancel" data-dismiss="modal">Cancelar</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
   <script src="../../../scripts/fullCalendar.js"></script>
 
   <!-- ======= Header ======= -->
@@ -75,10 +97,8 @@
           <p>Por favor, administre su horario para atencion de citas</p>
         </div>
 
-
-
-        <div id='calendarElement'></div>
-
+        <div id='calendarElement'></div><br>
+        
       </div>
     </section><!-- End Portfolio Section -->
 

@@ -32,7 +32,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 992px) {
   #main {
-    margin-top: 30px;
+    margin-top: 45px;
   }
 }
 
@@ -142,6 +142,12 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 992px) {
   #header .logo {
     font-size: 28px;
+  }
+}
+/*Added*/
+@media (max-width: 480px) {
+  #header .logo {
+    font-size: 18px;
   }
 }
 
