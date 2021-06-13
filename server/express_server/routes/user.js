@@ -66,9 +66,7 @@ router.get("/home", /* jwtSecurity.authenticateJWT, */ function (req, res, next)
  * This router renders the apointment acceptance view
  */
 router.get(
-  "/appointments/:action/:id",
-  jwtSecurity.authenticateJWT,
-  async function (req, res, next) {
+  "/appointments/:action/:id",/*  jwtSecurity.authenticateJWT, */ async function (req, res, next) {
     let action = req.params.action;
     if (action === "Accept") {
       res.render(`appointmentUser`, { id: req.params.id });

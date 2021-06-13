@@ -15,13 +15,17 @@ router.get(
   "/state/:state",
   jwtSecurity.authenticateJWT,
   async function (req, res, next) {
+    
     let value = req.params.state;
     let user = req.user.details.split(",")[0]; 
+
+    console.log(value, " ", user);
+
     await appointment
       .findAll({
         where: {
           state: value,
-          id_user: user.slice(1),
+          id_user: user,
         },
         include: [
           {
@@ -65,11 +69,9 @@ router.put("/changeState", jwtSecurity.authenticateJWT,  async function (req, re
   }
 });
 
-router.get(
-  "/byUser",
-  jwtSecurity.authenticateJWT,
+router.get( "/byUser", jwtSecurity.authenticateJWT,
   async (req, res, next) => {
-    let user = req.cookies.idUser.split(",")[0];
+    let user = req.user.details.split(",")[0];
     try {
       if (validator.isInt(user.slice(1))) {
         let appointments = await appointment.findAll({
