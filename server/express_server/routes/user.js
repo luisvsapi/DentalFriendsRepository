@@ -73,9 +73,27 @@ router.get(
     if (action === "Accept") {
       res.render(`appointmentUser`, { id: req.params.id });
     } else if (action === "Cancel") {
+        await appointment
+          .update(
+            { state: "3" },
+            { returning: true, where: { id: req.params.id } }
+          )
+          .then((dbresponse) => {
+            if (dbresponse) {
+              res.send({ message: 1 });
+            } else {
+              res.send({ message: 0 });
+            }
+          })
+          .catch((err) => {
+            res.status(500).send({
+              message: err.message || "Database failure.",
+            });
+          });
+    } else if (action === "Completed") {
       await appointment
         .update(
-          { state: "3" },
+          { state: "2" },
           { returning: true, where: { id: req.params.id } }
         )
         .then((dbresponse) => {
@@ -90,7 +108,7 @@ router.get(
             message: err.message || "Database failure.",
           });
         });
-    }
+  }
   }
 );
 

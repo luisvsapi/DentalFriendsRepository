@@ -26,7 +26,7 @@ router.get(
         include: [
           {
             model: pacient,
-            attributes: ["name_pacient", "lastname_pacient"],
+            attributes: ["name_pacient", "lastname_pacient", "id_card_pacient"],
           },
         ],
         raw: true,
