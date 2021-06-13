@@ -8,6 +8,9 @@ async function postFileFetch(url = "", form) {
   let response = await fetch(url, {
     method: "POST",
     body: formData,
+    headers: { 
+      token: sessionStorage.getItem("token")
+    }
   });
   return response.json();
 }
@@ -18,7 +21,7 @@ async function postFetch(url = "", objectSend = {}) {
     body: JSON.stringify(objectSend),
     headers: {
       "Content-Type": "application/json",
-      token: sessionStorage.getItem("token"),
+      token: sessionStorage.getItem("token")
     },
   });
   return response.json();
@@ -34,7 +37,7 @@ async function getFetch(url = "", objeto = {}) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      token: sessionStorage.getItem("token"),
+      token: sessionStorage.getItem("token")
     },
   });
   return respuesta.json();
@@ -46,7 +49,7 @@ async function putFetch(url = "", objectoEnviar = {}) {
     body: JSON.stringify(objectoEnviar),
     headers: {
       "Content-Type": "application/json",
-      token: sessionStorage.getItem("token"),
+      token: sessionStorage.getItem("token")
     },
   });
   return response.json();
@@ -58,7 +61,7 @@ async function deleteFetch(url = "", objectoEnviar = {}) {
     body: JSON.stringify(objectoEnviar),
     headers: {
       "Content-Type": "application/json",
-      token: sessionStorage.getItem("token"),
+      token: sessionStorage.getItem("token")
     },
   });
   return response.json();

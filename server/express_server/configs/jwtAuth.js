@@ -1,22 +1,12 @@
+const session = require("express-session");
 const jwt = require("jsonwebtoken");
-const keySecret = "FBC71CE36CC20790F2EEED2197898E71";
+const keySecret = "sPbZ3P7SSVVVgxNsyUTJ3z2pRfpAJVfwpY43sqSrDr9JvzbNeMb9DuQLWgqeDVvR";
 const utils = require("../scripts/utils");
 
-const authenticateJWT = (req, res, next) => {
-  const token = req.headers.token;
-  if (req.cookies && req.cookies.token) {
-    jwt.verify(req.cookies.token, keySecret, (err, user) => {
-      if (err) {
-        res.locals.message = "Forbidden";
-        res.locals.error = { status: "403", stack: "Acceso no permitido" };
-        res.render("error");
-      } else {
-        req.user = user;
-        next();
-      }
-    });
-  } else if (token) {
-    jwt.verify(token, keySecret, (err, user) => {
+const authenticateJWT = (req, res, next) => { 
+  const token = req.headers.token;  
+  if (token) {
+    jwt.verify(token, keySecret, (err, user) => { 
       if (err) return res.sendStatus(403);
       req.user = user;
       next();
@@ -28,10 +18,11 @@ const authenticateJWT = (req, res, next) => {
   }
 };
 
-const sign = (user, password) => {
+const sign = (user='', password='', details="") => {
   var payload = {
+    details: details,
     user: user,
-    password: password,
+    password: password
   };
   return jwt.sign(payload, keySecret, { expiresIn: "1 days" });
 };

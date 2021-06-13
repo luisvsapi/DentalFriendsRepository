@@ -19,8 +19,9 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
-app.use(logger("tiny"));
+ 
+app.use(logger('common', { skip: function(req, res) { return res.statusCode != 400 || res.statusCode != 200 }, stream: __dirname + './logs/api.log' }));
+ 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

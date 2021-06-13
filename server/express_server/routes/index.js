@@ -17,14 +17,7 @@ router.get("/", function (req, res, next) {
   res.render(`home`, {});
 });
 
-router.get("/login", function (req, res, next) {
-  var cookies = req.cookies;
-  if (cookies.token && cookies.user && cookies.idUser) {
-    res.clearCookie("token");
-    res.clearCookie("user");
-    res.clearCookie("idUser");
-    res.clearCookie("connect.sid");
-  }
+router.get("/login", function (req, res, next) { 
   res.render("login", { action: "login" });
 });
 
@@ -73,47 +66,22 @@ router.get("/professional", function (req, res, next) {
 
 /* POST METHODS */
 router.post("/login", async (req, res, next) => {
+  console.log(req.body, " ------");
   let requestBody = req.body;
   const [results] = await sequelize.query(
     `select login_user ('${requestBody.username}', '${requestBody.password}')`
   );
   if (results.length > 0) {
-    let encryptPassword = await utils.cryptPassword(requestBody.password);
-    const token = jwtSecurity.sign(requestBody.username, encryptPassword);
-    res.cookie("token", token, {
-      maxAge: constants.MAX_AGE_COOKIE,
-      httpOnly: true,
-    });
-    res.cookie("idUser", results[0].login_user, {
-      maxAge: constants.MAX_AGE_COOKIE,
-      httpOnly: true,
-    });
-    res.cookie("user", requestBody.username, {
-      maxAge: constants.MAX_AGE_COOKIE,
-      httpOnly: true,
-    });
+    let detailsSp = results[0].login_user.replace(/[()]/g, "")
+    let encryptPassword = await utils.cryptPassword(requestBody.password);    
+    const token = jwtSecurity.sign(requestBody.username, encryptPassword, detailsSp);      
     res.send({ username: requestBody.username, token: token });
   } else {
     res.status(400);
     res.send({});
   }
 });
-
-router.post("/loginApp", async (req, res, next) => {
-  let requestBody = req.body;
-  const [results] = await sequelize.query(
-    `select login_user ('${requestBody.username}', '${requestBody.password}')`
-  );
-  if (results.length > 0) {
-    let encryptPassword = await utils.cryptPassword(requestBody.password);
-    const token = jwtSecurity.sign(requestBody.username, encryptPassword);
-    res.send({ username: requestBody.username, token: token });
-  } else {
-    res.status(400);
-    res.send({});
-  }
-});
-
+ 
 router.post("/register", async (req, res, next) => {
   let requestBody = req.body;
   try {

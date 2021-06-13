@@ -15,7 +15,7 @@ router.get(
   jwtSecurity.authenticateJWT,
   async function (req, res, next) {
     let value = req.params.state;
-    let user = req.cookies.idUser.split(",")[0];
+    let user = req.user.details.split(",")[0]; 
     await appointment
       .findAll({
         where: {

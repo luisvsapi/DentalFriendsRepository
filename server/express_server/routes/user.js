@@ -30,19 +30,19 @@ const { treatments } = require("../scripts/constants.js");
 
 router.get(
   "/medicalResume",
-  jwtSecurity.authenticateJWT,
+ /*  jwtSecurity.authenticateJWT, */
   function (req, res, next) {
     res.render(`medicalResume`, { resume: {} });
   }
 );
 
-router.get("/profile", jwtSecurity.authenticateJWT, function (req, res, next) {
+router.get("/profile",/*  jwtSecurity.authenticateJWT, */ function (req, res, next) {
   res.render(`profile`, {});
 });
 
 router.get(
   "/medicalRecord",
-  jwtSecurity.authenticateJWT,
+  /* jwtSecurity.authenticateJWT, */
   function (req, res, next) {
     res.render(`medicalRecord`, {});
   }
@@ -50,7 +50,7 @@ router.get(
 
 router.get(
   "/attention",
-  jwtSecurity.authenticateJWT,
+  /*  jwtSecurity.authenticateJWT, */
   function (req, res, next) {
     res.render(`attention`, {});
   }
@@ -58,7 +58,7 @@ router.get(
 /**
  * This router renders the principal view of the user. Which shows the appointment requests from pacients.
  */
-router.get("/home", jwtSecurity.authenticateJWT, function (req, res, next) {
+router.get("/home", /* jwtSecurity.authenticateJWT, */ function (req, res, next) {
   res.render(`homeUser`, {});
 });
 
@@ -108,9 +108,7 @@ router.post(
   "/formProfile",
   upload.single("picture_url"),
   jwtSecurity.authenticateJWT,
-  async (req, res, next) => {
-    //cambio a put, prueba
-    console.log(req.file);
+  async (req, res, next) => { 
     let requestBody = req.body;
     let dict = {
       name: requestBody.name,
@@ -122,7 +120,7 @@ router.post(
     };
     await userModel
       .findOne({
-        where: { user_name: req.cookies.user },
+        where: { user_name: req.user.user },
         raw: true,
       })
       .then((doc) => {
