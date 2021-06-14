@@ -14,31 +14,25 @@ const pacient = require("../models/pacient");
 router.get(
   "/state/:state",
   jwtSecurity.authenticateJWT,
-  async function (req, res, next) {
-    
+  async function (req, res, next) { 
     let value = req.params.state;
-    let user = req.user.details.split(",")[0]; 
-
-    console.log(value, " ", user);
-
+    let user = req.user.details.split(",")[0];  
     await appointment
       .findAll({
         where: {
           state: value,
-          id_user: user,
+          idUser: user,
         },
         include: [
           {
-            model: pacient,
-            attributes: ["name_pacient", "lastname_pacient", "id_card_pacient"],
+            model: pacient  
           },
-        ],
-        raw: true,
+        ] 
       })
-      .then((data) => {
+      .then((data) => { 
         res.json(data);
       })
-      .catch((err) => {
+      .catch((err) => { 
         res.status(500).send({
           message: err.message || "Database failure.",
         });

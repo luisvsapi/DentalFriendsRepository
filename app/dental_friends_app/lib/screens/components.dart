@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dental_friends_app/constants/theme.dart';
 import 'package:dental_friends_app/widgets/card-category.dart';
 import 'package:dental_friends_app/widgets/card-horizontal.dart';
@@ -12,6 +10,8 @@ import 'package:dental_friends_app/widgets/navbar.dart';
 import 'package:dental_friends_app/widgets/photo-album.dart';
 import 'package:dental_friends_app/widgets/slider-product.dart';
 import 'package:dental_friends_app/widgets/table-cell.dart';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 final Map<String, Map<String, String>> homeCards = {
   "Ice Cream": {
@@ -133,12 +133,14 @@ class _ComponentsState extends State<Components> {
                     style: styleElevatedButton(),
                     onPressed: () {
                       // Respond to button press
-                      Navigator.pushReplacementNamed(context, '/home');
+                      Navigator.pushNamed(context, '/home');
                     },
                     child: Padding(
-                        padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 12, bottom: 12),
+                        padding: EdgeInsets.only(
+                            left: 16.0, right: 16.0, top: 12, bottom: 12),
                         child: Text("DEFAULT",
-                            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16.0))),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 16.0))),
                   ),
                 ),
               ),
@@ -151,7 +153,7 @@ class _ComponentsState extends State<Components> {
                     style: styleElevatedButton(color: MaterialColors.primary),
                     onPressed: () {
                       // Respond to button press
-                      Navigator.pushReplacementNamed(context, '/home');
+                      Navigator.pushNamed(context, '/home');
                     },
                     child: Padding(
                         padding: EdgeInsets.only(
@@ -171,7 +173,7 @@ class _ComponentsState extends State<Components> {
                     style: styleElevatedButton(color: MaterialColors.info),
                     onPressed: () {
                       // Respond to button press
-                      Navigator.pushReplacementNamed(context, '/home');
+                      Navigator.pushNamed(context, '/home');
                     },
                     child: Padding(
                         padding: EdgeInsets.only(
@@ -191,7 +193,7 @@ class _ComponentsState extends State<Components> {
                     style: styleElevatedButton(color: MaterialColors.success),
                     onPressed: () {
                       // Respond to button press
-                      Navigator.pushReplacementNamed(context, '/home');
+                      Navigator.pushNamed(context, '/home');
                     },
                     child: Padding(
                         padding: EdgeInsets.only(
@@ -454,7 +456,7 @@ class _ComponentsState extends State<Components> {
               TableCellSettings(
                   title: "Manage Options in Settings",
                   onTap: () {
-                    Navigator.pushReplacementNamed(context, '/settings');
+                    Navigator.pushNamed(context, '/settings');
                   }),
               Padding(
                 padding: const EdgeInsets.only(left: 8.0, top: 32, bottom: 32),
@@ -524,7 +526,7 @@ class _ComponentsState extends State<Components> {
                         title: homeCards["Ice Cream"]['title'],
                         img: homeCards["Ice Cream"]['image'],
                         tap: () {
-                          Navigator.pushReplacementNamed(context, '/pro');
+                          Navigator.pushNamed(context, '/pro');
                         }),
                   ),
                   SizedBox(height: 8.0),
@@ -536,14 +538,14 @@ class _ComponentsState extends State<Components> {
                           title: homeCards["Makeup"]['title'],
                           img: homeCards["Makeup"]['image'],
                           tap: () {
-                            Navigator.pushReplacementNamed(context, '/pro');
+                            Navigator.pushNamed(context, '/pro');
                           }),
                       CardSmall(
                           cta: "View article",
                           title: homeCards["Coffee"]['title'],
                           img: homeCards["Coffee"]['image'],
                           tap: () {
-                            Navigator.pushReplacementNamed(context, '/pro');
+                            Navigator.pushNamed(context, '/pro');
                           })
                     ],
                   ),
@@ -553,7 +555,7 @@ class _ComponentsState extends State<Components> {
                       title: homeCards["Fashion"]['title'],
                       img: homeCards["Fashion"]['image'],
                       tap: () {
-                        Navigator.pushReplacementNamed(context, '/pro');
+                        Navigator.pushNamed(context, '/pro');
                       }),
                   SizedBox(height: 8.0),
                   Padding(
@@ -563,7 +565,7 @@ class _ComponentsState extends State<Components> {
                         title: homeCards["Argon"]['title'],
                         img: homeCards["Argon"]['image'],
                         tap: () {
-                          Navigator.pushReplacementNamed(context, '/pro');
+                          Navigator.pushNamed(context, '/pro');
                         }),
                   ),
                   CardCategory(

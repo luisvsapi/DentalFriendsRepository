@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:dental_friends_app/constants/theme.dart';
+import 'package:flutter/material.dart';
 
 class CardHorizontal extends StatelessWidget {
   CardHorizontal(
@@ -20,11 +20,11 @@ class CardHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 130,
+        height: 100,
         margin: EdgeInsets.only(top: 10),
         child: GestureDetector(
           onTap: tap,
-          child: Stack( children: [
+          child: Stack(children: [
             Card(
               elevation: 0.7,
               shape: RoundedRectangleBorder(

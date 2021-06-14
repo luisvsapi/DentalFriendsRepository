@@ -7,10 +7,8 @@ part of 'user.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) {
-  $checkKeys(json,
-      allowedKeys: const ['id', 'username', 'token', 'email', 'details']);
   return User(
-    id: json['id'] as String,
+    id: json['id'] as int,
     username: json['username'] as String,
     token: json['token'] as String,
     email: json['email'] as String,

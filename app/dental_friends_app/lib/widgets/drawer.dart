@@ -78,7 +78,7 @@ class MaterialDrawer extends StatelessWidget {
                 icon: Icons.home,
                 onTap: () {
                   if (currentPage != "Home")
-                    Navigator.pushReplacementNamed(context, '/home');
+                    Navigator.pushNamed(context, '/home');
                 },
                 iconColor: Colors.black,
                 title: "Home",
@@ -87,46 +87,37 @@ class MaterialDrawer extends StatelessWidget {
                 icon: Icons.settings_input_component,
                 onTap: () {
                   if (currentPage != "Components")
-                    Navigator.pushReplacementNamed(context, '/components');
+                    Navigator.pushNamed(context, '/components');
                 },
                 iconColor: Colors.black,
-                title: "Components",
+                title: "Componentes(DEV)",
                 isSelected: currentPage == "Components" ? true : false),
             DrawerTile(
                 icon: Icons.account_circle,
                 onTap: () {
                   if (currentPage != "Profile")
-                    Navigator.pushReplacementNamed(context, '/profile');
+                    Navigator.pushNamed(context, '/profile');
                 },
                 iconColor: Colors.black,
-                title: "Profile",
+                title: "Perfil",
                 isSelected: currentPage == "Profile" ? true : false),
             DrawerTile(
                 icon: Icons.settings,
                 onTap: () {
                   if (currentPage != "Settings")
-                    Navigator.pushReplacementNamed(context, '/settings');
+                    Navigator.pushNamed(context, '/settings');
                 },
                 iconColor: Colors.black,
-                title: "Settings",
+                title: "Configuración",
                 isSelected: currentPage == "Settings" ? true : false),
-            DrawerTile(
-                icon: Icons.exit_to_app,
-                onTap: () {
-                  if (currentPage != "Sign In")
-                    Navigator.pushReplacementNamed(context, '/signIn');
-                },
-                iconColor: Colors.black,
-                title: "Sign In",
-                isSelected: currentPage == "Sign In" ? true : false),
             DrawerTile(
                 icon: Icons.open_in_browser,
                 onTap: () {
                   if (currentPage != "Sign Up")
-                    Navigator.pushReplacementNamed(context, '/signIn');
+                    Navigator.pushNamed(context, '/signIn');
                 },
                 iconColor: Colors.black,
-                title: "Sign Up",
+                title: "Cerrar sesión",
                 isSelected: currentPage == "Sign Up" ? true : false),
           ],
         ))

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:dental_friends_app/constants/theme.dart';
 // import 'package:dental_friends_app/screens/categories.dart';
 // import 'package:dental_friends_app/screens/best-deals.dart';
@@ -7,6 +6,7 @@ import 'package:dental_friends_app/constants/theme.dart';
 // import 'package:dental_friends_app/screens/chat.dart';
 
 import 'package:dental_friends_app/widgets/input.dart';
+import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class Navbar extends StatefulWidget implements PreferredSizeWidget {
@@ -153,24 +153,7 @@ class _NavbarState extends State<Navbar> {
                                         : Colors.white,
                                     size: 22.0),
                                 onPressed: null),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => Cart()));
-                            },
-                            child: IconButton(
-                                icon: Icon(Icons.add_shopping_cart,
-                                    color: !widget.transparent
-                                        ? (widget.bgColor == Colors.white
-                                            ? Colors.black
-                                            : Colors.white)
-                                        : Colors.white,
-                                    size: 22.0),
-                                onPressed: null),
-                          ),
+                          )
                         ],
                       )
                   ],

@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:dental_friends_app/constants/theme.dart';
 import 'package:dental_friends_app/widgets/drawer.dart';
 //widgets
 import 'package:dental_friends_app/widgets/navbar.dart';
 import 'package:dental_friends_app/widgets/table-cell.dart';
+import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
   @override
@@ -84,7 +84,7 @@ class _SettingsState extends State<Settings> {
                 TableCellSettings(
                     title: "Notifications",
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, '/pro');
+                      Navigator.pushNamed(context, '/pro');
                     }),
                 SizedBox(height: 36.0),
                 Center(
@@ -129,17 +129,17 @@ class _SettingsState extends State<Settings> {
                 TableCellSettings(
                     title: "User Agreement",
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, '/pro');
+                      Navigator.pushNamed(context, '/pro');
                     }),
                 TableCellSettings(
                     title: "Privacy",
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, '/pro');
+                      Navigator.pushNamed(context, '/pro');
                     }),
                 TableCellSettings(
                     title: "About",
                     onTap: () {
-                      Navigator.pushReplacementNamed(context, '/pro');
+                      Navigator.pushNamed(context, '/pro');
                     }),
               ],
             ),

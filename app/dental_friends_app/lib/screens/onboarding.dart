@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:dental_friends_app/constants/theme.dart';
+import 'package:flutter/material.dart';
 
 class Onboarding extends StatelessWidget {
   @override
@@ -58,7 +58,7 @@ class Onboarding extends StatelessWidget {
                     child: ElevatedButton(
                       style: styleElevatedButton(color: MaterialColors.info),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/home');
+                        Navigator.pushNamed(context, '/home');
                       },
                       child: Padding(
                           padding: EdgeInsets.only(
