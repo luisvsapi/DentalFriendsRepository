@@ -24,7 +24,7 @@ let loadAppointment = (data) => {
     let date = document.createElement("td");
     date.innerText = parseUtcDate(appointment.dateBegin);
     let name = document.createElement("td");
-    name.innerText = appointment['pacient.name_pacient'] + " " + appointment['pacient.lastname_pacient'];
+    name.innerText = appointment.pacient.namePacient + " " + appointment.pacient.lastnamePacient;
     let treatment = document.createElement("td");
     treatment.innerText = appointment.treatment;
     let buttons = document.createElement("td");

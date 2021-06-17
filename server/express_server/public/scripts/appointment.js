@@ -12,7 +12,7 @@ async function loadDoctors() {
   }
   let htmlSelect = `<option value=''>Seleccione doctor</option>`;
   listDoctors.forEach((element) => {
-    htmlSelect += `<option value=${element.id}>${element['user_detail.details'].name}</option>`;
+    htmlSelect += `<option value=${element.id}>${element.userDetail.details.name}</option>`;
   });
   $("#doctorPac").html(htmlSelect);
 }
@@ -37,15 +37,15 @@ async function loadTreatments() {
 $("#saveAppointment").submit(function (e) {
   e.preventDefault();
   const data = {
-    id_card_pacient: $("#cedPac").val(),
-    name_pacient: $("#nombrePac").val(),
-    lastname_pacient: $("#apellidoPac").val(),
-    age_pacient: 0,
-    gender_pacient: "M",
-    address_pacient: "",
-    phone_pacient: "0",
-    email_pacient: $("#emailPac").val(),
-    details_pacient: {},
+    idCardPacient: $("#cedPac").val(),
+    namePacient: $("#nombrePac").val(),
+    lastnamePacient: $("#apellidoPac").val(),
+    agePacient: 0,
+    genderPacient: "M",
+    addressPacient: "",
+    phonePacient: "0",
+    emailPacient: $("#emailPac").val(),
+    detailsPacient: {},
     date: $("#datepicker").val(),
     treat: $("#tratPac").val(),
     doctor: $("#doctorPac").val(),

@@ -4,22 +4,24 @@ const sequelize = require("./db");
 const user = require("./user");
 
 var userDetails = db.define(
-  "user_detail",
+  "userDetails",
   {
-    id_details: {
+    idDetails: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      field: "id_details",
     },
-    identity_card: Sequelize.STRING,
+    identityCard: {type: Sequelize.STRING, field: "identity_card"},
     address: Sequelize.STRING,
     speciality: Sequelize.STRING,
     details: Sequelize.JSON,
-    picture_url: Sequelize.STRING,
+    pictureUrl: {type: Sequelize.STRING, field: "picture_url"},
   },
   {
     timestamps: false,
-    freezeTableName: true,
+    //freezeTableName: true,
+    tableName: 'user_detail',
   }
 );
 

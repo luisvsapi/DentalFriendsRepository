@@ -122,7 +122,7 @@ router.post("/", jwtSecurity.authenticateJWT, function (req, res, next) {
 
 router.post(
   "/formProfile",
-  upload.single("picture_url"),
+  upload.single("pictureUrl"),
   jwtSecurity.authenticateJWT, 
   async (req, res, next) => {  
     let requestBody = req.body;
@@ -136,21 +136,20 @@ router.post(
     };
     await userModel
       .findOne({
-        where: { user_name: req.user.user },
-        raw: true,
+        where: { username: req.user.user },
       })
       .then((doc) => {
         if (doc) {
           userDetailsModel
             .update(
               {
-                identity_card: requestBody.idCard,
+                identityCard: requestBody.idCard,
                 address: requestBody.address,
                 speciality: requestBody.degree,
                 details: dict,
-                picture_url: req.file.path,
+                pictureUrl: req.file.path,
               },
-              { returning: true, where: { id_details: doc.id_details } }
+              { returning: true, where: { idDetails: doc.idDetails } }
             )
             .then((dbresponse) => {
               if (dbresponse) {
@@ -180,17 +179,17 @@ router.post("/medicalResume", async (req, res, next) => {
       where: {
         [Op.or]: [
           {
-            "$pacient.id_card_pacient$": {
+            "$pacient.idCardPacient$": {
               [Op.like]: requestBody.filterMedicalResume,
             },
           },
           {
-            "$pacient.name_pacient$": {
+            "$pacient.namePacient$": {
               [Op.like]: requestBody.filterMedicalResume,
             },
           },
           {
-            "$pacient.email_pacient$": {
+            "$pacient.emailPacient$": {
               [Op.like]: requestBody.filterMedicalResume,
             },
           },
@@ -199,10 +198,9 @@ router.post("/medicalResume", async (req, res, next) => {
       include: [
         {
           model: pacient,
-          attributes: ["name_pacient", "lastname_pacient"],
+          attributes: ["namePacient", "lastnamePacient"],
         },
       ],
-      raw: true,
     });
     for (element in medicalResume) {
       let dateAppointment = new Date();
@@ -212,11 +210,11 @@ router.post("/medicalResume", async (req, res, next) => {
       dateToJson += " " + dateAppointment.getFullYear();
       medicalResume[element].dateBegin = dateToJson;
       var fullName =
-        medicalResume[element]["pacient.name_pacient"] +
+        medicalResume[element]["pacient.namePacient"] +
         " " +
-        medicalResume[element]["pacient.lastname_pacient"];
-      delete medicalResume[element]["pacient.name_pacient"];
-      delete medicalResume[element]["pacient.lastname_pacient"];
+        medicalResume[element]["pacient.lastnamePacient"];
+      delete medicalResume[element]["pacient.namePacient"];
+      delete medicalResume[element]["pacient.lastnamePacient"];
       medicalResume[element]["nombrePaciente"] = fullName;
     }
     res.send(medicalResume);
@@ -242,7 +240,7 @@ router.post("/medicalResume/details", async (req, res, next) => {
     res.sendStatus(500);
   }
 });
-
+//¿Donde se usa?
 router.get("/all", jwtSecurity.authenticateJWT, async (req, res, next) => {
   try {
     const users = await userModel.findAll({
@@ -282,10 +280,9 @@ router.get("/allDoctors", async (req, res, next) => {
       include: [
         {
           model: userDetailsModel,
-          attribute: ["details"],
+          attributes: ["details"],
         },
       ],
-      raw:true,
     });
     res.send(users);
   } catch (error) {
@@ -293,7 +290,9 @@ router.get("/allDoctors", async (req, res, next) => {
     res.sendStatus(500);
   }
 });
-
+/**
+ * This method returns an array of treatments
+ */
 router.get("/allTreatments", async (req, res, next) => {
   try {
     res.send(treatments);
@@ -302,7 +301,9 @@ router.get("/allTreatments", async (req, res, next) => {
     res.sendStatus(500);
   }
 });
-
+/**
+ * This method search and returns a doctor per id
+ */
 router.get("/:id", jwtSecurity.authenticateJWT, async (req, res, next) => {
   try {
     if (validator.isInt(req.params.id)) {
@@ -343,13 +344,13 @@ router.post("/setRecord", async (req, res, next) => {
   };
   try {
     await pacientModel.findOne({
-      where: { id_card_pacient: requestBody.id_card_pacient },
+      where: { idCardPacient: requestBody.idCardPacient },
     });
       await pacientModel.update(
       {
-        details_pacient: dict,
+        detailsPacient: dict,
       },
-      {where: {  id_card_pacient: requestBody.id_card_pacient },
+      {where: {  idCardPacient: requestBody.idCardPacient },
     });
     } catch (err) {
     console.log(err);

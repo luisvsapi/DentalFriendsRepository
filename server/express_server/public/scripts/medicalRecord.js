@@ -37,7 +37,7 @@ $("#formRecord").submit(function (e) {
     var tuberculosisV = true
   };
   const data = {
-    id_card_pacient: $("#id_card").val(),
+    idCardPacient: $("#id_card").val(),
     reason: $("#reason").val(),
     enfermedad: $("#enfermedad").val(),
     embarazo: embarazoValue,

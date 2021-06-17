@@ -67,10 +67,10 @@ router.get( "/byUser", jwtSecurity.authenticateJWT,
   async (req, res, next) => {
     let user = req.user.details.split(",")[0];
     try {
-      if (validator.isInt(user.slice(1))) {
+      if (validator.isInt(user)) {
         let appointments = await appointment.findAll({
           where: {
-            id_user: user.slice(1),
+            idUser: user,
             state: '0',
             dateBegin: {
               [Op.lt]: utils.modificateActualTime("day", +15),
@@ -99,7 +99,7 @@ router.post("/setAppointment", async (req, res, next) => {
   let requestBody = req.body;
   try {
     let pacient = await pacientModel.findOne({
-      where: { id_card_pacient: requestBody.id_card_pacient },
+      where: { idCardPacient: requestBody.idCardPacient },
     });
     if (pacient == null) {
       pacient = await pacientModel.create(req.body);
@@ -107,7 +107,7 @@ router.post("/setAppointment", async (req, res, next) => {
     }
     let {count, appointmentTmp} = await appointment.findAndCountAll({
       where: { 
-        id_pacient: pacient.id, 
+        idPacient: pacient.id, 
         [Op.or]: [
           {
             state: '0'
@@ -130,8 +130,8 @@ router.post("/setAppointment", async (req, res, next) => {
       const dataTemp = {
         state: "1",
         details: {},
-        id_user: requestBody.doctor,
-        id_pacient: pacient.id,
+        idUser: requestBody.doctor,
+        idPacient: pacient.id,
         treatment: requestBody.treat,
         dateBegin: new Date(date),
       };
@@ -151,7 +151,7 @@ router.post("/insert", jwtSecurity.authenticateJWT, async (req, res, next) => {
   try {
     requestBody.state = 0;
     let appointmentTmp = await appointment.findOne({
-      where: { id_user: requestBody.id_user, dateBegin: requestBody.date },
+      where: { idUser: requestBody.idUser, dateBegin: requestBody.date },
     });
     if (appointmentTmp == null) {
       appointmentTmp = await appointment.create(req.body);

@@ -48,13 +48,14 @@ router.get("/treatment", function (req, res, next) {
 router.get("/professional", function (req, res, next) {
   userModel
     .findAll({
+      attributes: { exclude: ["password"] },
       include: {
         model: userDetailsModel,
         required: true,
       },
-      raw: true,
     })
     .then((data) => {
+      console.log(data);
       res.render(`professional`, { title: "profesionales", docs: data });
     })
     .catch((err) => {
@@ -86,7 +87,7 @@ router.post("/register", async (req, res, next) => {
   let requestBody = req.body;
   try {
     let user = await userModel.findOne({
-      where: { user_name: requestBody.username },
+      where: { username: requestBody.username },
       attributes: { exclude: ["password"] },
     });
     if (user == null) {
@@ -99,10 +100,10 @@ router.post("/register", async (req, res, next) => {
           let userDetails = await userDetailsModel.create({});
           await userDetails.save();
           user = await userModel.findOne({
-            where: { user_name: requestBody.username },
+            where: { username: requestBody.username },
             attributes: { exclude: ["password"] },
           });
-          user.id_details = userDetails.id_details;
+          user.idDetails = userDetails.idDetails;
           await user.save();
           res.send({ message: 1 });
         });

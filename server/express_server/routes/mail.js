@@ -17,12 +17,12 @@ router.post("/send", async (req, res, next) => {
   console.log(appointmentObject);
   const pacientResult = await pacientModel.findOne({
     where: {
-      id: appointmentObject.id_pacient,
+      id: appointmentObject.idPacient,
     },
   });
   const userResult = await userModel.findOne({
     where: {
-      id: appointmentObject.id_user,
+      id: appointmentObject.idUser,
     },
   });
   const pacientObject = pacientResult.dataValues;
@@ -31,7 +31,7 @@ router.post("/send", async (req, res, next) => {
   console.log(userObject);
   const userDetailsResult = await userDetailsModel.findOne({
     where: {
-      id_details: userObject.id_details,
+      idDetails: userObject.idDetails,
     },
   });
   const userDetailsObject = userDetailsResult.dataValues;

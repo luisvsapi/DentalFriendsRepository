@@ -6,11 +6,11 @@ var user = db.define(
   "users",
   {
     id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-    user_name: Sequelize.STRING,
+    username: {type: Sequelize.STRING, field: "user_name"},
     email: Sequelize.STRING,
     password: Sequelize.STRING,
     active: Sequelize.BOOLEAN,
-    id_details: Sequelize.INTEGER,
+    idDetails: {type: Sequelize.INTEGER, field: "id_details"},
   },
   {
     timestamps: false,
@@ -18,7 +18,7 @@ var user = db.define(
   }
 );
 
-userDetails.hasOne(user, { foreignKey: "id_details" });
-user.belongsTo(userDetails, { foreignKey: "id_details" });
+userDetails.hasOne(user, { foreignKey: 'idDetails' });
+user.belongsTo(userDetails, { foreignKey: 'idDetails' });
 
 module.exports = user;

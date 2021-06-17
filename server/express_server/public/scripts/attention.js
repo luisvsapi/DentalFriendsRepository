@@ -23,11 +23,11 @@ let loadAppointment = (data) => {
     let date = document.createElement("td");
     date.innerText = parseUtcDate(appointment.dateBegin);
     let name = document.createElement("td");
-    name.innerText = appointment['pacient.name_pacient'] + " " + appointment['pacient.lastname_pacient'];
+    name.innerText = appointment.pacient.namePacient + " " + appointment.pacient.lastnamePacient;
     let treatment = document.createElement("td");
     treatment.innerText = appointment.treatment;
     let id_card = document.createElement("td");
-    id_card.innerText = appointment['pacient.id_card_pacient'];
+    id_card.innerText = appointment.pacient.idCardPacient;
 
     let link = document.createElement("button");
     link.className = "btn btn-info";

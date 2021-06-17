@@ -17,8 +17,8 @@ function initializeCalendar(calendarEl){
     nowIndicator: true,
     contentHeight: "auto",
     initialDate: Date.now(),
-    slotMinTime: "00:00",
-    slotMaxTime: "20:00",
+    slotMinTime: "07:00",
+    slotMaxTime: "19:00",
     selectable: true,
     headerToolbar: {
       left: "prev,next today",

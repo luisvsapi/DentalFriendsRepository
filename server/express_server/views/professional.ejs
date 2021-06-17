@@ -82,54 +82,54 @@
 
         <% for(var i=0; i < docs.length; i++) { %>
           <!--null/ not defined Validation-->
-          <% if (docs[i]["user_detail.details"] !=null) { %>
+          <% if (docs[i].userDetail.details !=null) { %>
 
             <div class="row">
               <div class="col-lg-4">
-                <img src=<%=docs[i]['user_detail.picture_url'] %> alt="image-doctor" class="rounded img-fluid" >
+                <img src=<%=docs[i].userDetail.pictureUrl %> alt="image-doctor" class="rounded img-fluid" >
               </div>
               <div class="col-lg-8 pt-4 pt-lg-0 content">
-                <h3>Odontólogo &amp; <%= docs[i]['user_detail.speciality'] %>
+                <h3>Odontólogo &amp; <%= docs[i].userDetail.speciality %>
                 </h3>
                 <p class="font-italic">
-                  <%= docs[i].user_name %>
+                  <%= docs[i].username %>
                 </p>
                 <div class="row">
                   <div class="col-lg-6">
                     <ul>
                       <li><em class="icofont-rounded-right"></em> <strong>Nombre:</strong>
-                        <%= docs[i]['user_detail.details'].name %>
+                        <%= docs[i].userDetail.details.name %>
                       </li>
                       <li><em class="icofont-rounded-right"></em> <strong>Edad:</strong>
-                        <%= docs[i]['user_detail.details'].age %>
+                        <%= docs[i].userDetail.details.age %>
                       </li>
                       <li><em class="icofont-rounded-right"></em> <strong>Teléfono:</strong>
-                        <%= docs[i]['user_detail.details'].phone %>
+                        <%= docs[i].userDetail.details.phone %>
                       </li>
                       <li><em class="icofont-rounded-right"></em> <strong>Dirección :</strong>
-                        <%= docs[i]['user_detail.address'] %>
+                        <%= docs[i].userDetail.address %>
                       </li>
                     </ul>
                   </div>
                   <div class="col-lg-6">
                     <ul>
                       <li><em class="icofont-rounded-right"></em> <strong>Reconocimiento:</strong>
-                        <%= docs[i]['user_detail.details'].recognitions %>
+                        <%= docs[i].userDetail.details.recognitions %>
                       </li>
                       <li><em class="icofont-rounded-right"></em> <strong>Estudios:</strong>
-                        <%= docs[i]['user_detail.speciality'] %>
+                        <%= docs[i].userDetail.speciality %>
                       </li>
                       <li><em class="icofont-rounded-right"></em> <strong>Email:</strong>
                         <%= docs[i].email %>
                       </li>
                       <li><em class="icofont-rounded-right"></em> <strong>Universidad:</strong>
-                        <%= docs[i]['user_detail.details'].university %>
+                        <%= docs[i].userDetail.details.university %>
                       </li>
                     </ul>
                   </div>
                 </div>
                 <p>
-                  " <%= docs[i]['user_detail.details'].frase %> "
+                  " <%= docs[i].userDetail.details.frase %> "
                 </p>
               </div>
             </div><br><br><br>
