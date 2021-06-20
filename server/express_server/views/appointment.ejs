@@ -39,6 +39,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -72,7 +73,6 @@
   <!-- ======= End of Header ======= -->
 
   <main id="main">
-
     <!-- ======= Portfolio Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
@@ -143,14 +143,12 @@
             </div>
             <div class="form-row">
               <div class="col-md-2"></div>
-                <div class="g-recaptcha" data-sitekey="6Lfs-j0bAAAAAHoGeKDiDHMP2sBCo2PSlno0u1Ij"></div>
+               <div class="g-recaptcha" id="capcha" data-sitekey="6LejZkQbAAAAAGKL8GPREnZlOcaNwWH-bGB-NKb0" ></div>
+               <!--<div class="g-recaptcha" id="capcha" data-sitekey="6Lfs-j0bAAAAAHoGeKDiDHMP2sBCo2PSlno0u1Ijs" ></div> -->
               </div>
-            </div>
             <div class="form-row">
               <div class="col-md-2"></div>
-              <button type="submit" class="form-group btn btn-primary">
-                Agendar
-              </button>
+               <button class="form-group btn btn-primary"  data-action='submit'>Agendar</button>
               <div class="col-md-2"></div>
             </div>
           </form>
@@ -192,7 +190,6 @@
   <script src="assets/vendor/venobox/venobox.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
 
-  <script src='https://www.google.com/recaptcha/api.js?hl=es'></script>
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 

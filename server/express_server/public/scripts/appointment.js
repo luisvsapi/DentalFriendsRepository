@@ -34,32 +34,39 @@ async function loadTreatments() {
   $("#tratPac").html(htmlSelect);
 }
 
+
 $("#saveAppointment").submit(function (e) {
-  e.preventDefault();
-  const data = {
-    idCardPacient: $("#cedPac").val(),
-    namePacient: $("#nombrePac").val(),
-    lastnamePacient: $("#apellidoPac").val(),
-    agePacient: 0,
-    genderPacient: "M",
-    addressPacient: "",
-    phonePacient: "0",
-    emailPacient: $("#emailPac").val(),
-    detailsPacient: {},
-    date: $("#datepicker").val(),
-    treat: $("#tratPac").val(),
-    doctor: $("#doctorPac").val(),
-  };
-  console.log("Datos a enviar al service:", data);
-  try {
-    postFetch(`/appointment/setAppointment`, data).then((res) => {
-      if (res.message == 1) {
-        alertify.success("Cita reservada exitosamente");
-      } else {
-        alertify.error("Error en reservación de cita: " + res.infoAppointment);
-      }
-    });
-  } catch (error) {
-    console.log("Error en guardar cita.", error);
+  var response = grecaptcha.getResponse();
+  if(response.length == 0){
+    alertify.error("Captcha no verificado");
   }
+  else{
+    e.preventDefault();
+    const data = {
+      idCardPacient: $("#cedPac").val(),
+      namePacient: $("#nombrePac").val(),
+      lastnamePacient: $("#apellidoPac").val(),
+      agePacient: 0,
+      genderPacient: "M",
+      addressPacient: "",
+      phonePacient: "0",
+      emailPacient: $("#emailPac").val(),
+      detailsPacient: {},
+      date: $("#datepicker").val(),
+      treat: $("#tratPac").val(),
+      doctor: $("#doctorPac").val(),
+    };
+    console.log("Datos a enviar al service:", data);
+    try {
+      postFetch(`/appointment/setAppointment`, data).then((res) => {
+        if (res.message == 1) {
+          alertify.success("Cita reservada exitosamente");
+        } else {
+          alertify.error("Error en reservación de cita: " + res.infoAppointment);
+        }
+      });
+    } catch (error) {
+      console.log("Error en guardar cita.", error);
+    }
+  } 
 });
