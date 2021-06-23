@@ -7,6 +7,10 @@
 var app = require('../app');
 var debug = require('debug')('express_server:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
+
+const SECURE = true;
 
 /**
  * Get port from environment and store in Express.
@@ -19,7 +23,20 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+var server;
+if(SECURE){
+  var https_options = {
+    key: fs.readFileSync("../../../../www_dentalfriends_ec.key"),
+    cert: fs.readFileSync("../../../../www_dentalfriends_ec.crt"),
+    ca: [
+      fs.readFileSync('../../../../comodorsadomainvalidationsecureserverca.crt'),
+      fs.readFileSync('../../../../comodorsaaddtrustca.crt') 
+    ]
+  };
+  server = https.createServer(https_options, app);
+}else{
+  server = http.createServer(app);
+}
 
 /**
  * Listen on provided port, on all network interfaces.

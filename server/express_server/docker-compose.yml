@@ -7,6 +7,6 @@ services:
       - expressServer:/app
     command: npm start
     ports:
-      - "80:3000"
+      - "443:3000"
 volumes:
   expressServer:
