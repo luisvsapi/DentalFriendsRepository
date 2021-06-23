@@ -35,11 +35,11 @@ app.use(
 );
 app.use(express.static(path.join(__dirname, "public")));
 
+//httpOnly: true,
 app.use(
   session({
     secret: "FBC71CE36CC20790F2EEED2197898E71",
     resave: false,
-    httpOnly: true,
     saveUninitialized: true,
     cookie: { secure: true, maxAge: constants.MAX_AGE_COOKIE },
   })
@@ -53,9 +53,10 @@ app.use("/appointment", appointmentRouter);
 app.use("/mail", sendRouter);
 
 // catch 404 and forward to error handler
+/*
 app.use(function (req, res, next) {
   next(createError(404));
-});
+});*/
 
 // error handler
 app.use(function (err, req, res, next) {
