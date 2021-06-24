@@ -48,11 +48,10 @@ async function getAvaliablesAppointment() {
   let resp = await getFetch(`/appointment/byUser`)
     .then((res) => {
       res.forEach(element => {
-        console.log("fecha retornada inicio:", new Date(element.dateBegin));
         calendar.addEvent({
           title: element.treatment,
           start: new Date(element.dateBegin),
-          end: new Date(element.dateEnd),
+          end: new Date(element.dateFinish),
           backgroundColor: element.state == 1 ? 'crimson' : 'darkcyan',
         });
       });
@@ -123,6 +122,7 @@ async function showConfirmation(content){
   confirmation.getElementsByClassName('m-details')[0].innerHTML = "<h5>Detalles</h5></br><p>Fecha inicio: " + content.start + "</p><p>Fecha fin: " + content.end + "</p></br>";
   let id = document.getElementById('appointmentId').innerText;
   confirmation.getElementsByClassName('m-confirm')[0].setAttribute("onclick", "confirmate(" + id + ",0,'" + content.startStr + "','" + content.endStr + "')");
+  confirmation.getElementsByClassName('close')[0].setAttribute('onclick','cancel()');
   confirmation.getElementsByClassName('m-cancel')[0].setAttribute("onclick", "cancel()");
   confirmation.style.display= 'block';
 }
@@ -147,7 +147,6 @@ async function confirmate(id, state, dateBegin, dateFinish){
 function cancel(){
   let confirmation = document.getElementById('modalAppointment');
   confirmation.style.display= 'none';
-  console.log('cancelado');
 }
 // function sendNotification(appointmentIdCancel) {
 //   let urlNotify = "/mail/send";

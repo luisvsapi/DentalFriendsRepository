@@ -55,7 +55,8 @@ let loadAppointment = (data) => {
  */
 function acceptRequest(appointmentId) {
   let url = "./appointments/" + "Accept/" + appointmentId;
-  location.replace(url);
+  location.replace(url)
+
 }
 /**
  * This method uses the appointment's id to request it to be cancelled.

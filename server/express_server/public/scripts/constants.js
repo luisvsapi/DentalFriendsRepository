@@ -8,5 +8,5 @@ const aceptOrNot = { labels: { ok: "Aceptar", cancel: "Cancelar" } };
 const CLAVECAPCHA = "6LejZkQbAAAAAGKL8GPREnZlOcaNwWH-bGB-NKb0";
 
 //clave para PRODUCCION
-//const CLAVECAPCHA = "6Lfs-j0bAAAAAHoGeKDiDHMP2sBCo2PSlno0u1Ijs";
+//const CLAVECAPCHA = "6LeQRVIbAAAAAAqjQH-jBTJA9q9qS0-n-r68QSYK";
 

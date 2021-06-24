@@ -69,7 +69,7 @@ router.get(
   "/appointments/:action/:id",/*  jwtSecurity.authenticateJWT, */ async function (req, res, next) {
     let action = req.params.action;
     if (action === "Accept") {
-      res.render(`appointmentUser`, { id: req.params.id });
+      res.render(`appointmentUser`, { id: req.params.id });//refator needed
     } else if (action === "Cancel") {
         await appointment
           .update(
@@ -179,17 +179,17 @@ router.post("/medicalResume", async (req, res, next) => {
       where: {
         [Op.or]: [
           {
-            "$pacient.idCardPacient$": {
+            "$pacient.id_card_pacient$": {
               [Op.like]: requestBody.filterMedicalResume,
             },
           },
           {
-            "$pacient.namePacient$": {
+            "$pacient.name_pacient$": {
               [Op.like]: requestBody.filterMedicalResume,
             },
           },
           {
-            "$pacient.emailPacient$": {
+            "$pacient.email_pacient$": {
               [Op.like]: requestBody.filterMedicalResume,
             },
           },

@@ -1,9 +1,9 @@
 let resume = {};
 
 $(document).ready(function () {
-  let htmlSelect = `<tr> <th>Id</th> <th>Fecha</th> <th>Paciente</th> <th>Detalles</th></tr>`;
-  htmlSelect += `<tr><td>1</td><td>01/06/2021</td><td>Nombre</td><td><button type="button" id=1 onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`;
-  $("#medicalResumeTable").html(htmlSelect);
+  //let htmlSelect = `<tr> <th>Id</th> <th>Fecha</th> <th>Paciente</th> <th>Detalles</th></tr>`;
+  //htmlSelect += `<tr><td>1</td><td>01/06/2021</td><td>Nombre</td><td><button type="button" id=1 onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`;
+  //$("#medicalResumeTable").html(htmlSelect);
 });
 
 $("#searchMedicalResume").submit(async function (e) {
@@ -17,9 +17,10 @@ $("#searchMedicalResume").submit(async function (e) {
     .catch(function () {
       alert("Error contacte con administrador");
     });
+  console.log(resume)
   let htmlSelect = `<tr> <th>Id</th> <th>Fecha</th> <th>Paciente</th> <th>Detalles</th></tr>`;
   resume.forEach((element) => {
-    htmlSelect += `<tr><td>${element.id}</td><td>${element.dateBegin}</td><td>${element.nombrePaciente}</td><td><button type="button" id=${element.id} onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`;
+    htmlSelect += `<tr><td>${element.id}</td><td>${element.dateBegin}</td><td>${element.pacient.namePacient}</td><td><button type="button" id=${element.id} onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`;
   });
   $("#medicalResumeTable").html(htmlSelect);
 });

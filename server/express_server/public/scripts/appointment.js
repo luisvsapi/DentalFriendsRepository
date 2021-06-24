@@ -61,6 +61,7 @@ $("#saveAppointment").submit(function (e) {
       postFetch(`/appointment/setAppointment`, data).then((res) => {
         if (res.message == 1) {
           alertify.success("Cita reservada exitosamente");
+          location.reload();
         } else {
           alertify.error("Error en reservación de cita: " + res.infoAppointment);
         }
