@@ -1,0 +1,25 @@
+<header id="header" class="fixed-top">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+
+      <h1 class="logo"><a href="./">DentalFriends</a></h1>
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li  <% if (active == "inicio"){ %>  class="active" <% }%>  ><a href="./">Inicio</a></li>  
+          <li  <% if (active == "professional"){ %>  class="active" <% }%>  ><a href="professional">Profesionales</a></li>
+          <li  <% if (active == "dentalcare"){ %>  class="active" <% }%> ><a href="dentalcare">Consejos</a></li>
+          <li  <% if (active == "treatment"){ %>  class="active" <% }%> ><a href="treatment">Tratamientos</a></li>
+          <li  <% if (active == "aboutus"){ %>  class="active" <% }%> ><a href="aboutus">Contáctenos</a></li>
+          <li  <% if (active == "appointment"){ %>  class="active" <% }%> ><a href="appointment">Cita</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+
+      <div class="header-social-links">
+        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+        <a href="#" class="whatsapp"><i class="icofont-whatsapp"></i></i></a>
+        <a href="/login" class="login">Ingresar</a>
+      </div>
+    </div>
+</header>

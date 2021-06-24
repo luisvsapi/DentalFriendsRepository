@@ -42,37 +42,8 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-
-      <h1 class="logo"><a href="./">DentalFriends</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-      <nav class="nav-menu d-none d-lg-block">
-        <ul>
-
-
-          <li class="active"><a href="./">Inicio</a></li>
-          <li><a href="professional">Profesionales</a></li>
-          <li><a href="dentalcare">Consejos</a></li>
-          <li><a href="treatment">Tratamientos</a></li>
-          <li><a href="aboutus">Contáctenos</a></li>
-          <li><a href="appointment">Cita</a></li>
-        </ul>
-      </nav><!-- .nav-menu -->
-
-      <div class="header-social-links">
-        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-        <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
-        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-        <a href="#" class="whatsapp"><i class="icofont-whatsapp"></i></i></a>
-        <a href="/login" class="login">Ingresar</a>
-      </div>
-
-    </div>
-
-  </header><!-- End Header -->
+  <%- include('./header', {active: "inicio"}); %>
+  <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">

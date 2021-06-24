@@ -40,33 +40,8 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-
-      <h1 class="logo"><a href="./">DentalFriends</a></h1> 
-
-      <nav class="nav-menu d-none d-lg-block">
-        <ul>
-          <li><a href="./">Inicio</a></li>
-          <li class="active"><a href="professional">Profesionales</a></li>
-          <li><a href="dentalcare">Consejos</a></li>
-          <li><a href="treatment">Tratamientos</a></li>
-          <li><a href="aboutus">Contáctenos</a></li>
-          <li><a href="appointment">Cita</a></li>
-        </ul>
-      </nav><!-- .nav-menu -->
-
-      <div class="header-social-links">
-        <a href="#" class="twitter"><em class="icofont-twitter"></em></a>
-        <a href="#" class="facebook"><em class="icofont-facebook"></em></a>
-        <a href="#" class="instagram"><em class="icofont-instagram"></em></a>
-        <a href="#" class="whatsapp"><em class="icofont-whatsapp"></em></em></a>
-        <a href="/login" class="login">Ingresar</a>
-      </div>
-
-    </div>
-
-  </header><!-- End Header -->
+  <%- include('./header', {active: "professional"}); %>
+  <!-- End Header -->
 
   <main id="main">
 
