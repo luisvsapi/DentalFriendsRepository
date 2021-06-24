@@ -1,4 +1,4 @@
-
+//document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
 $(document).ready(function () {
   let url = "/appointment/state/0";
   getFetch(url, {})

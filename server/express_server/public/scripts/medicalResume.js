@@ -1,3 +1,4 @@
+document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
 let resume = {};
 
 $(document).ready(function () {

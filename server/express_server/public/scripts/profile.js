@@ -1,3 +1,4 @@
+document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
 $("#formProfile").submit(function (e) {
   e.preventDefault();
   var form = document.getElementById("formProfile");

@@ -1,3 +1,4 @@
+document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
 let calendar;
 document.addEventListener("DOMContentLoaded", function () {
   var calendarEl = document.getElementById("calendarElement");
