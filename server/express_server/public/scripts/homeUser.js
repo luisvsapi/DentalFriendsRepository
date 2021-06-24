@@ -61,7 +61,7 @@ function acceptRequest(appointmentId) {
  * This method uses the appointment's id to request it to be cancelled.
  * @param {*} appointmentId
  */
-function cancellRequest(appointmentIdCancel) {
+async function cancellRequest(appointmentIdCancel) {
   let url = "./appointments/" + "Cancel/" + appointmentIdCancel;
   getFetch(url, {})
     .then((res) => {
@@ -69,21 +69,21 @@ function cancellRequest(appointmentIdCancel) {
         sendNotification(appointmentIdCancel);
         location.reload();
       } else {
-        alertify.error("Error al eliminar solicitud");
+        alertify.error("Error al eliminar solicitud!");
       }
     })
     .catch((err) => {
       console.log(err.message);
     });
 }
-function sendNotification(appointmentIdCancel) {
+async function sendNotification(appointmentIdCancel) {
   let urlNotify = "/mail/send";
   postFetch(urlNotify, {
     appointmentId: appointmentIdCancel,
   }).then((res) => {
     return res;
   }).catch(function () {
-    alert("Error contacte con administrador");
+    alertify.error("Error, el correo no pudo enviarse!");
   });
 }
 
