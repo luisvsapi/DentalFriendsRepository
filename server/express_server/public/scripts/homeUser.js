@@ -78,7 +78,7 @@ async function cancellRequest(appointmentIdCancel) {
       console.log(err.message);
     });
 }
-async function sendNotification(appointmentIdCancel) {
+/*async function sendNotification(appointmentIdCancel) {
   let urlNotify = "/mail/send";
   postFetch(urlNotify, {
     appointmentId: appointmentIdCancel,
@@ -88,4 +88,4 @@ async function sendNotification(appointmentIdCancel) {
     alertify.error("Error, el correo no pudo enviarse!");
   });
 }
-
+*/

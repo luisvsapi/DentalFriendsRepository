@@ -161,3 +161,13 @@ function addNameMonth(dateAppointment, dateToJson) {
   }
   return dateToJson;
 }
+async function sendNotification(appointmentIdCancel) {
+  let urlNotify = "/mail/send";
+  postFetch(urlNotify, {
+    appointmentId: appointmentIdCancel,
+  }).then((res) => {
+    return res;
+  }).catch(function () {
+    alertify.error("Error, el correo no pudo enviarse!");
+  });
+}

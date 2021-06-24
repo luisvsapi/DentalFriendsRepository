@@ -139,7 +139,7 @@ async function confirmate(id, state, dateBegin, dateFinish){
   await putFetch(`/appointment/changeState`, body)
   .then((res) => {
     if(res){
-      // sendNotification(appointmentId)
+      sendNotification(id);
       confirmation.style.display= 'none';
       location.replace('./../../home');
     }
@@ -149,13 +149,3 @@ function cancel(){
   let confirmation = document.getElementById('modalAppointment');
   confirmation.style.display= 'none';
 }
-// function sendNotification(appointmentIdCancel) {
-//   let urlNotify = "/mail/send";
-//   postFetch(urlNotify, {
-//     appointmentId: appointmentIdCancel,
-//   }).then((res) => {
-//     return res;
-//   }).catch(function () {
-//     alert("Error contacte con administrador");
-//   });
-// }
