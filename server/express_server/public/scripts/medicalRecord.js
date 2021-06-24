@@ -1,4 +1,4 @@
-document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
+//document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
 $("#myForm a").click(function (e) {
   e.preventDefault();
   $(this).tab("show");

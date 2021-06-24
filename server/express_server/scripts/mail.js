@@ -10,7 +10,7 @@ async function sendMail(pacient, dentistDetails, appointment) {
   let dateFinishAppointment = new Date();
   dateBeginAppointment.setTime(Date.parse(appointment.dateBegin));
   dateFinishAppointment.setTime(Date.parse(appointment.dateFinish));
-  console.log(dateBeginAppointment)
+  console.log("llego aqui sendmail",dateBeginAppointment)
   var dateToStringBegin = ""
   dateToStringBegin =
     utils.addNameDay(dateBeginAppointment, dateToStringBegin) +

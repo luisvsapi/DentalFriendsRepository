@@ -1,4 +1,4 @@
-//document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
+document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
 $(document).ready(function () {
   let url = "/appointment/state/0";
   getFetch(url, {})
@@ -55,18 +55,19 @@ function goMedicalRecord() {
   location.replace(url);
 }
 
-function finishRequest(appointmentId) {
+async function finishRequest(appointmentId) {
   let url = "./appointments/" + "Completed/" + appointmentId;
   getFetch(url, {})
     .then((res) => {
       if (res.message) {
-        sendNotification(Completed);
+        console.log("entra al if:", res.message)
+        sendNotification(appointmentId);
+        location.reload();
       } else {
         alertify.error("Error al finalizar la cita");
       }
     })
     .catch((err) => {
-      console.log(err.message);
+      console.log("finish request:", err.message);
     });
-    location.reload();
   }
