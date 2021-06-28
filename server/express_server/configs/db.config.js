@@ -10,9 +10,9 @@ module.exports = {
     acquire: 30000,
     idle: 10000,
   },
-  "dialectOptions": {
-    "useUTC": true
+  dialectOptions: {
+    useUTC: true,
   },
-  "timezone": "-05:00",
-  logging: false
+  timezone: "-05:00",
+  logging: false,
 };

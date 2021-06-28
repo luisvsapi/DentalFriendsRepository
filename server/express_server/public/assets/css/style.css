@@ -1275,6 +1275,7 @@ section {
   color: #222222;
   font-size: 14px;
   text-align: center;
+  position:fixed;
 }
 
 #footer .credits {
@@ -1446,6 +1447,27 @@ h2.active {
 
 
 /* OTHERS */
+select {
+  font-family: "Open Sans", sans-serif;
+  color: #444444;
+  background-color: #fff;
+  font-weight: 400;
+}
+
+select:focus{
+  border-color: rgb(52, 183, 167);
+}
+
+#datepicker {
+  font-family: "Open Sans", sans-serif;
+  color: #444444;
+  font-weight: 400;
+  border: 1px solid #ced4da;
+}
+
+#datepicker:focus {
+  border-color: rgb(52, 183, 167) ;
+}
 
 *:focus {
     outline: none;

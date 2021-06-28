@@ -104,3 +104,4 @@ dist
 .tern-port
 
 server/express_server/node_modules/
+server/express_server/package-lock.json

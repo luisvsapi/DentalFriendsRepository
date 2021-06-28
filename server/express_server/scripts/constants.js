@@ -1,9 +1,12 @@
 module.exports = {
   treatments: [
-    { descr: "Limpieza Dental" },
-    { descr: "Blanqueamiento de Dientes" },
-    { descr: "Calces Dentales" },
-    { descr: "Checkeo Rutinario" },
+    { descr: "Profilaxis dental (limpieza dental)" },
+    { descr: "Restauraciones dentales" },
+    { descr: "Extracciones dentales" },
+    { descr: "Endodoncias no molares" },
+    { descr: "Rehabilitación oral (con puentes y coronas)" },
+    { descr: "Prótesis a placas (parciales o totales)" },
+    { descr: "Consulta periódica" },
   ],
   states: {
     0: "Approved",

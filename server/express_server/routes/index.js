@@ -17,7 +17,7 @@ router.get("/", function (req, res, next) {
   res.render(`home`, {});
 });
 
-router.get("/login", function (req, res, next) { 
+router.get("/login", function (req, res, next) {
   res.render("login", { action: "login" });
 });
 
@@ -35,10 +35,6 @@ router.get("/appointment", function (req, res, next) {
 
 router.get("/dentalcare", function (req, res, next) {
   res.render(`dentalcare`, {});
-});
-
-router.get("/portafolio", function (req, res, next) {
-  res.render(`portafolio`, {});
 });
 
 router.get("/treatment", function (req, res, next) {
@@ -73,16 +69,20 @@ router.post("/login", async (req, res, next) => {
     `select login_user ('${requestBody.username}', '${requestBody.password}')`
   );
   if (results.length > 0) {
-    let detailsSp = results[0].login_user.replace(/[()]/g, "")
-    let encryptPassword = await utils.cryptPassword(requestBody.password);    
-    const token = jwtSecurity.sign(requestBody.username, encryptPassword, detailsSp);      
+    let detailsSp = results[0].login_user.replace(/[()]/g, "");
+    let encryptPassword = await utils.cryptPassword(requestBody.password);
+    const token = jwtSecurity.sign(
+      requestBody.username,
+      encryptPassword,
+      detailsSp
+    );
     res.send({ username: requestBody.username, token: token });
   } else {
     res.status(400);
     res.send({});
   }
 });
- 
+
 router.post("/register", async (req, res, next) => {
   let requestBody = req.body;
   try {

@@ -30,15 +30,18 @@ const { treatments } = require("../scripts/constants.js");
 
 router.get(
   "/medicalResume",
- /*  jwtSecurity.authenticateJWT, */
+  /*  jwtSecurity.authenticateJWT, */
   function (req, res, next) {
     res.render(`medicalResume`, { resume: {} });
   }
 );
 
-router.get("/profile",/*  jwtSecurity.authenticateJWT, */ function (req, res, next) {
-  res.render(`profile`, {});
-});
+router.get(
+  "/profile",
+  /*  jwtSecurity.authenticateJWT, */ function (req, res, next) {
+    res.render(`profile`, {});
+  }
+);
 
 router.get(
   "/medicalRecord",
@@ -58,36 +61,40 @@ router.get(
 /**
  * This router renders the principal view of the user. Which shows the appointment requests from pacients.
  */
-router.get("/home", /* jwtSecurity.authenticateJWT, */ function (req, res, next) {
-  res.render(`homeUser`, {});
-});
+router.get(
+  "/home",
+  /* jwtSecurity.authenticateJWT, */ function (req, res, next) {
+    res.render(`homeUser`, {});
+  }
+);
 
 /**
  * This router renders the apointment acceptance view
  */
 router.get(
-  "/appointments/:action/:id",/*  jwtSecurity.authenticateJWT, */ async function (req, res, next) {
+  "/appointments/:action/:id",
+  /*  jwtSecurity.authenticateJWT, */ async function (req, res, next) {
     let action = req.params.action;
     if (action === "Accept") {
-      res.render(`appointmentUser`, { id: req.params.id });//refator needed
+      res.render(`appointmentUser`, { id: req.params.id }); //refator needed
     } else if (action === "Cancel") {
-        await appointment
-          .update(
-            { state: "3" },
-            { returning: true, where: { id: req.params.id } }
-          )
-          .then((dbresponse) => {
-            if (dbresponse) {
-              res.send({ message: 1 });
-            } else {
-              res.send({ message: 0 });
-            }
-          })
-          .catch((err) => {
-            res.status(500).send({
-              message: err.message || "Database failure.",
-            });
+      await appointment
+        .update(
+          { state: "3" },
+          { returning: true, where: { id: req.params.id } }
+        )
+        .then((dbresponse) => {
+          if (dbresponse) {
+            res.send({ message: 1 });
+          } else {
+            res.send({ message: 0 });
+          }
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message: err.message || "Database failure.",
           });
+        });
     } else if (action === "Completed") {
       await appointment
         .update(
@@ -106,7 +113,7 @@ router.get(
             message: err.message || "Database failure.",
           });
         });
-  }
+    }
   }
 );
 
@@ -123,8 +130,8 @@ router.post("/", jwtSecurity.authenticateJWT, function (req, res, next) {
 router.post(
   "/formProfile",
   upload.single("pictureUrl"),
-  jwtSecurity.authenticateJWT, 
-  async (req, res, next) => {  
+  jwtSecurity.authenticateJWT,
+  async (req, res, next) => {
     let requestBody = req.body;
     let dict = {
       name: requestBody.name,
@@ -346,13 +353,13 @@ router.post("/setRecord", async (req, res, next) => {
     await pacientModel.findOne({
       where: { idCardPacient: requestBody.idCardPacient },
     });
-      await pacientModel.update(
+    await pacientModel.update(
       {
         detailsPacient: dict,
       },
-      {where: {  idCardPacient: requestBody.idCardPacient },
-    });
-    } catch (err) {
+      { where: { idCardPacient: requestBody.idCardPacient } }
+    );
+  } catch (err) {
     console.log(err);
     res.send({ message: 0 });
   }

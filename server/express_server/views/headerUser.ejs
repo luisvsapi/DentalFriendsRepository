@@ -1,0 +1,27 @@
+<header id="header" class="fixed-top">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+
+        <h1 class="logo"><a href="home">DentalFriendsEC</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                <li <% if (active=="home" ){ %> class="active" <% }%> ><a href="home">Inicio</a></li>
+                <li <% if (active=="attention" ){ %> class="active" <% }%> ><a href="attention">Atención</a></li>
+                <li <% if (active=="medicalResume" ){ %> class="active" <% }%> ><a href="medicalResume">Resumen
+                            Médico</a></li>
+                <li <% if (active=="profile" ){ %> class="active" <% }%> ><a href="profile">Perfil</a></li>
+            </ul>
+        </nav><!-- .nav-menu -->
+
+        <div class="header-social-links">
+            <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+            <a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+            <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+            <a href="#" class="whatsapp"><i class="icofont-whatsapp"></i></i></a>
+            <a href="/login" id="logout" class="login">Salir</a>
+        </div>
+
+    </div>
+
+</header>

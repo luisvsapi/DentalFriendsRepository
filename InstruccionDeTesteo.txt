@@ -1,2 +1,0 @@
-Para testear el prototipo debe de ejecutar en el navegador al archivo “inicio.html” que se encuentra:
-DentalFriendsRepository/resources/TemplateHtml/inicio.html

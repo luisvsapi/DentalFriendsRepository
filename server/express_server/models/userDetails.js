@@ -12,16 +12,16 @@ var userDetails = db.define(
       autoIncrement: true,
       field: "id_details",
     },
-    identityCard: {type: Sequelize.STRING, field: "identity_card"},
+    identityCard: { type: Sequelize.STRING, field: "identity_card" },
     address: Sequelize.STRING,
     speciality: Sequelize.STRING,
     details: Sequelize.JSON,
-    pictureUrl: {type: Sequelize.STRING, field: "picture_url"},
+    pictureUrl: { type: Sequelize.STRING, field: "picture_url" },
   },
   {
     timestamps: false,
     //freezeTableName: true,
-    tableName: 'user_detail',
+    tableName: "user_detail",
   }
 );
 

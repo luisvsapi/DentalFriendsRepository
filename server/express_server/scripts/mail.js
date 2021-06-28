@@ -10,8 +10,8 @@ async function sendMail(pacient, dentistDetails, appointment) {
   let dateFinishAppointment = new Date();
   dateBeginAppointment.setTime(Date.parse(appointment.dateBegin));
   dateFinishAppointment.setTime(Date.parse(appointment.dateFinish));
-  console.log("llego aqui sendmail",dateBeginAppointment)
-  var dateToStringBegin = ""
+  console.log("llego aqui sendmail", dateBeginAppointment);
+  var dateToStringBegin = "";
   dateToStringBegin =
     utils.addNameDay(dateBeginAppointment, dateToStringBegin) +
     ", " +
@@ -21,7 +21,7 @@ async function sendMail(pacient, dentistDetails, appointment) {
     utils.addNameMonth(dateBeginAppointment, dateToStringBegin) +
     " de " +
     dateBeginAppointment.getFullYear();
-  console.log(dateToStringBegin)
+  console.log(dateToStringBegin);
   let hourBegin = `${dateBeginAppointment.getHours()}:${dateBeginAppointment.getMinutes()}`;
   let hourFinish = `${dateFinishAppointment.getHours()}:${dateFinishAppointment.getMinutes()}`;
   try {
