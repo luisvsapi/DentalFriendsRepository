@@ -36,15 +36,9 @@ class Appointment {
         tokenValue: await getSecureStorage("token"));
     List<Appointment> result =
         response.map((entry) => Appointment.fromJson(entry)).toList();
-    result.add(result[0]);
-    result.add(result[0]);
-    result.add(result[0]);
-    result.add(result[0]);
-    result.add(result[0]);
-    result.add(result[0]);
-    result.add(result[0]);
-    result.add(result[0]);
-    result.add(result[0]);
+
+    /*Appointment cita = result[0];
+    print("Respuesta: $result");*/
     return result;
   }
 }

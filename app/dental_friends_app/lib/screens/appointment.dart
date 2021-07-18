@@ -4,12 +4,18 @@ import 'package:dental_friends_app/widgets/bottom-navigation-bar.dart';
 import 'package:dental_friends_app/widgets/drawer.dart';
 import 'package:dental_friends_app/widgets/navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
-class AppointmentScreen extends StatelessWidget {
+class AppointmentScreen extends StatefulWidget {
+  @override
+  State createState() => new StateAppointment();
+
   Future<String> initClass() async {
     return "";
   }
+}
 
+class StateAppointment extends State<AppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,42 +29,48 @@ class AppointmentScreen extends StatelessWidget {
       bottomNavigationBar: BottonNavigationBar(option: 1),
     );
   }
+}
 
-  contentScreen(BuildContext context) {
-    Appointment.getByStare();
-    return FutureBuilder<List<Appointment>>(
-      future: Appointment.getByStare(),
-      builder: (context, request) {
-        if (request.connectionState == ConnectionState.done &&
-            request.hasData) {
-          return ListView.builder(
-              itemCount: request.data.length,
-              itemBuilder: (context, index) {
-                Appointment item = request.data[index];
-                return Padding(
-                  padding: const EdgeInsets.only(top: 4.0),
-                  child: ListTile(
-                    tileColor: MaterialColors.defaultButton,
-                    title: Text("${item.id} - ${item.treatment}"),
-                    subtitle: Text(
-                        "${item.pacient.namePacient} ${item.pacient.lastnamePacient}"),
-                    leading:
-                        IconButton(icon: Icon(Icons.info), onPressed: null),
-                    trailing: Wrap(
-                      children: <Widget>[
-                        IconButton(
-                            icon: Icon(Icons.done), onPressed: null), // icon-1
-                        IconButton(
-                            icon: Icon(Icons.delete),
-                            onPressed: null), // icon-2
-                      ],
-                    ),
-                  ),
-                );
-              });
-        }
-        return Container();
-      },
-    );
-  }
+contentScreen(BuildContext context){
+  return FutureBuilder<List<Appointment>>(
+    future: Appointment.getByStare(),
+    builder: (context, request){
+      if(request.data != null){
+        return ListView.builder(
+          itemCount: request.data.length,
+          scrollDirection: Axis.vertical,
+          itemBuilder: (context, index){
+            Appointment item = request.data[index];
+            return Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: ListTile(
+                tileColor: MaterialColors.defaultButton,
+                title: Text("${item.treatment}"),
+                subtitle: Text(
+                    "${item.pacient.namePacient} ${item.pacient.lastnamePacient}"),
+                leading:
+                IconButton(icon: Icon(Icons.info), onPressed: null),
+                trailing: Wrap(
+                  children: <Widget>[
+                    IconButton(
+                        icon: Icon(Icons.done), onPressed: null), // icon-1
+                    IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: null), // icon-2
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }else{
+        return Container(
+          child: Center(
+            child: Text("Cargando..."),
+          ),
+        );
+      }
+
+    }
+  );
 }
