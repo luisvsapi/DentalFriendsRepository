@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "nodemon ./bin/www"
+    "test": "jest"
   },
   "dependencies": {
     "@admin-bro/express": "^3.1.0",
@@ -47,6 +47,7 @@
     "delay": "1000"
   },
   "devDependencies": {
+    "jest": "^27.0.6",
     "nodemon": "^2.0.7"
   }
 }
