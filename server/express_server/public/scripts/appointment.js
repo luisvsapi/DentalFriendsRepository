@@ -3,35 +3,33 @@ $(document).ready(function () {
   loadTreatments();
 });
 
-async function loadDoctors() {
-  let listDoctors;
+async function loadDoctors() { 
   try {
-    listDoctors = await getFetch("/user/allDoctors");
+    let listDoctors = await getFetch("/user/allDoctors");
+    let htmlSelect = `<option value=''>Seleccione doctor</option>`;
+    listDoctors.forEach((element) => { 
+      if(element?.userDetail?.details)
+        htmlSelect += `<option value=${element.id}>${element?.userDetail?.details?.name}</option>`;        
+    });
+    $("#doctorPac").html(htmlSelect);
   } catch (error) {
-    console.log("Error en loadDoctors:", error);
-  }
-  let htmlSelect = `<option value=''>Seleccione doctor</option>`;
-  listDoctors.forEach((element) => {
-    htmlSelect += `<option value=${element.id}>${element.userDetail.details.name}</option>`;
-  });
-  $("#doctorPac").html(htmlSelect);
+    //
+  }  
 }
 
-async function loadTreatments() {
-  let listTreatments;
+async function loadTreatments() { 
   try {
-    listTreatments = await getFetch("/user/allTreatments");
-  } catch (error) {
-    console.log("Error en loadTreatments:", error);
-  }
-  let htmlSelect = `<option value=''>Seleccione tratamiento</option>`;
-
-  listTreatments.forEach((element) => {
-    htmlSelect += `<option value=${element.descr.replace(/\s+/g, " ")}>${
-      element.descr
-    }</option>`;
-  });
-  $("#tratPac").html(htmlSelect);
+    let listTreatments = await getFetch("/user/allTreatments");
+    let htmlSelect = `<option value=''>Seleccione tratamiento</option>`;
+    listTreatments.forEach((element) => {
+      htmlSelect += `<option value=${element.descr.replace(/\s+/g, " ")}>${
+        element.descr
+      }</option>`;
+    });
+    $("#tratPac").html(htmlSelect);
+  } catch (error) { 
+    //
+  } 
 }
 
 
@@ -55,8 +53,7 @@ $("#saveAppointment").submit(function (e) {
       date: $("#datepicker").val(),
       treat: $("#tratPac").val(),
       doctor: $("#doctorPac").val(),
-    };
-    console.log("Datos a enviar al service:", data);
+    }; 
     try {
       postFetch(`/appointment/setAppointment`, data).then((res) => {
         if (res.message == 1) {
@@ -67,7 +64,7 @@ $("#saveAppointment").submit(function (e) {
         }
       });
     } catch (error) {
-      console.log("Error en guardar cita.", error);
+      alertify.error("Error en reservación de cita");
     }
   } 
 });
