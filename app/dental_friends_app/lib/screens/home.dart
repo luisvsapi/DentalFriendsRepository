@@ -1,6 +1,5 @@
 import 'package:dental_friends_app/constants/strings.dart';
 import 'package:dental_friends_app/constants/theme.dart';
-import 'package:dental_friends_app/utils/utils.dart';
 import 'package:dental_friends_app/widgets/bottom-navigation-bar.dart';
 import 'package:dental_friends_app/widgets/card-horizontal.dart';
 import 'package:dental_friends_app/widgets/drawer.dart';
@@ -12,10 +11,7 @@ class Home extends StatelessWidget {
     initClass();
   }
 
-  Future<String> initClass() async {
-    String token = await getSecureStorage("token");
-    showCenterShortToast("Usuario con token $token");
-    return "";
+  initClass() async {
   }
 
   @override

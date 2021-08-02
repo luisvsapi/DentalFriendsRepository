@@ -23,14 +23,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d94fc618-074c-4bf2-b8b9-b1a9d386a6e6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/constants/config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/constants/config.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/constants/strings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/constants/strings.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/constants/theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/constants/theme.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/models/appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/models/appointment.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/screens/appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/screens/appointment.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/screens/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/screens/home.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Nexus_5X_API_28]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -46,10 +55,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="com.intellij.openapi.externalSystem.service.settings.ExternalSystemGroupConfigurable" value="ALL" />
-    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/SDKs/dart-sdk" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunManager" selected="Flutter.main.dart">
@@ -69,7 +80,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -96,34 +107,60 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="67" y="117" width="1736" height="856" key="AVDManager" timestamp="1627445529114">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1443" y="-148" key="#com.intellij.ide.util.MemberChooser" timestamp="1627902581566">
+      <screen x="-1879" y="-224" width="1239" height="720" />
+    </state>
+    <state x="-1443" y="-148" key="#com.intellij.ide.util.MemberChooser/-1879.-224.1239.720/62.0.1304.768@-1879.-224.1239.720" timestamp="1627902581566" />
+    <state x="105" y="81" width="1102" height="593" key="AVDManager" timestamp="1627894611241">
+      <screen x="62" y="0" width="1218" height="720" />
     </state>
     <state x="67" y="117" width="1736" height="856" key="AVDManager/0.0.1920.1040@0.0.1920.1040" timestamp="1627445529114" />
+    <state x="105" y="81" width="1102" height="593" key="AVDManager/62.0.1218.720@62.0.1218.720" timestamp="1627894611241" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1626246354715">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1626246354715" />
-    <state width="938" height="282" key="GridCell.Tab.0.bottom" timestamp="1627341034584">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1268" height="235" key="GridCell.Tab.0.bottom" timestamp="1627903238022">
+      <screen x="-1879" y="-224" width="1239" height="720" />
     </state>
+    <state width="1268" height="235" key="GridCell.Tab.0.bottom/-1879.-224.1239.720/62.0.1304.768@-1879.-224.1239.720" timestamp="1627903238022" />
     <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1627341034584" />
-    <state width="938" height="282" key="GridCell.Tab.0.center" timestamp="1627341034584">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="587" height="237" key="GridCell.Tab.0.bottom/62.0.1218.720@62.0.1218.720" timestamp="1627894677962" />
+    <state width="1268" height="235" key="GridCell.Tab.0.center" timestamp="1627903238022">
+      <screen x="-1879" y="-224" width="1239" height="720" />
     </state>
+    <state width="1268" height="235" key="GridCell.Tab.0.center/-1879.-224.1239.720/62.0.1304.768@-1879.-224.1239.720" timestamp="1627903238022" />
     <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1627341034584" />
-    <state width="938" height="282" key="GridCell.Tab.0.left" timestamp="1627341034584">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="587" height="237" key="GridCell.Tab.0.center/62.0.1218.720@62.0.1218.720" timestamp="1627894677962" />
+    <state width="1268" height="235" key="GridCell.Tab.0.left" timestamp="1627903238021">
+      <screen x="-1879" y="-224" width="1239" height="720" />
     </state>
+    <state width="1268" height="235" key="GridCell.Tab.0.left/-1879.-224.1239.720/62.0.1304.768@-1879.-224.1239.720" timestamp="1627903238021" />
     <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1627341034584" />
-    <state width="938" height="282" key="GridCell.Tab.0.right" timestamp="1627341034584">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="587" height="237" key="GridCell.Tab.0.left/62.0.1218.720@62.0.1218.720" timestamp="1627894677962" />
+    <state width="1268" height="235" key="GridCell.Tab.0.right" timestamp="1627903238022">
+      <screen x="-1879" y="-224" width="1239" height="720" />
     </state>
+    <state width="1268" height="235" key="GridCell.Tab.0.right/-1879.-224.1239.720/62.0.1304.768@-1879.-224.1239.720" timestamp="1627903238022" />
     <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1627341034584" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1626902968238">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="587" height="237" key="GridCell.Tab.0.right/62.0.1218.720@62.0.1218.720" timestamp="1627894677962" />
+    <state x="242" y="0" key="SettingsEditor" timestamp="1627894674476">
+      <screen x="62" y="0" width="1218" height="720" />
     </state>
     <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1626902968238" />
+    <state x="242" y="0" key="SettingsEditor/62.0.1218.720@62.0.1218.720" timestamp="1627894674476" />
+    <state x="-1438" y="50" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1627898528321">
+      <screen x="-1879" y="-224" width="1239" height="720" />
+    </state>
+    <state x="-1438" y="50" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1879.-224.1239.720/62.0.1304.768@-1879.-224.1239.720" timestamp="1627898528321" />
+    <state x="-1664" y="-224" width="589" height="720" key="find.popup" timestamp="1627896712885">
+      <screen x="-1879" y="-224" width="1239" height="720" />
+    </state>
+    <state x="-1664" y="-224" width="589" height="720" key="find.popup/-1879.-224.1239.720/62.0.1304.768@-1879.-224.1239.720" timestamp="1627896712885" />
+    <state x="-1586" y="-183" width="672" height="678" key="search.everywhere.popup" timestamp="1627899200016">
+      <screen x="-1879" y="-224" width="1239" height="720" />
+    </state>
+    <state x="-1586" y="-183" width="672" height="678" key="search.everywhere.popup/-1879.-224.1239.720/62.0.1304.768@-1879.-224.1239.720" timestamp="1627899200016" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

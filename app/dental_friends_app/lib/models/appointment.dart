@@ -26,19 +26,25 @@ class Appointment {
       this.id,
       this.state});
 
+  @override
+  String toString() {
+    return 'Appointment{id: $id, state: $state, user: $user, pacient: $pacient}';
+  }
+
   factory Appointment.fromJson(Map<String, dynamic> json) =>
       _$AppointmentFromJson(json);
   Map<String, dynamic> toJson() => _$AppointmentToJson(this);
 
-  static Future<List<Appointment>> getByStare({int state = 1}) async {
+  static Future<List<Appointment>> getByState({int state = 1}) async {
     List<dynamic> response = await DioClient().getJsonListRequest(
         '/appointment/state/$state',
         tokenValue: await getSecureStorage("token"));
     List<Appointment> result =
         response.map((entry) => Appointment.fromJson(entry)).toList();
-
-    /*Appointment cita = result[0];
-    print("Respuesta: $result");*/
     return result;
   }
+
+  static void deleteAppointment(int id) {}
+
+  static void acceptAppointment(int id) {}
 }

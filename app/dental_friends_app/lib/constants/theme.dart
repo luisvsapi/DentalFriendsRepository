@@ -36,3 +36,5 @@ ButtonStyle styleElevatedButton({
       textStyle: TextStyle(fontSize: fontSizeValue),
       primary: color
 );
+
+const boldStyle = TextStyle(fontWeight: FontWeight.bold, color: Colors.black);
