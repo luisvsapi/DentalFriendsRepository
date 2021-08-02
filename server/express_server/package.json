@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
+    "lint": "npm run lint",
     "start": "node ./bin/www",
     "test": "jest"
   },
@@ -13,6 +15,7 @@
     "admin-bro": "^3.4.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
+    "cross-env": "^7.0.3",
     "crypto-js": "^4.0.0",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
@@ -48,6 +51,7 @@
   },
   "devDependencies": {
     "jest": "^27.0.6",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "supertest": "^6.1.4"
   }
 }
