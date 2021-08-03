@@ -1,0 +1,9 @@
+name: AutomaticTesting
+on: [push]
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      -uses: actions/checkout@master
+      -run: npm i
+      -run: npm run test
