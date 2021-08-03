@@ -38,3 +38,12 @@ ButtonStyle styleElevatedButton({
 );
 
 const boldStyle = TextStyle(fontWeight: FontWeight.bold, color: Colors.black);
+
+var bottonBorderBlue = ButtonStyle(
+  shape: MaterialStateProperty.all(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(25.0),
+      side: BorderSide(color: Colors.blueAccent),
+    ),
+  ),
+);

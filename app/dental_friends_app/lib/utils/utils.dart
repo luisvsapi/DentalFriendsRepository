@@ -40,6 +40,7 @@ void showCenterShortToast(String message, {Color colorValue}) {
     backgroundColor: Colors.lightBlue,
     textColor: Colors.white,
     msg: message,
+    fontSize: 18,
     toastLength: Toast.LENGTH_SHORT,
     gravity: ToastGravity.CENTER,
   );
