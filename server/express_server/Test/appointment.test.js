@@ -3,28 +3,65 @@ const { testing } = require('googleapis/build/src/apis/testing')
 const supertest = require('supertest')
 const api = supertest(app)
 
-//cross-env NODE_ENV=test jest --verbose
-test('La solicitud de cita se agenda correctamente', async () =>{
-    const newRequest = {
-        idCardPacient: "1900077777",
-        namePacient: "Test Name 1",
-        lastnamePacient: "Test Lastname 2",
-        agePacient: 22,
-        genderPacient: "M",
-        addressPacient: "",
-        phonePacient: "09",
-        emailPacient: "rogwinalex2@hotmail.com",
-        detailsPacient: {},
-        date: '30/12/2021',
-        treat: "Restauraciones dentales",
-        doctor: "22"
-    }
+const appointment = {
+    idCardPacient: "1111111224",
+    namePacient: "Test Name",
+    lastnamePacient: "Test Lastname",
+    agePacient: 22,
+    genderPacient: "M",
+    addressPacient: "",
+    phonePacient: "09",
+    emailPacient: "rogwinalex2@hotmail.com",
+    detailsPacient: {},
+    date: '2021/12/03',
+    treat: "Restauraciones dentales",
+    doctor: "22"
+}
+/**
+ * Test Cuando se envia valores incorrectos
+ 
+ test('La solicitud de cita se rechaza por fecha igual o anterior', async () =>{
+    const incorrect = appointment;
+    incorrect.date = "2020/12/03"
     await api
         .post('/appointment/setAppointment/')
-        .send(newRequest)
+        .send(appointment)
         .set('Accept', 'application/json')
         //.expect('Content-Type', /application\json/)
         //.expect(200)
         .expect({ message: 1, infoAppointment: "Ok" })
         
 })
+*/
+/**
+ * Test Cuando se envia valores correctos y el paciente no tiene citas agendadas
+ */
+test('La solicitud de cita se agenda correctamente', async () =>{
+    
+    await api
+        .post('/appointment/setAppointment/')
+        .send(appointment)
+        .set('Accept', 'application/json')
+        //.expect('Content-Type', /application\json/)
+        //.expect(200)
+        .expect({ message: 1, infoAppointment: "Ok" })
+        
+})
+/**
+ * Test Cuando se envia valores correctos y el paciente  tiene citas agendadas
+ */
+test('La solicitud de cita se rechaza correctamente ', async () =>{
+    await api
+        .post('/appointment/setAppointment/')
+        .send(appointment)
+        .set('Accept', 'application/json')
+        //.expect('Content-Type', /application\json/)
+        //.expect(200)
+        .expect({message: 2, infoAppointment: "Ya existe una cita a su nombre!"})
+        
+})
+
+//test para borrar una solicitud de cita
+//test para aceptar una solicitud de cita
+
+//test 

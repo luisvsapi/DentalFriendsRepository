@@ -135,10 +135,10 @@ router.post("/setAppointment", async (req, res, next) => {
       const dataTemp = {
         state: "1",
         details: {},
-        idUser: requestBody.doctor,
+        idUser: requestBody.doctor,//
         idPacient: pacient.id,
         treatment: requestBody.treat,
-        dateBegin: new Date(date),
+        dateBegin: new Date(date), //
       };
       let appointmentNew = await appointment.create(dataTemp);
       await appointmentNew.save();
@@ -146,8 +146,8 @@ router.post("/setAppointment", async (req, res, next) => {
       res.send({ message: 1, infoAppointment: "Ok" });
     }
   } catch (err) {
-    console.log("Error en guardar cita", err);
-    res.send({ message: 0 });
+      //console.log("Error en guardar cita", err);
+      res.send({ message: 0, infoAppointment: "Error al guardar cita" });
   }
 });
 
