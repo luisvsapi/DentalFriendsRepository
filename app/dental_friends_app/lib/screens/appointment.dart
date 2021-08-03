@@ -1,6 +1,7 @@
 import 'package:dental_friends_app/constants/strings.dart';
 import 'package:dental_friends_app/constants/theme.dart';
 import 'package:dental_friends_app/models/appointment.dart';
+import 'package:dental_friends_app/utils/utils.dart';
 import 'package:dental_friends_app/widgets/bottom-navigation-bar.dart';
 import 'package:dental_friends_app/widgets/drawer.dart';
 import 'package:dental_friends_app/widgets/navbar.dart';
@@ -18,9 +19,9 @@ class AppointmentScreen extends StatefulWidget {
 enum popupButtonDecisition { accept, reject }
 
 class StateAppointment extends State<AppointmentScreen> {
-
   @override
   Widget build(BuildContext context) {
+    print('BUILD StateAppointment');
     return Scaffold(
       appBar: Navbar(title: "Citas"),
       backgroundColor: MaterialColors.bgColorScreen,
@@ -30,6 +31,8 @@ class StateAppointment extends State<AppointmentScreen> {
         child: contentScreen(context),
       ),
       bottomNavigationBar: BottonNavigationBar(option: 1),
+      floatingActionButton:
+          FloatingActionButton(onPressed: () {}, child: Icon(Icons.search)),
     );
   }
 
@@ -39,20 +42,7 @@ class StateAppointment extends State<AppointmentScreen> {
    */
   @deprecated
   updateLayoutByDay(BuildContext context, int day) {
-    switch (day) {
-      case 0:
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-        break;
-      default:
-        break;
-    }
+    //print(DateTime.now().subtract(Duration(days: day)));
   }
 
   contentScreen(BuildContext context) {
@@ -92,28 +82,20 @@ class StateAppointment extends State<AppointmentScreen> {
       buttons.add(TextButton(
         autofocus: true,
         onPressed: () => updateLayoutByDay(context, element['value']),
-        style: ButtonStyle(
-          //backgroundColor: MaterialStateColor.resolveWith((states) => Colors.blue[100]),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.0),
-              side: BorderSide(color: Colors.blueAccent),
-            ),
-          ),
-        ),
+        style: bottonBorderBlue,
         child: Text(element['label'], style: boldStyle),
       ));
     });
     return buttons;
   }
 
-  FutureBuilder<List<Appointment>> loadAppointmentByDayScreen(
+  FutureBuilder<List<AppointmentModel>> loadAppointmentByDayScreen(
       BuildContext context) {
-    return FutureBuilder<List<Appointment>>(
-        future: Appointment.getByState(),
+    return FutureBuilder<List<AppointmentModel>>(
+        future: AppointmentModel.getByState(),
         builder: (context, request) {
           if (request.hasData) {
-            List<Appointment> result = request.data;
+            List<AppointmentModel> result = request.data;
             int dataLen = result?.length ?? 0;
             if (dataLen > 0) {
               return ListView.builder(
@@ -121,7 +103,7 @@ class StateAppointment extends State<AppointmentScreen> {
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  Appointment item = result[index];
+                  AppointmentModel item = result[index];
                   return Card(
                     //color: Colors.blueAccent,
                     child: ListTile(
@@ -130,10 +112,9 @@ class StateAppointment extends State<AppointmentScreen> {
                       subtitle: Text(
                           "${item.pacient.namePacient} ${item.pacient.lastnamePacient}",
                           style: boldStyle),
-                      leading:
-                          IconButton(icon: Icon(Icons.info),
-                              onPressed: () => printInfo(context, item)
-                          ),
+                      leading: IconButton(
+                          icon: Icon(Icons.info),
+                          onPressed: () => printInfo(context, item)),
                       trailing: PopupMenuButton<popupButtonDecisition>(
                         onSelected: (popupButtonDecisition result) {
                           executeDecisiton(result, item.id);
@@ -189,43 +170,59 @@ class StateAppointment extends State<AppointmentScreen> {
   void executeDecisiton(popupButtonDecisition result, int id) {
     switch (result) {
       case popupButtonDecisition.accept:
-        Appointment.acceptAppointment(id);
+        AppointmentModel.acceptAppointment(id);
         break;
       case popupButtonDecisition.reject:
-        Appointment.deleteAppointment(id);
+        AppointmentModel.deleteAppointment(id).then((value) {
+          if (value['message'] == 1) {
+            setState(() {});
+            showCenterShortToast('La cita #${id} se elimino correctamente');
+          }
+        });
         break;
       default:
         break;
     }
   }
 
-  printInfo(BuildContext context, Appointment item) {
-    print(item);
+  printInfo(BuildContext context, AppointmentModel item) {
     showDialog(
         context: context,
-        builder: (_) => new AlertDialog(
-          title: new Text("Informacion de la cita"),
-          content: Column(
-            children: [
-              Text("${item.pacient?.namePacient}"),
-              Text("${item.pacient?.agePacient}")
+        builder: (_) {
+          return new AlertDialog(
+            title: new Text("Informacion de la cita # ${item.id}"),
+            content: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text("PACIENTE", style: boldStyle),
+                Text("Cedula:", style: boldStyle),
+                Text("${item.pacient?.idCardPacient ?? ''}"),
+                Text("Nombre:", style: boldStyle),
+                Text(
+                    "${item.pacient?.namePacient ?? ''} ${item.pacient?.lastnamePacient ?? ''}"),
+                Text("Edad:", style: boldStyle),
+                Text("${item.pacient?.agePacient ?? ''}"),
+                Text("Contacto:", style: boldStyle),
+                Text("${item.pacient?.emailPacient ?? ''} ")
+              ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Salir'),
+                style: bottonBorderBlue,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
             ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Close me!'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        ));
+          );
+        });
   }
 
-  /**
+/**
     Mostrar info de la cita en un cuadro de dialogo
-  */
-  /*
+ */
+/*
   Future<void> showDialogueInfo(BuildContext context, Appointment appointment) {
     return showDialog<void>(
       context: context,

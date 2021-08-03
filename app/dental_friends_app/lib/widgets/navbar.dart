@@ -145,7 +145,7 @@ class _NavbarState extends State<Navbar> {
                               //         builder: (context) => Chat()));
                             },
                             child: IconButton(
-                                icon: Icon(Icons.chat_bubble_outline,
+                                icon: Icon(Icons.more_vert,
                                     color: !widget.transparent
                                         ? (widget.bgColor == Colors.white
                                             ? Colors.black
