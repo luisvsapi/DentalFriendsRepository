@@ -28,12 +28,12 @@ class AppointmentModel {
 
   @override
   String toString() {
-    return 'Appointment{id: $id, state: $state, user: $user, pacient: $pacient}';
+    return 'AppointmentModel{id: $id, state: $state, dateBegin: $dateBegin, user: $user, pacient: $pacient}';
   }
 
   factory AppointmentModel.fromJson(Map<String, dynamic> json) =>
-      _$AppointmentFromJson(json);
-  Map<String, dynamic> toJson() => _$AppointmentToJson(this);
+      _$AppointmentModelFromJson(json);
+  Map<String, dynamic> toJson() => _$AppointmentModelToJson(this);
 
   static Future<List<AppointmentModel>> getByState({int state = 1}) async {
     List<dynamic> response = await DioClient().getJsonListRequest(
