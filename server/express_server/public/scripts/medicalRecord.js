@@ -1,4 +1,3 @@
-//document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
 $("#myForm a").click(function (e) {
   e.preventDefault();
   $(this).tab("show");
@@ -59,7 +58,6 @@ $("#formRecord").submit(function (e) {
     diagnostico: $("#diagnostico").val(),
     tratamiento: $("#tratamiento").val(),
   };
-   console.log("Datos a enviar al service:", data);
   try {
     postFetch("/user/setRecord", data).then((res) => {
       if (res.message == 1) {

@@ -4,7 +4,7 @@ const supertest = require('supertest')
 const api = supertest(app)
 
 //cross-env NODE_ENV=test jest --verbose
-test('La solicitud de cita se agenda correctamente', async () =>{
+test.skip('La solicitud de cita se agenda correctamente', async () =>{
     const newRequest = {
         idCardPacient: "1900077777",
         namePacient: "Test Name 1",
