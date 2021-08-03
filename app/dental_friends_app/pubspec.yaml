@@ -28,6 +28,7 @@ dependencies:
   convex_bottom_bar: ^3.0.0
   table_calendar: ^3.0.0
   expansion_tile_card: ^1.1.0
+  syncfusion_flutter_calendar: ^19.2.49
 
 dev_dependencies:
   flutter_test:

@@ -21,10 +21,28 @@ test.skip('La solicitud de cita se agenda correctamente', async () =>{
     }
     await api
         .post('/appointment/setAppointment/')
-        .send(newRequest)
+        .send(appointment)
         .set('Accept', 'application/json')
         //.expect('Content-Type', /application\json/)
         //.expect(200)
         .expect({ message: 1, infoAppointment: "Ok" })
         
 })
+/**
+ * Test Cuando se envia valores correctos y el paciente  tiene citas agendadas
+ */
+test('La solicitud de cita se rechaza correctamente ', async () =>{
+    await api
+        .post('/appointment/setAppointment/')
+        .send(appointment)
+        .set('Accept', 'application/json')
+        //.expect('Content-Type', /application\json/)
+        //.expect(200)
+        .expect({message: 2, infoAppointment: "Ya existe una cita a su nombre!"})
+        
+})
+
+//test para borrar una solicitud de cita
+//test para aceptar una solicitud de cita
+
+//test 

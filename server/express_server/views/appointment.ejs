@@ -65,7 +65,7 @@
                 <div class="col-md-2"></div>
                 <label class="col-form-label col-md-2">Cédula:</label>
                 <div class="col-md-6 form-group">
-                  <input class="form-control" id="cedPac" type="text" minlength="10" maxlength="10" required />
+                  <input class="form-control" id="cedPac" type="text" pattern="[0-9]{10}" minlength="10" maxlength="10" required />
                 </div>
                 <div class="col-md-2"></div>
               </div>
@@ -73,7 +73,7 @@
                 <div class="col-md-2"></div>
                 <label class="col-form-label col-md-2">Nombres:</label>
                 <div class="col-md-6 form-group">
-                  <input class="form-control" id="nombrePac" required />
+                  <input class="form-control" pattern="[A-Za-z]{3}" type="text" id="nombrePac" required />
                 </div>
                 <div class="col-md-2"></div>
               </div>
@@ -81,7 +81,7 @@
                 <div class="col-md-2"></div>
                 <label class="col-form-label col-md-2">Apellidos:</label>
                 <div class="col-md-6 form-group">
-                  <input class="form-control" id="apellidoPac" required />
+                  <input class="form-control" id="apellidoPac" pattern="[A-Za-z]{3}" type="text" required />
                 </div>
                 <div class="col-md-2"></div>
               </div>

@@ -8,7 +8,7 @@ import 'pacient.dart';
 part 'appointment.g.dart';
 
 @JsonSerializable()
-class Appointment {
+class AppointmentModel {
   final int id;
   final String state;
   final String dateBegin;
@@ -17,7 +17,7 @@ class Appointment {
   final Pacient pacient;
   final String treatment;
 
-  Appointment(
+  AppointmentModel(
       {this.user,
       this.pacient,
       this.dateBegin,
@@ -31,20 +31,26 @@ class Appointment {
     return 'Appointment{id: $id, state: $state, user: $user, pacient: $pacient}';
   }
 
-  factory Appointment.fromJson(Map<String, dynamic> json) =>
+  factory AppointmentModel.fromJson(Map<String, dynamic> json) =>
       _$AppointmentFromJson(json);
   Map<String, dynamic> toJson() => _$AppointmentToJson(this);
 
-  static Future<List<Appointment>> getByState({int state = 1}) async {
+  static Future<List<AppointmentModel>> getByState({int state = 1}) async {
     List<dynamic> response = await DioClient().getJsonListRequest(
         '/appointment/state/$state',
         tokenValue: await getSecureStorage("token"));
-    List<Appointment> result =
-        response.map((entry) => Appointment.fromJson(entry)).toList();
+    List<AppointmentModel> result =
+        response.map((entry) => AppointmentModel.fromJson(entry)).toList();
     return result;
   }
 
-  static void deleteAppointment(int id) {}
+  static Future<Map<String, dynamic>> deleteAppointment(int id) async {
+    Map<String, dynamic> response = await DioClient().deleteJsonRequest(
+      '/appointment/delete', {'id': id}, tokenValue: await getSecureStorage("token"));
+    if (response != null)
+      return response;
+    return {'message': 0};
+  }
 
   static void acceptAppointment(int id) {}
 }

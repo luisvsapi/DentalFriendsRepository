@@ -38,9 +38,26 @@ class DioClient {
           options: Options(
             headers: {"token": tokenValue},
           ));
-      print("*** postJsonRequest ***");
-      print(response);
-      print("**********************");
+      print("postJsonRequest ${response}");
+      return json.decode(response.toString());
+    } on DioError catch (ex) {
+      print("postJsonRequest " + ex.message);
+    }
+    return null;
+  }
+
+  /// Obtener un json en DELETE
+  Future<Map<String, dynamic>> deleteJsonRequest(String method, dynamic dataValue,
+      {String url, String tokenValue}) async {
+    try {
+      Dio client = this.init();
+      client.options.baseUrl = url ?? apiUrl;
+      final response = await client.delete(method,
+          data: dataValue,
+          options: Options(
+            headers: {"token": tokenValue},
+          ));
+      print("deleteJsonRequest ${response}");
       return json.decode(response.toString());
     } on DioError catch (ex) {
       print("postJsonRequest " + ex.message);
