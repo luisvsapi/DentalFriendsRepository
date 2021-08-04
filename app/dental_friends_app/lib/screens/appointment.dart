@@ -16,6 +16,9 @@ class AppointmentScreen extends StatefulWidget {
   }
 }
 
+List<AppointmentModel> appointments;
+List<AppointmentModel> appointmentsByDay;
+
 enum popupButtonDecisition { accept, reject }
 
 class StateAppointment extends State<AppointmentScreen> {
@@ -40,9 +43,73 @@ class StateAppointment extends State<AppointmentScreen> {
    * Este metodo podria ser mas eficiente si deseas actualizar el listado
    * Porque no mejor se coloca un select en donde los valores son las fechas???
    */
-  @deprecated
-  updateLayoutByDay(BuildContext context, int day) {
-    //print(DateTime.now().subtract(Duration(days: day)));
+  updateLayoutByDay(int day) {
+    DateTime dayAppointment;
+    List<AppointmentModel> temp = [];
+    switch (day) {
+      case 0:
+        appointments.forEach((e) => {
+          dayAppointment = DateTime.parse(e.dateBegin),
+          if(dayAppointment.weekday==DateTime.monday){
+            temp.add(e)
+          }
+        });
+        break;
+      case 1:
+        appointments.forEach((e) => {
+          dayAppointment = DateTime.parse(e.dateBegin),
+          if(dayAppointment.weekday==DateTime.tuesday){
+            temp.add(e)
+          }
+        });
+        break;
+      case 2:
+        appointments.forEach((e) => {
+          dayAppointment = DateTime.parse(e.dateBegin),
+          if(dayAppointment.weekday==DateTime.wednesday){
+            temp.add(e)
+          }
+        });
+        break;
+      case 3:
+        appointments.forEach((e) => {
+          dayAppointment = DateTime.parse(e.dateBegin),
+          if(dayAppointment.weekday==DateTime.thursday){
+            temp.add(e)
+          }
+        });
+        break;
+      case 4:
+        appointments.map((e) => {
+          dayAppointment = DateTime.parse(e.dateBegin),
+          if(dayAppointment.weekday==DateTime.friday){
+            temp.add(e)
+          }
+        });
+        break;
+      case 5:
+        appointments.forEach((e) => {
+          dayAppointment = DateTime.parse(e.dateBegin),
+          if(dayAppointment.weekday==DateTime.saturday){
+            temp.add(e)
+          }
+        });
+        break;
+      case 6:
+        appointments.forEach((e) => {
+          dayAppointment = DateTime.parse(e.dateBegin),
+          if(dayAppointment.weekday==DateTime.sunday){
+            temp.add(e)
+          }
+        });
+        break;
+      default:
+        print("Imposible en dia");
+        break;
+    }
+    setState(() {
+      appointmentsByDay = temp;
+    });
   }
 
   contentScreen(BuildContext context) {
@@ -81,7 +148,7 @@ class StateAppointment extends State<AppointmentScreen> {
     daysOperation.forEach((element) {
       buttons.add(TextButton(
         autofocus: true,
-        onPressed: () => updateLayoutByDay(context, element['value']),
+        onPressed: () => updateLayoutByDay(element['value']),
         style: bottonBorderBlue,
         child: Text(element['label'], style: boldStyle),
       ));
@@ -98,6 +165,7 @@ class StateAppointment extends State<AppointmentScreen> {
             List<AppointmentModel> result = request.data;
             int dataLen = result?.length ?? 0;
             if (dataLen > 0) {
+              appointments = result;
               return ListView.builder(
                 itemCount: dataLen,
                 scrollDirection: Axis.vertical,
@@ -135,7 +203,7 @@ class StateAppointment extends State<AppointmentScreen> {
                   );
                 },
               );
-            } else {
+            }else{
               return Card(
                 color: Colors.blueAccent,
                 child: ListTile(

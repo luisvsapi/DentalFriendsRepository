@@ -131,13 +131,14 @@ router.post("/setAppointment", async (req, res, next) => {
       });
     } else {
       let date = new Date(requestBody.date).setUTCHours(12);
+      //val 
       const dataTemp = {
         state: "1",
         details: {},
-        idUser: requestBody.doctor,
+        idUser: requestBody.doctor,//
         idPacient: pacient.id,
         treatment: requestBody.treat,
-        dateBegin: new Date(date),
+        dateBegin: new Date(date), //
       };
       let appointmentNew = await appointment.create(dataTemp);
       await appointmentNew.save();
