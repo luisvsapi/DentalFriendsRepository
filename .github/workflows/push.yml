@@ -1,9 +1,22 @@
 name: AutomaticTesting
 on: [push]
 jobs:
-  testing:
+  testJob:
     runs-on: ubuntu-latest
+
     steps:
-      -uses: actions/checkout@master
-      -run: cd ./server/express_server
-      -run: npm install && npm run test
+      - name: Checkout
+        uses: actions/checkout@master
+      
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ./server/express_server
+      
+      - name: Testing
+        run: npm test
+        working-directory: ./server/express_server
