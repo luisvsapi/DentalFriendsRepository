@@ -34,8 +34,11 @@ class StateAppointment extends State<AppointmentScreen> {
         child: contentScreen(context),
       ),
       bottomNavigationBar: BottonNavigationBar(option: 1),
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: Icon(Icons.search)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            filterForm();
+          },
+          child: Icon(Icons.search)),
     );
   }
 
@@ -49,64 +52,51 @@ class StateAppointment extends State<AppointmentScreen> {
     switch (day) {
       case 0:
         appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.monday){
-            temp.add(e)
-          }
-        });
+              dayAppointment = DateTime.parse(e.dateBegin),
+              if (dayAppointment.weekday == DateTime.monday) {temp.add(e)}
+            });
         break;
       case 1:
         appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.tuesday){
-            temp.add(e)
-          }
-        });
+              dayAppointment = DateTime.parse(e.dateBegin),
+              if (dayAppointment.weekday == DateTime.tuesday) {temp.add(e)}
+            });
         break;
       case 2:
         appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.wednesday){
-            temp.add(e)
-          }
-        });
+              dayAppointment = DateTime.parse(e.dateBegin),
+              if (dayAppointment.weekday == DateTime.wednesday) {temp.add(e)}
+            });
         break;
       case 3:
         appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.thursday){
-            temp.add(e)
-          }
-        });
+              dayAppointment = DateTime.parse(e.dateBegin),
+              if (dayAppointment.weekday == DateTime.thursday) {temp.add(e)}
+            });
         break;
       case 4:
         appointments.map((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.friday){
-            temp.add(e)
-          }
-        });
+              dayAppointment = DateTime.parse(e.dateBegin),
+              if (dayAppointment.weekday == DateTime.friday) {temp.add(e)}
+            });
         break;
       case 5:
         appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.saturday){
-            temp.add(e)
-          }
-        });
+              dayAppointment = DateTime.parse(e.dateBegin),
+              if (dayAppointment.weekday == DateTime.saturday) {temp.add(e)}
+            });
         break;
       case 6:
         appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.sunday){
-            temp.add(e)
-          }
-        });
+              dayAppointment = DateTime.parse(e.dateBegin),
+              if (dayAppointment.weekday == DateTime.sunday) {temp.add(e)}
+            });
         break;
       default:
         print("Imposible en dia");
         break;
     }
+    print(appointments);
     setState(() {
       appointmentsByDay = temp;
     });
@@ -166,44 +156,46 @@ class StateAppointment extends State<AppointmentScreen> {
             int dataLen = result?.length ?? 0;
             if (dataLen > 0) {
               appointments = result;
-              return ListView.builder(
-                itemCount: dataLen,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  AppointmentModel item = result[index];
-                  return Card(
-                    //color: Colors.blueAccent,
-                    child: ListTile(
-                      tileColor: Colors.white30,
-                      title: Text("${item.treatment}", style: boldStyle),
-                      subtitle: Text(
-                          "${item.pacient.namePacient} ${item.pacient.lastnamePacient}",
-                          style: boldStyle),
-                      leading: IconButton(
-                          icon: Icon(Icons.info),
-                          onPressed: () => printInfo(context, item)),
-                      trailing: PopupMenuButton<popupButtonDecisition>(
-                        onSelected: (popupButtonDecisition result) {
-                          executeDecisiton(result, item.id);
-                        },
-                        itemBuilder: (BuildContext context) =>
-                            <PopupMenuEntry<popupButtonDecisition>>[
-                          const PopupMenuItem<popupButtonDecisition>(
-                            value: popupButtonDecisition.accept,
-                            child: Text('Aceptar'),
-                          ),
-                          const PopupMenuItem<popupButtonDecisition>(
-                            value: popupButtonDecisition.reject,
-                            child: Text('Rechazar'),
-                          ),
-                        ],
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: dataLen,
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    AppointmentModel item = result[index];
+                    return Card(
+                      //color: Colors.blueAccent,
+                      child: ListTile(
+                        tileColor: Colors.white30,
+                        title: Text("${item.treatment}", style: boldStyle),
+                        subtitle: Text(
+                            "${item.pacient.namePacient} ${item.pacient.lastnamePacient}",
+                            style: boldStyle),
+                        leading: IconButton(
+                            icon: Icon(Icons.info),
+                            onPressed: () => printInfo(context, item)),
+                        trailing: PopupMenuButton<popupButtonDecisition>(
+                          onSelected: (popupButtonDecisition result) {
+                            executeDecisiton(result, item.id);
+                          },
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<popupButtonDecisition>>[
+                            const PopupMenuItem<popupButtonDecisition>(
+                              value: popupButtonDecisition.accept,
+                              child: Text('Aceptar'),
+                            ),
+                            const PopupMenuItem<popupButtonDecisition>(
+                              value: popupButtonDecisition.reject,
+                              child: Text('Rechazar'),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               );
-            }else{
+            } else {
               return Card(
                 color: Colors.blueAccent,
                 child: ListTile(
@@ -262,6 +254,11 @@ class StateAppointment extends State<AppointmentScreen> {
             content: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                Text("DETALLES", style: boldStyle),
+                Text("Inicio:", style: boldStyle),
+                Text("${item.dateBegin}"),
+                // item.dateFinish != null ? Text("Fin:", style: boldStyle) : Container(),
+                // item.dateFinish != null ? Text("${item.dateFinish}") : Container(),
                 Text("PACIENTE", style: boldStyle),
                 Text("Cedula:", style: boldStyle),
                 Text("${item.pacient?.idCardPacient ?? ''}"),
@@ -273,6 +270,50 @@ class StateAppointment extends State<AppointmentScreen> {
                 Text("Contacto:", style: boldStyle),
                 Text("${item.pacient?.emailPacient ?? ''} ")
               ],
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Salir'),
+                style: bottonBorderBlue,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+
+  void filterForm() {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return new AlertDialog(
+            title: new Text("Filtrar citas"),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text("Fecha", style: boldStyle),
+                  IconButton(
+                      onPressed: () async {
+                        final DateTime picked = await showDatePicker(
+                          context: context,
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime(2022),
+                          initialDate: DateTime.now(),
+                        );
+                        print(picked);
+                      },
+                      icon: const Icon(Icons.calendar_today)),
+                  SizedBox(height: 10),
+                  Text("Nombre:", style: boldStyle),
+                  TextField(),
+                  SizedBox(height: 10),
+                  Text("Cedula:", style: boldStyle),
+                  TextField()
+                ],
+              ),
             ),
             actions: <Widget>[
               TextButton(

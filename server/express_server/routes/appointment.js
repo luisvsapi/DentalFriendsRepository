@@ -22,6 +22,10 @@ router.get(
         where: {
           state: value,
           idUser: user,
+          dateBegin: {
+            [Op.lt]: utils.modificateActualTime("day", +15),
+            [Op.gt]: utils.modificateActualTime("day", -1),
+          },
         },
         include: [
           {
