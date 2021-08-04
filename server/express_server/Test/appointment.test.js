@@ -4,7 +4,7 @@ const supertest = require('supertest')
 const api = supertest(app)
 
 const appointment = {
-    idCardPacient: "1111111224",
+    idCardPacient: "1111111226",
     namePacient: "Test Name",
     lastnamePacient: "Test Lastname",
     agePacient: 22,
@@ -19,7 +19,8 @@ const appointment = {
 }
 /**
  * Test Cuando se envia valores incorrectos
- 
+ */
+/*
  test('La solicitud de cita se rechaza por fecha igual o anterior', async () =>{
     const incorrect = appointment;
     incorrect.date = "2020/12/03"

@@ -6,7 +6,6 @@ $("#formProfile").submit(function (e) {
     .then((res) => {
       if (res.message == 1) {
         alertify.success("Datos Guardados Satisfactoriamente");
-        location.replace("./home")
       } else {
         alertify.error("Hubo un error al guardar los datos!!");
       }

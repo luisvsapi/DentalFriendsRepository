@@ -21,6 +21,9 @@ function initializeCalendar(calendarEl){
     slotMinTime: "07:00",
     slotMaxTime: "19:00",
     selectable: true,
+    selectConstraint:{
+      start: Date.now(),
+    },
     headerToolbar: {
       left: "prev,next today",
       center: "title",

@@ -1,6 +1,7 @@
 $(document).ready(function () {
   loadDoctors();
   loadTreatments();
+  loadDate();
 });
 
 async function loadDoctors() { 
@@ -15,6 +16,14 @@ async function loadDoctors() {
   } catch (error) {
     //
   }  
+}
+
+/**
+ * This method avoid the user to choose a not vali date
+ */
+async function loadDate(){
+  const date = localDateRestricted();
+  document.getElementById('datepicker').setAttribute('min', date); 
 }
 
 async function loadTreatments() { 

@@ -317,6 +317,14 @@ function generateMailTemplate(
 
 </html>`;
 }
+function dateRestriction(){
+  let date =  new Date ();
+  date.setDate(date.getDate() +1);
+  const year = date.getFullYear();
+  const day = ("0" + (date.getDate())).slice(-2);
+  const month =("0" + (date.getMonth()+1)).slice(-2);
+  return year+"-"+month+"-"+day;
+}
 
 module.exports = {
   modificateActualTime,

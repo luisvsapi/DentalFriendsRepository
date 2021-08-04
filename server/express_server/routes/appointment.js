@@ -132,6 +132,7 @@ router.post("/setAppointment", async (req, res, next) => {
       });
     } else {
       let date = new Date(requestBody.date).setUTCHours(12);
+      //val 
       const dataTemp = {
         state: "1",
         details: {},
