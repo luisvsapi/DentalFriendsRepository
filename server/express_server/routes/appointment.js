@@ -91,8 +91,7 @@ router.get("/byUser", jwtSecurity.authenticateJWT, async (req, res, next) => {
       });
       res.json(appointments);
     }
-  } catch (error) {
-    console.log("Error en recuperacion de datos", error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -145,8 +144,7 @@ router.post("/setAppointment", async (req, res, next) => {
 
       res.send({ message: 1, infoAppointment: "Ok" });
     }
-  } catch (err) {
-    console.log("Error en guardar cita", err);
+  } catch (err) { 
     res.send({ message: 0 });
   }
 });
@@ -165,8 +163,7 @@ router.post("/insert", jwtSecurity.authenticateJWT, async (req, res, next) => {
     } else {
       res.send({ message: 2, infoAppointment: "Ya existe" });
     }
-  } catch (err) {
-    console.log(err);
+  } catch (err) { 
     res.send({ message: 0 });
   }
 });
@@ -175,6 +172,7 @@ router.delete(
   "/delete",
   jwtSecurity.authenticateJWT,
   async (req, res, next) => {
+    console.log(req.body);
     let requestBody = req.body;
     try {
       await appointment.destroy({
@@ -183,8 +181,7 @@ router.delete(
         },
       });
       res.send({ message: 1, messageHuman: "Borrado exitoso" });
-    } catch (err) {
-      console.log("Error en borrar cita", err);
+    } catch (err) { 
       res.send({ message: 0 });
     }
   }

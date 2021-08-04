@@ -62,8 +62,7 @@ router.get("/professional", function (req, res, next) {
 });
 
 /* POST METHODS */
-router.post("/login", async (req, res, next) => {
-  console.log(req.body, " ------");
+router.post("/login", async (req, res, next) => { 
   let requestBody = req.body;
   const [results] = await sequelize.query(
     `select login_user ('${requestBody.username}', '${requestBody.password}')`
