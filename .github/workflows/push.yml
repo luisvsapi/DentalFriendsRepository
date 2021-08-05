@@ -1,4 +1,4 @@
-name: AutomaticTesting
+name: Automatic Testing And Deployment
 on: [push]
 jobs:
   testJob:
@@ -20,3 +20,38 @@ jobs:
       #- name: Testing
         #run: npm test
         #working-directory: ./server/express_server
+  
+  deployJob:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      
+      - name: Docker Registry Login
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: luisvills/dentalfriendsimage
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: ./server/express_server
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{secrets.DIGITALOCEAN_ACCESS_TOKEN}}
+      
+      #- name: Deploying Container
+        #run: |
+          #doctl compute cluster
