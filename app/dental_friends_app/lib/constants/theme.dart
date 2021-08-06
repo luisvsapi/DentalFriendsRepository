@@ -37,7 +37,9 @@ ButtonStyle styleElevatedButton({
       primary: color
 );
 
-const boldStyle = TextStyle(fontWeight: FontWeight.bold, color: Colors.black);
+TextStyle boldStyle({double size = 14.0, Color color = Colors.black}) {
+  return TextStyle(fontSize: size, fontWeight: FontWeight.bold, color: Colors.black);
+}
 
 var bottonBorderBlue = ButtonStyle(
   shape: MaterialStateProperty.all(
