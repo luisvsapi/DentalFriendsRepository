@@ -1,4 +1,4 @@
-import 'package:dental_friends_app/constants/strings.dart';
+import 'package:dental_friends_app/constants/enums.dart';
 import 'package:dental_friends_app/constants/theme.dart';
 import 'package:dental_friends_app/models/appointment.dart';
 import 'package:dental_friends_app/utils/utils.dart';
@@ -6,6 +6,7 @@ import 'package:dental_friends_app/widgets/bottom-navigation-bar.dart';
 import 'package:dental_friends_app/widgets/drawer.dart';
 import 'package:dental_friends_app/widgets/navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class AppointmentScreen extends StatefulWidget {
   @override
@@ -16,12 +17,46 @@ class AppointmentScreen extends StatefulWidget {
   }
 }
 
-List<AppointmentModel> appointments;
-List<AppointmentModel> appointmentsByDay;
-
-enum popupButtonDecisition { accept, reject }
-
 class StateAppointment extends State<AppointmentScreen> {
+  final controllerCardPacient = TextEditingController();
+  final controllerNamePacient = TextEditingController();
+  DateTime controllerDate = DateTime.now();
+
+  List<AppointmentModel> listAppointmentLoad = [];
+  List<AppointmentModel> filterAppointment = [];
+
+  int filterMode = 0;
+
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
+
+  void onRefresh() async {
+    clearScreen();
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.refreshCompleted();
+  }
+
+  void clearScreen() {
+    setState(() {
+      filterMode = 0;
+    });
+    controllerNamePacient.text = '';
+    controllerCardPacient.text = '';
+    controllerDate = DateTime.now();
+  }
+
+  void onLoading() async {
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.loadComplete();
+  }
+
+  @override
+  void dispose() {
+    controllerCardPacient.dispose();
+    controllerNamePacient.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     print('BUILD StateAppointment');
@@ -34,126 +69,34 @@ class StateAppointment extends State<AppointmentScreen> {
         child: contentScreen(context),
       ),
       bottomNavigationBar: BottonNavigationBar(option: 1),
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: Icon(Icons.search)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            filterForm();
+          },
+          child: Icon(Icons.search)),
     );
-  }
-
-  /**
-   * Este metodo podria ser mas eficiente si deseas actualizar el listado
-   * Porque no mejor se coloca un select en donde los valores son las fechas???
-   */
-  updateLayoutByDay(int day) {
-    DateTime dayAppointment;
-    List<AppointmentModel> temp = [];
-    switch (day) {
-      case 0:
-        appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.monday){
-            temp.add(e)
-          }
-        });
-        break;
-      case 1:
-        appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.tuesday){
-            temp.add(e)
-          }
-        });
-        break;
-      case 2:
-        appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.wednesday){
-            temp.add(e)
-          }
-        });
-        break;
-      case 3:
-        appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.thursday){
-            temp.add(e)
-          }
-        });
-        break;
-      case 4:
-        appointments.map((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.friday){
-            temp.add(e)
-          }
-        });
-        break;
-      case 5:
-        appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.saturday){
-            temp.add(e)
-          }
-        });
-        break;
-      case 6:
-        appointments.forEach((e) => {
-          dayAppointment = DateTime.parse(e.dateBegin),
-          if(dayAppointment.weekday==DateTime.sunday){
-            temp.add(e)
-          }
-        });
-        break;
-      default:
-        print("Imposible en dia");
-        break;
-    }
-    setState(() {
-      appointmentsByDay = temp;
-    });
   }
 
   contentScreen(BuildContext context) {
-    Container citas = new Container(
-      padding: EdgeInsets.all(10.0),
-      child: new Column(
-        children: <Widget>[
-          Text(
-            "CALENDARIO",
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
+    return SmartRefresher(
+        enablePullDown: true,
+        enablePullUp: true,
+        header: WaterDropHeader(),
+        controller: refreshController,
+        onRefresh: onRefresh,
+        onLoading: onLoading,
+        child: new Column(
+          children: <Widget>[
+            Text(
+              "AGENDAMIENTO",
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          SizedBox(
-              height: 50,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  ButtonBar(
-                    overflowDirection: VerticalDirection.down,
-                    alignment: MainAxisAlignment.start,
-                    children: buttonByDay(context),
-                  )
-                ],
-              )),
-          loadAppointmentByDayScreen(context),
-        ],
-      ),
-    );
-    return citas;
-  }
-
-  List<Widget> buttonByDay(BuildContext context) {
-    List<Widget> buttons = [];
-    daysOperation.forEach((element) {
-      buttons.add(TextButton(
-        autofocus: true,
-        onPressed: () => updateLayoutByDay(element['value']),
-        style: bottonBorderBlue,
-        child: Text(element['label'], style: boldStyle),
-      ));
-    });
-    return buttons;
+            loadAppointmentByDayScreen(context),
+          ],
+        ));
   }
 
   FutureBuilder<List<AppointmentModel>> loadAppointmentByDayScreen(
@@ -162,48 +105,52 @@ class StateAppointment extends State<AppointmentScreen> {
         future: AppointmentModel.getByState(),
         builder: (context, request) {
           if (request.hasData) {
-            List<AppointmentModel> result = request.data;
-            int dataLen = result?.length ?? 0;
+            listAppointmentLoad = request.data;
+            var tmpAppointmentLoad =
+                filterMode == 1 ? filterAppointment : listAppointmentLoad;
+            int dataLen = tmpAppointmentLoad?.length ?? 0;
             if (dataLen > 0) {
-              appointments = result;
-              return ListView.builder(
-                itemCount: dataLen,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  AppointmentModel item = result[index];
-                  return Card(
-                    //color: Colors.blueAccent,
-                    child: ListTile(
-                      tileColor: Colors.white30,
-                      title: Text("${item.treatment}", style: boldStyle),
-                      subtitle: Text(
-                          "${item.pacient.namePacient} ${item.pacient.lastnamePacient}",
-                          style: boldStyle),
-                      leading: IconButton(
-                          icon: Icon(Icons.info),
-                          onPressed: () => printInfo(context, item)),
-                      trailing: PopupMenuButton<popupButtonDecisition>(
-                        onSelected: (popupButtonDecisition result) {
-                          executeDecisiton(result, item.id);
-                        },
-                        itemBuilder: (BuildContext context) =>
-                            <PopupMenuEntry<popupButtonDecisition>>[
-                          const PopupMenuItem<popupButtonDecisition>(
-                            value: popupButtonDecisition.accept,
-                            child: Text('Aceptar'),
-                          ),
-                          const PopupMenuItem<popupButtonDecisition>(
-                            value: popupButtonDecisition.reject,
-                            child: Text('Rechazar'),
-                          ),
-                        ],
+              return Expanded(
+                child: ListView.builder(
+                  itemCount: dataLen,
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    AppointmentModel item = tmpAppointmentLoad[index];
+                    return Card(
+                      child: ListTile(
+                        dense: true,
+                        tileColor: Colors.white30,
+                        title: Text(
+                            "${item.pacient.namePacient} ${item.pacient.lastnamePacient}",
+                            style: boldStyle(size: 14)),
+                        subtitle: Text("${item.id} - ${item.treatment}",
+                            style: boldStyle(size: 14)),
+                        leading: IconButton(
+                            icon: Icon(Icons.info),
+                            onPressed: () => printInfo(context, item)),
+                        trailing: PopupMenuButton<popupButtonDecisition>(
+                          onSelected: (popupButtonDecisition result) {
+                            executeDecisiton(result, item.id);
+                          },
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<popupButtonDecisition>>[
+                            const PopupMenuItem<popupButtonDecisition>(
+                              value: popupButtonDecisition.accept,
+                              child: Text('Aceptar'),
+                            ),
+                            const PopupMenuItem<popupButtonDecisition>(
+                              value: popupButtonDecisition.reject,
+                              child: Text('Rechazar'),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               );
-            }else{
+            } else {
               return Card(
                 color: Colors.blueAccent,
                 child: ListTile(
@@ -253,7 +200,7 @@ class StateAppointment extends State<AppointmentScreen> {
     }
   }
 
-  printInfo(BuildContext context, AppointmentModel item) {
+  void printInfo(BuildContext context, AppointmentModel item) {
     showDialog(
         context: context,
         builder: (_) {
@@ -262,15 +209,20 @@ class StateAppointment extends State<AppointmentScreen> {
             content: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text("PACIENTE", style: boldStyle),
-                Text("Cedula:", style: boldStyle),
+                Text("DETALLES", style: boldStyle(size: 14)),
+                Text("Inicio:", style: boldStyle(size: 14)),
+                Text("${item.dateBegin}"),
+                // item.dateFinish != null ? Text("Fin:", style: boldStyle(size: 14)) : Container(),
+                // item.dateFinish != null ? Text("${item.dateFinish}") : Container(),
+                Text("PACIENTE", style: boldStyle(size: 14)),
+                Text("Cedula:", style: boldStyle(size: 14)),
                 Text("${item.pacient?.idCardPacient ?? ''}"),
-                Text("Nombre:", style: boldStyle),
+                Text("Nombre:", style: boldStyle(size: 14)),
                 Text(
                     "${item.pacient?.namePacient ?? ''} ${item.pacient?.lastnamePacient ?? ''}"),
-                Text("Edad:", style: boldStyle),
+                Text("Edad:", style: boldStyle(size: 14)),
                 Text("${item.pacient?.agePacient ?? ''}"),
-                Text("Contacto:", style: boldStyle),
+                Text("Contacto:", style: boldStyle(size: 14)),
                 Text("${item.pacient?.emailPacient ?? ''} ")
               ],
             ),
@@ -287,36 +239,75 @@ class StateAppointment extends State<AppointmentScreen> {
         });
   }
 
-/**
-    Mostrar info de la cita en un cuadro de dialogo
- */
-/*
-  Future<void> showDialogueInfo(BuildContext context, Appointment appointment) {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('AlertDialog Title'),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: const <Widget>[
-                Text('This is a demo alert dialog.'),
-                Text('Would you like to approve of this message?'),
-              ],
+  void filterForm() {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return new AlertDialog(
+            title: new Text("Filtrar citas"),
+            content: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text("Fecha:", style: boldStyle(size: 14)),
+                  IconButton(
+                      onPressed: () async {
+                        final DateTime picked = await datePickerLimits(context,
+                            finishAfter: Duration(days: 15),
+                            startBefore: Duration(days: 1));
+                        controllerDate = picked;
+                      },
+                      icon: const Icon(Icons.calendar_today)),
+                  SizedBox(height: 10),
+                  Text("Nombre:", style: boldStyle(size: 14)),
+                  TextField(controller: controllerNamePacient),
+                  SizedBox(height: 10),
+                  Text("Cedula:", style: boldStyle(size: 14)),
+                  TextField(controller: controllerCardPacient)
+                ],
+              ),
             ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Approve'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+            actions: <Widget>[
+              TextButton(
+                child: Text('Filtrar'),
+                style: bottonBorderBlue,
+                onPressed: () {
+                  filterAppointment = [];
+                  listAppointmentLoad.forEach((element) {
+                    if ((element.pacient.namePacient
+                                .contains(controllerNamePacient.text) &&
+                            controllerNamePacient.text != '') ||
+                        (element.pacient.idCardPacient
+                                .contains(controllerCardPacient.text) &&
+                            controllerCardPacient.text != '') ||
+                        (controllerDate != null &&
+                            controllerDate.day ==
+                                DateTime.parse(element.dateBegin).day)) {
+                      filterAppointment.add(element);
+                    }
+                  });
+                  setState(() {
+                    filterMode = 1;
+                  });
+                },
+              ),
+              TextButton(
+                child: Text('Limpiar'),
+                style: bottonBorderBlue,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  clearScreen();
+                },
+              ),
+              TextButton(
+                child: Text('Salir'),
+                style: bottonBorderBlue,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
   }
-  */
 }

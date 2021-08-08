@@ -1,0 +1,1 @@
+enum popupButtonDecisition { accept, reject }

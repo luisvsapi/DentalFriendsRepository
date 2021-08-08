@@ -57,3 +57,14 @@ String formatTimeReduced(String spMedium) {
   DateTime dt = DateTime.now().toLocal();
   return '${dt.year}${dt.month}${dt.day}$spMedium${dt.hour}${dt.minute}${dt.second}';
 }
+
+Future<DateTime> datePickerLimits(BuildContext ctx,
+    {Duration startBefore, Duration finishAfter}) {
+  var now = DateTime.now();
+  return showDatePicker(
+    context: ctx,
+    firstDate: now.subtract(startBefore),
+    lastDate: now.add(finishAfter),
+    initialDate: now,
+  );
+}

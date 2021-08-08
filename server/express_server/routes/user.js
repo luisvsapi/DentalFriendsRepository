@@ -121,10 +121,8 @@ router.post("/", jwtSecurity.authenticateJWT, function (req, res, next) {
   res.send({ message: "Tu estas autorizado" });
 });
 
-/* 
- * -------------------------------------------------------------------------------------------------
- POST METHODS 
- * -------------------------------------------------------------------------------------------------
+/*  
+ POST METHODS  
 */
 
 router.post(
