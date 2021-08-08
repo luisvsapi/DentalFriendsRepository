@@ -24,11 +24,9 @@ dependencies:
   pull_to_refresh: ^2.0.0
   provider: ^5.0.0
 
-  webview_flutter: ^2.0.8
   convex_bottom_bar: ^3.0.0
   table_calendar: ^3.0.0
   expansion_tile_card: ^1.1.0
-  syncfusion_flutter_calendar: ^19.2.49
 
 dev_dependencies:
   flutter_test:

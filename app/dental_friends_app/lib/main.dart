@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         title: "Dental Friends",
         debugShowCheckedModeBanner: false,
-        initialRoute: "/signIn",
+        initialRoute: "/appointment",
         routes: <String, WidgetBuilder>{
           "/onBoarding": (BuildContext context) => new Onboarding(),
           "/home": (BuildContext context) => new Home(),

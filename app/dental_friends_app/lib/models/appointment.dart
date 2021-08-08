@@ -52,5 +52,7 @@ class AppointmentModel {
     return {'message': 0};
   }
 
-  static void acceptAppointment(int id) {}
+  static void acceptAppointment(int id) {
+
+  }
 }

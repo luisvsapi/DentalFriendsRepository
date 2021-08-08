@@ -1,4 +1,5 @@
 import 'package:dental_friends_app/constants/theme.dart';
+
 // import 'package:dental_friends_app/screens/categories.dart';
 // import 'package:dental_friends_app/screens/best-deals.dart';
 // import 'package:dental_friends_app/screens/search.dart';
@@ -43,7 +44,7 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
       this.bgColor = Colors.white,
       this.searchBar = false});
 
-  final double _prefferedHeight = 180.0;
+  final double _prefferedHeight = 140.0;
 
   @override
   _NavbarState createState() => _NavbarState();
@@ -72,13 +73,7 @@ class _NavbarState extends State<Navbar> {
         widget.tags == null ? false : (widget.tags.length == 0 ? false : true);
 
     return Container(
-        height: widget.searchBar
-            ? (!categories
-                ? (tagsExist ? 211.0 : 178.0)
-                : (tagsExist ? 262.0 : 210.0))
-            : (!categories
-                ? (tagsExist ? 132.0 : 102.0)
-                : (tagsExist ? 200.0 : 150.0)),
+        height: 100,
         decoration: BoxDecoration(
             color: !widget.transparent ? widget.bgColor : Colors.transparent,
             boxShadow: [
@@ -158,126 +153,6 @@ class _NavbarState extends State<Navbar> {
                       )
                   ],
                 ),
-                if (widget.searchBar)
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8, bottom: 4, left: 15, right: 15),
-                    child: Input(
-                        placeholder: "What are you looking for?",
-                        controller: widget.searchController,
-                        onChanged: widget.searchOnChanged,
-                        autofocus: widget.searchAutofocus,
-                        outlineBorder: true,
-                        enabledBorderColor: Colors.black.withOpacity(0.2),
-                        focusedBorderColor: MaterialColors.muted,
-                        suffixIcon:
-                            Icon(Icons.zoom_in, color: MaterialColors.muted),
-                        onTap: () {
-                          // if (!widget.isOnSearch)
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => Search()));
-                        }),
-                  ),
-                SizedBox(
-                  height: tagsExist ? 0 : 10,
-                ),
-                if (categories)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => Categories()));
-                        },
-                        child: Row(
-                          children: [
-                            Icon(Icons.border_all,
-                                color: Colors.black87, size: 22.0),
-                            SizedBox(width: 10),
-                            Text(widget.categoryOne,
-                                style: TextStyle(
-                                    color: Colors.black87, fontSize: 16.0)),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: 30),
-                      Container(
-                        color: MaterialColors.muted,
-                        height: 25,
-                        width: 0.3,
-                      ),
-                      SizedBox(width: 30),
-                      GestureDetector(
-                        onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => BestDeals()));
-                        },
-                        child: Row(
-                          children: [
-                            Icon(Icons.history,
-                                color: Colors.black87, size: 22.0),
-                            SizedBox(width: 10),
-                            Text(widget.categoryTwo,
-                                style: TextStyle(
-                                    color: Colors.black87, fontSize: 16.0)),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                if (tagsExist)
-                  Container(
-                    height: 40,
-                    child: ScrollablePositionedList.builder(
-                      itemScrollController: _scrollController,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: widget.tags.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            if (activeTag != widget.tags[index]) {
-                              setState(() => activeTag = widget.tags[index]);
-                              _scrollController.scrollTo(
-                                  index:
-                                      index == widget.tags.length - 1 ? 1 : 0,
-                                  duration: Duration(milliseconds: 420),
-                                  curve: Curves.easeIn);
-                              if (widget.getCurrentPage != null)
-                                widget.getCurrentPage(activeTag);
-                            }
-                          },
-                          child: Container(
-                              margin: EdgeInsets.only(
-                                  left: index == 0 ? 46 : 8, right: 8),
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      bottom: BorderSide(
-                                          width: 2.0,
-                                          color: activeTag == widget.tags[index]
-                                              ? MaterialColors.primary
-                                              : Colors.transparent))),
-                              child: Center(
-                                child: Text(widget.tags[index],
-                                    style: TextStyle(
-                                        color: activeTag == widget.tags[index]
-                                            ? MaterialColors.primary
-                                            : MaterialColors.placeholder,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14.0)),
-                              )),
-                        );
-                      },
-                    ),
-                  )
               ],
             ),
           ),
