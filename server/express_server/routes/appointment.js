@@ -105,9 +105,8 @@ router.get("/byUser", jwtSecurity.authenticateJWT, async (req, res, next) => {
  */
 router.post("/setAppointment", async (req, res, next) => {
   let requestBody = req.body;
-  let dateValidation =  utils.localDateRestricted(new Date(requestBody.date));
-
   try {
+    let dateValidation =  utils.localDateRestricted(new Date(requestBody.date));
     if( dateValidation === false){
       throw err;
     }

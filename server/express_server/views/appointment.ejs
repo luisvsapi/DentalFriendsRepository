@@ -87,6 +87,43 @@
               </div>
               <div class="form-row">
                 <div class="col-md-2"></div>
+                <label class="col-form-label col-md-2">Edad:</label>
+                <div class="col-md-6 form-group">
+                  <input class="form-control" id="edadPac" min = "18" type="number" required />
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-2"></div>
+                <label class="col-form-label col-md-2">Género:</label>
+                <div class="col-md-6 form-group">
+                  <select class="form-control" id="genderPac" required>
+                    <option value="M">Masculino</option>
+                    <option value="F" selected>Femenino</option>
+                    <option value="O">Otro</option> 
+                  </select>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-2"></div>
+                <label class="col-form-label col-md-2">Dirección:</label>
+                <div class="col-md-6 form-group">
+                  <input class="form-control"  type="text" id="direccionPac" required />
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-2"></div>
+                <label class="col-form-label col-md-2">Teléfono:</label>
+                <div class="col-md-6 form-group">
+                  <input class="form-control"  type="text" minlength="10"
+                  maxlength="10"  id="phonePac" required />
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-2"></div>
                 <label class="col-form-label col-md-2">Email:</label>
                 <div class="col-md-6 form-group">
                   <input class="form-control" id="emailPac" type="email" required />
