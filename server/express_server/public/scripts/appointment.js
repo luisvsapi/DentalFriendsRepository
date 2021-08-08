@@ -49,6 +49,8 @@ $("#saveAppointment").submit(function (e) {
   }
   else{
     e.preventDefault();
+    let date = new Date($("#datepicker").val())
+    date.setDate(date.getDate()+1);
     const data = {
       idCardPacient: $("#cedPac").val(),
       namePacient: $("#nombrePac").val(),
@@ -59,7 +61,7 @@ $("#saveAppointment").submit(function (e) {
       phonePacient: "0",
       emailPacient: $("#emailPac").val(),
       detailsPacient: {},
-      date: $("#datepicker").val(),
+      date: date,
       treat: $("#tratPac").val(),
       doctor: $("#doctorPac").val(),
     }; 
