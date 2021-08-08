@@ -21,7 +21,7 @@ $("#searchMedicalResume").submit(async function (e) {
   console.log(resume)
   let htmlSelect = `<tr> <th>Id</th> <th>Fecha</th> <th>Paciente</th> <th>Detalles</th></tr>`;
   resume.forEach((element) => {
-    htmlSelect += `<tr><td>${element.id}</td><td>${element.dateBegin}</td><td>${element.pacient.namePacient}</td><td><button type="button" id=${element.id} onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`;
+    htmlSelect += `<tr><td>${element.id}</td><td>${parseUtcDateWithHours( element.dateBegin,true, "numeral")}</td><td>${element.pacient.namePacient}</td><td><button type="button" id=${element.id} onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`;
   });
   $("#medicalResumeTable").html(htmlSelect);
 });

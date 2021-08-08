@@ -174,7 +174,9 @@ router.post(
       });
   }
 );
-
+/***
+ * This method filter the medical appointments that have been succesful terminated
+ */
 //jwtSecurity.authenticateJWT,
 router.post("/medicalResume", async (req, res, next) => {
   try {
@@ -208,12 +210,13 @@ router.post("/medicalResume", async (req, res, next) => {
       ],
     });
     for (element in medicalResume) {
+      /*
       let dateAppointment = new Date();
       dateAppointment.setTime(Date.parse(medicalResume[element].dateBegin));
       var dateToJson = dateAppointment.getDay() + " ";
       dateToJson = utils.addNameMonth(dateAppointment, dateToJson);
       dateToJson += " " + dateAppointment.getFullYear();
-      medicalResume[element].dateBegin = dateToJson;
+      medicalResume[element].dateBegin = dateToJson;*/
       var fullName =
         medicalResume[element]["pacient.namePacient"] +
         " " +

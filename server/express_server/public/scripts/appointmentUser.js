@@ -2,9 +2,9 @@ document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
 let calendar;
 document.addEventListener("DOMContentLoaded", function () {
   var calendarEl = document.getElementById("calendarElement");
-
   initializeCalendar(calendarEl);
   getAvaliablesAppointment();
+  mostrarFecha();
 });
 /**
  * This method loads the FullCalendar element and configs.
@@ -42,7 +42,6 @@ function initializeCalendar(calendarEl){
       }, */
     select: function (info) {
       showConfirmation(info);
-      console.log("Recuperado:", info);
     }
     
   });
@@ -123,7 +122,7 @@ function clearCalendar() {
 async function showConfirmation(content){
   let confirmation = document.getElementById('modalAppointment');
   confirmation.getElementsByClassName('modal-title')[0].textContent = "Confirmar Cita";
-  confirmation.getElementsByClassName('m-details')[0].innerHTML = "<h5>Detalles</h5></br><p>Fecha inicio: " + content.start + "</p><p>Fecha fin: " + content.end + "</p></br>";
+  confirmation.getElementsByClassName('m-details')[0].innerHTML = "<h5>Detalles</h5></br><p>Fecha inicio: " + parseUtcDateWithHours(content.start,true) + "</p><p>Fecha fin: " + parseUtcDateWithHours(content.end,true) + "</p></br>";
   let id = document.getElementById('appointmentId').innerText;
   confirmation.getElementsByClassName('m-confirm')[0].setAttribute("onclick", "confirmate(" + id + ",0,'" + content.startStr + "','" + content.endStr + "')");
   confirmation.getElementsByClassName('close')[0].setAttribute('onclick','cancel()');
@@ -151,4 +150,16 @@ async function confirmate(id, state, dateBegin, dateFinish){
 function cancel(){
   let confirmation = document.getElementById('modalAppointment');
   confirmation.style.display= 'none';
+}
+async function mostrarFecha(){
+  let id = document.getElementById('appointmentId').innerText;
+  let url = '/appointment/' + id.trim();
+  await getFetch(url)
+  .then((res) => {
+    if(res){
+      document.getElementById('dateRequest').innerText = parseUtcDateWithHours(res.dateBegin);
+    } else{
+      console.log("error");
+    }
+  })
 }

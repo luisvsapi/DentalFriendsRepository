@@ -196,4 +196,15 @@ router.delete(
   }
 );
 
+router.get("/:id", jwtSecurity.authenticateJWT, async (req, res, next) => {
+  let id = req.params.id;
+  try {
+    if (validator.isInt(id)) {
+      let appointmentInstance = await appointment.findByPk(id);
+      res.json(appointmentInstance);
+    }
+  } catch (error) { 
+    res.sendStatus(500);
+  }
+});
 module.exports = router;

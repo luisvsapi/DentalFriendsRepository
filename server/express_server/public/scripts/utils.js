@@ -100,6 +100,66 @@ function modificateActualTime(mode = "minute", date = "", value = 1) {
   return new Date(dateTmp);
 }
 /**
+ * This method parses the date string to a user readable format
+ * @param {*} dateUTC 
+ * @param {*} hours 
+ * @returns 
+ */
+function parseUtcDateWithHours(dateUTC, hours = false, mode = "descriptivo"){
+  let date = new Date(dateUTC);
+  var month = "";
+  var day = date.getDay();
+  var dayMonth = date.getDate();
+  var year = date.getFullYear(); 
+  let parsed ="";
+  if (mode == "descriptivo"){
+    parsed += parseDay(day) +" " + dayMonth + " de " + addNameMonth(date, month) + " del " + year;
+  } else if (mode == "numeral"){
+    parsed += dayMonth + "/" + (date.getMonth()+1) + "/" + year;
+  }
+  if (hours && mode == "descriptivo"){
+    parsed += " a las " + (("0" + (date.getHours())).slice(-2)) + ":" + (("0" + (date.getMinutes())).slice(-2)) + " Hora Ecuador";
+  } else if (hours && mode == "numeral"){
+    parsed += " " + (("0" + (date.getHours())).slice(-2)) + ":" + (("0" + (date.getMinutes())).slice(-2));
+  } 
+  return parsed;
+}
+/**
+ * This method returns the string name of a day
+ * @param {*} day 
+ * @returns 
+ */
+function parseDay(day){
+  let parsed = "";
+  switch (day) {
+    case 0:
+      parsed = "Domingo";
+      break;
+    case 1:
+      parsed += "Lunes";
+      break;
+    case 2:
+      parsed = "Martes";
+      break;
+    case 3:
+      parsed = "Miercoles";
+      break;
+    case 4:
+      parsed = "Jueves";
+      break;
+    case 5:
+      parsed = "Viernes";
+      break;
+    case 6:
+      parsed = "Sabado";
+      break;
+    default:
+      break;
+  }
+  return parsed;
+}
+
+/**
  * This method generates a user friendly date
  * @param {*} dateUTC 
  * @returns date 
