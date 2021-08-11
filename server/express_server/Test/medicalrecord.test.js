@@ -4,7 +4,8 @@ const supertest = require('supertest')
 const api = supertest(app)
 
 //cross-env NODE_ENV=test jest --verbose
-test('Test de medical record', async () =>{
+
+test.skip('Test de medical record', async () =>{
     const newRequest = {
         idCardPacient: "1234567890",
         reason: "isolis12",
