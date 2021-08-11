@@ -3,19 +3,21 @@ const { testing } = require('googleapis/build/src/apis/testing')
 const supertest = require('supertest')
 const api = supertest(app)
 
+let date = new Date('2021-11-03');
+date.setDate(date.getDate()+1);
 const appointment = {
-    idCardPacient: "1111111226",
+    idCardPacient: "2200723333",
     namePacient: "Test Name",
     lastnamePacient: "Test Lastname",
     agePacient: 22,
     genderPacient: "M",
-    addressPacient: "",
-    phonePacient: "09",
+    addressPacient: "av del ejercito",
+    phonePacient: "0123456789",
     emailPacient: "rogwinalex2@hotmail.com",
     detailsPacient: {},
-    date: '2021/12/03',
+    date: date,
     treat: "Restauraciones dentales",
-    doctor: "22"
+    doctor: 22
 }
 /**
  * Test Cuando se envia valores incorrectos
@@ -61,8 +63,3 @@ test('La solicitud de cita se rechaza correctamente ', async () =>{
         .expect({message: 2, infoAppointment: "Ya existe una cita a su nombre!"})
         
 })
-
-//test para borrar una solicitud de cita
-//test para aceptar una solicitud de cita
-
-//test 

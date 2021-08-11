@@ -327,7 +327,7 @@ function localDateRestricted(date){
   console.log("enviada:",date)
   console.log("año l: ", actualYear, "dia local:",actualDay, "mes local", actualMonth )
   console.log("año : ", date.getFullYear(), "dia :",date.getDate(), "mes ", date.getMonth() )
-  if ((date.getFullYear() >= actualYear) && (date.getMonth() >= actualMonth) && (date.getDate() >= actualDay)){
+  if (date.getTime() >=  dateLocal.getTime()){
     return true;
   }
   return false;

@@ -110,16 +110,16 @@ router.post("/setAppointment", async (req, res, next) => {
     if( dateValidation === false){
       throw err;
     }
-    let pacient = await pacientModel.findOne({
+    let pacientTmp = await pacientModel.findOne({
       where: { idCardPacient: requestBody.idCardPacient },
     });
-    if (pacient == null) {
-      pacient = await pacientModel.create(req.body);
-      await pacient.save();
+    if (pacientTmp == null) {
+      pacientTmp = await pacientModel.create(req.body);
+      await pacientTmp.save();
     }
     let { count, appointmentTmp } = await appointment.findAndCountAll({
       where: {
-        idPacient: pacient.id,
+        idPacient: pacientTmp.id,
         [Op.or]: [
           {
             state: "0",
@@ -138,13 +138,11 @@ router.post("/setAppointment", async (req, res, next) => {
         infoAppointment: "Ya existe una cita a su nombre!",
       });
     } else {
-      //let date = new Date(requestBody.date).setUTCHours(12);
-      //val 
       const dataTemp = {
         state: "1",
         details: {},
         idUser: requestBody.doctor,//
-        idPacient: pacient.id,
+        idPacient: pacientTmp.id,
         treatment: requestBody.treat,
         dateBegin: requestBody.date, //
       };
