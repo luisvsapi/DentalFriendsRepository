@@ -318,16 +318,11 @@ function generateMailTemplate(
 </html>`;
 }
 function localDateRestricted(date){
-  let dateLocal =  new Date ();
-  dateLocal.setDate(dateLocal.getDate() +1);
-  let actualYear = dateLocal.getFullYear();
-  let actualDay = dateLocal.getDate();
-  let actualMonth = dateLocal.getMonth();
-  console.log("server:",dateLocal)
-  console.log("enviada:",date)
-  console.log("año l: ", actualYear, "dia local:",actualDay, "mes local", actualMonth )
-  console.log("año : ", date.getFullYear(), "dia :",date.getDate(), "mes ", date.getMonth() )
-  if (date.getTime() >=  dateLocal.getTime()){
+  let dateLocal =  new Date ().getTime();
+  let dateClient = date.getTime();
+  console.log("local: ",dateLocal)
+  console.log("cliente: ",dateClient)
+  if ((dateClient-dateLocal)>= 70200000){
     return true;
   }
   return false;
