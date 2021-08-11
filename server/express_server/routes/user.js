@@ -176,15 +176,16 @@ router.post(
   }
 );
 /***
- * This method filter the medical appointments that have been succesful terminated
+ * This method filter the medical appointments that had been succesful completed (code 2)
  */
 //jwtSecurity.authenticateJWT,
 router.post("/medicalResume", async (req, res, next) => {
   try {
     let requestBody = req.body;
     const medicalResume = await appointment.findAll({
-      attributes: ["id", "dateBegin"],
+      attributes: ["id", "dateBegin", "state"],
       where: {
+        state : "2",
         [Op.or]: [
           {
             "$pacient.id_card_pacient$": {
@@ -218,17 +219,18 @@ router.post("/medicalResume", async (req, res, next) => {
       dateToJson = utils.addNameMonth(dateAppointment, dateToJson);
       dateToJson += " " + dateAppointment.getFullYear();
       medicalResume[element].dateBegin = dateToJson;*/
+      
       var fullName =
-        medicalResume[element]["pacient.namePacient"] +
-        " " +
-        medicalResume[element]["pacient.lastnamePacient"];
+      medicalResume[element]["pacient.namePacient"] +
+      " " +
+      medicalResume[element]["pacient.lastnamePacient"];
       delete medicalResume[element]["pacient.namePacient"];
       delete medicalResume[element]["pacient.lastnamePacient"];
-      medicalResume[element]["nombrePaciente"] = fullName;
+      medicalResume[element]["nombrePaciente"] = fullName;  
     }
     res.send(medicalResume);
   } catch (error) {
-    console.log("\nError en medicalResume:", error);
+    // deberia ser este formato res.send({ message: 0 });
     res.sendStatus(500);
   }
 });
