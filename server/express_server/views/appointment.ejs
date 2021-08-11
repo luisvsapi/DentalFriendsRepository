@@ -73,7 +73,11 @@
                 <div class="col-md-2"></div>
                 <label class="col-form-label col-md-2">Nombres:</label>
                 <div class="col-md-6 form-group">
+<<<<<<< HEAD
                   <input class="form-control" pattern="[A-Za-z]{0,100}" type="text" id="nombrePac" required />
+=======
+                  <input class="form-control" pattern="[^0-9]+" type="text" id="nombrePac" required />
+>>>>>>> c2e0b13763bdc47ad0be9dd3e078c9bd01cbae98
                 </div>
                 <div class="col-md-2"></div>
               </div>
@@ -81,7 +85,48 @@
                 <div class="col-md-2"></div>
                 <label class="col-form-label col-md-2">Apellidos:</label>
                 <div class="col-md-6 form-group">
+<<<<<<< HEAD
                   <input class="form-control" id="apellidoPac" pattern="[A-Za-z]{1,100}" type="text" required />
+=======
+                  <input class="form-control" id="apellidoPac" pattern="[^0-9]+" type="text" required />
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-2"></div>
+                <label class="col-form-label col-md-2">Edad:</label>
+                <div class="col-md-6 form-group">
+                  <input class="form-control" id="edadPac" min = "18" type="number" required />
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-2"></div>
+                <label class="col-form-label col-md-2">Género:</label>
+                <div class="col-md-6 form-group">
+                  <select class="form-control" id="genderPac" required>
+                    <option value="M">Masculino</option>
+                    <option value="F" selected>Femenino</option>
+                    <option value="O">Otro</option> 
+                  </select>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-2"></div>
+                <label class="col-form-label col-md-2">Dirección:</label>
+                <div class="col-md-6 form-group">
+                  <input class="form-control"  type="text" id="direccionPac" required />
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-2"></div>
+                <label class="col-form-label col-md-2">Teléfono:</label>
+                <div class="col-md-6 form-group">
+                  <input class="form-control"  type="text" minlength="10"
+                  maxlength="10"  id="phonePac" required />
+>>>>>>> c2e0b13763bdc47ad0be9dd3e078c9bd01cbae98
                 </div>
                 <div class="col-md-2"></div>
               </div>

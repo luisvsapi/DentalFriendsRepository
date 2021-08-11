@@ -317,13 +317,20 @@ function generateMailTemplate(
 
 </html>`;
 }
-function dateRestriction(){
-  let date =  new Date ();
-  date.setDate(date.getDate() +1);
-  const year = date.getFullYear();
-  const day = ("0" + (date.getDate())).slice(-2);
-  const month =("0" + (date.getMonth()+1)).slice(-2);
-  return year+"-"+month+"-"+day;
+function localDateRestricted(date){
+  let dateLocal =  new Date ();
+  dateLocal.setDate(dateLocal.getDate() +1);
+  let actualYear = dateLocal.getFullYear();
+  let actualDay = dateLocal.getDate();
+  let actualMonth = dateLocal.getMonth();
+  console.log("server:",dateLocal)
+  console.log("enviada:",date)
+  console.log("año l: ", actualYear, "dia local:",actualDay, "mes local", actualMonth )
+  console.log("año : ", date.getFullYear(), "dia :",date.getDate(), "mes ", date.getMonth() )
+  if ((date.getFullYear() >= actualYear) && (date.getMonth() >= actualMonth) && (date.getDate() >= actualDay)){
+    return true;
+  }
+  return false;
 }
 
 module.exports = {
@@ -333,4 +340,5 @@ module.exports = {
   cryptPassword,
   comparePassword,
   generateMailTemplate,
+  localDateRestricted,
 };

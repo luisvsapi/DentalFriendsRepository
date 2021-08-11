@@ -106,6 +106,10 @@ router.get("/byUser", jwtSecurity.authenticateJWT, async (req, res, next) => {
 router.post("/setAppointment", async (req, res, next) => {
   let requestBody = req.body;
   try {
+    let dateValidation =  utils.localDateRestricted(new Date(requestBody.date));
+    if( dateValidation === false){
+      throw err;
+    }
     let pacient = await pacientModel.findOne({
       where: { idCardPacient: requestBody.idCardPacient },
     });
@@ -134,7 +138,7 @@ router.post("/setAppointment", async (req, res, next) => {
         infoAppointment: "Ya existe una cita a su nombre!",
       });
     } else {
-      let date = new Date(requestBody.date).setUTCHours(12);
+      //let date = new Date(requestBody.date).setUTCHours(12);
       //val 
       const dataTemp = {
         state: "1",
@@ -142,7 +146,7 @@ router.post("/setAppointment", async (req, res, next) => {
         idUser: requestBody.doctor,//
         idPacient: pacient.id,
         treatment: requestBody.treat,
-        dateBegin: new Date(date), //
+        dateBegin: requestBody.date, //
       };
       let appointmentNew = await appointment.create(dataTemp);
       await appointmentNew.save();

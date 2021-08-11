@@ -49,17 +49,19 @@ $("#saveAppointment").submit(function (e) {
   }
   else{
     e.preventDefault();
+    let date = new Date($("#datepicker").val())
+    date.setDate(date.getDate()+1);
     const data = {
       idCardPacient: $("#cedPac").val(),
       namePacient: $("#nombrePac").val(),
       lastnamePacient: $("#apellidoPac").val(),
-      agePacient: 0,
-      genderPacient: "M",
-      addressPacient: "",
-      phonePacient: "0",
+      agePacient: $("#edadPac").val(),
+      genderPacient: $("#genderPac").val(),
+      addressPacient: $("#direccionPac").val(),
+      phonePacient: $("#phonePac").val(),
       emailPacient: $("#emailPac").val(),
       detailsPacient: {},
-      date: $("#datepicker").val(),
+      date: date,
       treat: $("#tratPac").val(),
       doctor: $("#doctorPac").val(),
     }; 
@@ -67,7 +69,7 @@ $("#saveAppointment").submit(function (e) {
       postFetch(`/appointment/setAppointment`, data).then((res) => {
         if (res.message == 1) {
           alertify.success("Cita reservada exitosamente");
-          location.reload();
+          resetFields();
         } else {
           alertify.error("Error en reservación de cita: " + res.infoAppointment);
         }
@@ -77,3 +79,10 @@ $("#saveAppointment").submit(function (e) {
     }
   } 
 });
+
+function resetFields(){
+  let inputs = document.getElementsByTagName('input');
+  for (let field of inputs){
+    field.value = "";
+  }
+}

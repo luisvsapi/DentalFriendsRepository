@@ -23,18 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d94fc618-074c-4bf2-b8b9-b1a9d386a6e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/constants/config.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/constants/config.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/models/appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/models/appointment.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/screens/appointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/screens/appointment.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/screens/manageAppointment.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/screens/manageAppointment.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/utils/utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/utils/utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/widgets/drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/widgets/drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dental_friends_app/lib/widgets/navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/lib/widgets/navbar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dental_friends_app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dental_friends_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/dental_friends_app/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/express_server/public/scripts/appointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/express_server/public/scripts/appointment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/express_server/routes/appointment.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/express_server/routes/appointment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/express_server/scripts/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/../server/express_server/scripts/utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../server/express_server/views/appointment.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/../server/express_server/views/appointment.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -88,7 +88,7 @@ class _ManageAppoinmentState extends State<ManageAppoinment> {
                     //DateTime.parse(element.dateBegin).day)
                     listDuration.map((duration) => {
                       dataRequest.map((appointment) => {
-                        if(DateTime.parse(appointment.))
+                        //if(DateTime.parse(appointment.))
                       })
                     });
                     return Card(
