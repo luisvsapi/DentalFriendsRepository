@@ -319,10 +319,10 @@ function generateMailTemplate(
 }
 function localDateRestricted(date){
   let dateLocal =  new Date ().getTime();
-  let dateClient = date.getTime();
+  let dateClient = date.getTime() + 18000000;
   console.log("local: ",dateLocal)
   console.log("cliente: ",dateClient)
-  if ((dateClient-dateLocal)>= 70200000){
+  if ((dateClient-dateLocal)>= 86400000){
     return true;
   }
   return false;
