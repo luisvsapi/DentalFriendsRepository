@@ -1,14 +1,4 @@
-import 'package:dental_friends_app/constants/theme.dart';
-
-// import 'package:dental_friends_app/screens/categories.dart';
-// import 'package:dental_friends_app/screens/best-deals.dart';
-// import 'package:dental_friends_app/screens/search.dart';
-// import 'package:dental_friends_app/screens/cart.dart';
-// import 'package:dental_friends_app/screens/chat.dart';
-
-import 'package:dental_friends_app/widgets/input.dart';
 import 'package:flutter/material.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class Navbar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -56,8 +46,6 @@ class Navbar extends StatefulWidget implements PreferredSizeWidget {
 class _NavbarState extends State<Navbar> {
   String activeTag;
 
-  ItemScrollController _scrollController = ItemScrollController();
-
   void initState() {
     if (widget.tags != null && widget.tags.length != 0) {
       activeTag = widget.tags[0];
@@ -67,10 +55,6 @@ class _NavbarState extends State<Navbar> {
 
   @override
   Widget build(BuildContext context) {
-    final bool categories =
-        widget.categoryOne.isNotEmpty && widget.categoryTwo.isNotEmpty;
-    final bool tagsExist =
-        widget.tags == null ? false : (widget.tags.length == 0 ? false : true);
 
     return Container(
         height: 100,
