@@ -16,7 +16,7 @@ $("#searchMedicalResume").submit(async function (e) {
       return res;
     })
     .catch(function () {
-      alert("Error contacte con administrador");
+      alertify.error("Error contacte con administrador");
     });
   console.log(resume)
   let htmlSelect = `<tr> <th>Id</th> <th>Fecha</th> <th>Paciente</th> <th>Detalles</th></tr>`;

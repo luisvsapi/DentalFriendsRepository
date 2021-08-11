@@ -47,6 +47,7 @@ router.get(
   "/medicalRecord",
   /* jwtSecurity.authenticateJWT, */
   function (req, res, next) {
+    
     res.render(`medicalRecord`, {});
   }
 );
@@ -326,7 +327,11 @@ router.get("/:id", jwtSecurity.authenticateJWT, async (req, res, next) => {
     res.sendStatus(500);
   }
 });
-
+/**
+ * This method recieve the pacient detail and asociate it to the
+ * actual approved state appointment asigned to it id
+ * Note: it does not change the state of the appointment. 
+ */
 router.post("/setRecord", async (req, res, next) => {
   let requestBody = req.body;
   let dict = {
@@ -351,15 +356,40 @@ router.post("/setRecord", async (req, res, next) => {
     tratamiento: requestBody.tratamiento,
   };
   try {
-    await pacientModel.findOne({
-      where: { idCardPacient: requestBody.idCardPacient },
+    const appointmentData = await pacientModel.findAll({
+      where: {
+        [Op.and]: [
+          {
+            idCardPacient: requestBody.idCardPacient,
+          },
+          {
+            "$appointments.state$" : '0',
+          }
+        ], 
+        
+      },
+      include:  [ 
+        {
+        model: appointment
+        }
+      ],
     });
+    
     await pacientModel.update(
       {
         detailsPacient: dict,
+        active: true,
       },
       { where: { idCardPacient: requestBody.idCardPacient } }
     );
+    await appointment.update(
+      {
+        details: dict,
+      },
+      {
+        where: { id: appointmentData[0].appointments[0].id}
+      }
+    )
   } catch (err) {
     console.log(err);
     res.send({ message: 0 });

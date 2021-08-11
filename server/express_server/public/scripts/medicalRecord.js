@@ -58,6 +58,7 @@ $("#formRecord").submit(function (e) {
     diagnostico: $("#diagnostico").val(),
     tratamiento: $("#tratamiento").val(),
   };
+  console.log(data);
   try {
     postFetch("/user/setRecord", data).then((res) => {
       if (res.message == 1) {
