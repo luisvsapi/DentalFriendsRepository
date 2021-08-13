@@ -36,10 +36,8 @@ router.get(
   }
 );
 
-router.get(
-  "/profile",
-  /*  jwtSecurity.authenticateJWT, */ function (req, res, next) {
-    res.render(`profile`, {});
+router.get("/profile", /*  jwtSecurity.authenticateJWT, */ async  (req, res, next) => { 
+  res.render(`profile`, {}); 
   }
 );
 
@@ -125,10 +123,12 @@ router.post("/", jwtSecurity.authenticateJWT, function (req, res, next) {
 /*  
  POST METHODS  
 */
-
+/**
+ * This method update the user details
+ */
 router.post(
   "/formProfile",
-  upload.single("pictureUrl"),
+  /*upload.single("pictureUrl"),*/
   jwtSecurity.authenticateJWT,
   async (req, res, next) => {
     let requestBody = req.body;
@@ -153,6 +153,45 @@ router.post(
                 address: requestBody.address,
                 speciality: requestBody.degree,
                 details: dict,
+                /*pictureUrl: req.file.path,*/
+              },
+              { returning: true, where: { idDetails: doc.idDetails } }
+            )
+            .then((dbresponse) => {
+              if (dbresponse) {
+                res.send({ message: 1 });
+              } else {
+                res.send({ message: 0 });
+              }
+            })
+            .catch((err) => {
+              res.status(500).send({
+                message: err.message || "Database failure.",
+              });
+            });
+        } else {
+          res.send({ message: 0 });
+        }
+      });
+  }
+);
+/**
+ * This method updates the user profile picture
+ */
+router.post(
+  "/formPictureProfile",
+  upload.single("pictureUrl"),
+  jwtSecurity.authenticateJWT,
+  async (req, res, next) => {
+    await userModel
+      .findOne({
+        where: { username: req.user.user },
+      })
+      .then((doc) => {
+        if (doc) {
+          userDetailsModel
+            .update(
+              {
                 pictureUrl: req.file.path,
               },
               { returning: true, where: { idDetails: doc.idDetails } }
@@ -175,6 +214,7 @@ router.post(
       });
   }
 );
+
 /***
  * This method filter the medical appointments that had been succesful completed (code 2)
  */
@@ -397,6 +437,31 @@ router.post("/setRecord", async (req, res, next) => {
     res.send({ message: 0 });
   }
   res.send({ message: 1 });
+});
+/**
+ * this method returns the data of a user by his username
+ */
+router.get("/byUser/data", jwtSecurity.authenticateJWT, async (req, res, next) => {
+  let user = req.user.details.split(",")[0];
+  try {
+    if (validator.isInt(user)) {
+      let userData = await userModel.findAll({
+        attributes: {exclude: ["password"]},
+        where: {
+          id: user,
+        },
+        include: [
+          {
+            model: userDetailsModel,
+          },
+        ],
+      });
+      res.json(userData[0]);
+    }
+  } catch (error) {
+    console.log(error) 
+    res.send({message: 0});
+  }
 });
 
 module.exports = router;
