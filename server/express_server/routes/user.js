@@ -61,8 +61,8 @@ router.get(
  * This router renders the principal view of the user. Which shows the appointment requests from pacients.
  */
 router.get(
-  "/home",
-  /* jwtSecurity.authenticateJWT, */ function (req, res, next) {
+  "/home", function (req, res, next) {
+    console.log(req);
     res.render(`homeUser`, {});
   }
 );
@@ -463,5 +463,15 @@ router.get("/byUser/data", jwtSecurity.authenticateJWT, async (req, res, next) =
     res.send({message: 0});
   }
 });
+
+/**
+ * This method validates if a view has a valid token
+ */
+ router.get(
+  "/check/credentials",
+   jwtSecurity.authenticateJWT,  function (req, res, next) {
+    res.send({message:1});
+  }
+);
 
 module.exports = router;

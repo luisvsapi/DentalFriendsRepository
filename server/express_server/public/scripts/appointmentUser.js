@@ -1,6 +1,7 @@
 document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
 let calendar;
 document.addEventListener("DOMContentLoaded", function () {
+  validateCredentials();
   var calendarEl = document.getElementById("calendarElement");
   initializeCalendar(calendarEl);
   getAvaliablesAppointment();

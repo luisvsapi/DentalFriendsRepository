@@ -1,4 +1,9 @@
 document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
+
+document.addEventListener("DOMContentLoaded",  function () {
+  validateCredentials();
+});
+
 $(document).ready(function () {
   let url = "../appointment/state/1";
   getFetch(url, {})

@@ -1,6 +1,7 @@
 document.getElementById("logout").setAttribute("onclick", "resetCredentials()");
 
 document.addEventListener("DOMContentLoaded", function () {
+  validateCredentials();
   loadUserData();
 });
 
