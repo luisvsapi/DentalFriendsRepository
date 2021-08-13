@@ -22,7 +22,6 @@ $("#searchMedicalResume").submit(async function (e) {
     .catch(function () {
       alertify.error("Error contacte con administrador");
     });
-  console.log(resume)
   let htmlSelect = `<tr> <th>Id</th> <th>Fecha</th> <th>Paciente</th> <th>Detalles</th></tr>`;
   resume.forEach((element) => {
     htmlSelect += `<tr><td>${element.id}</td><td>${parseUtcDateWithHours( element.dateBegin,true, "numeral")}</td><td>${element.pacient.namePacient}</td><td><button type="button" id=${element.id} onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`;
@@ -45,10 +44,14 @@ async function mostrarDetalles(id, e) {
   if (detalles.details == null) {
     htmlSelect = `<p>Detalles no existe</p>`;
   }
-  htmlSelect += "Temporalmente trabajando";
-  /*detalles.details.forEach((detalle)=>{
-        htmlSelect += `${element.id}`;
-    });*/
-
+  htmlSelect += "";
+  htmlSelect += `Cita Nº: ${detalles.id}</br>`;
+  htmlSelect += `Iniciada: ${ parseUtcDateWithHours( detalles.dateBegin,true, "numeral") }</br>`;
+  htmlSelect += `Finalizada: ${ parseUtcDateWithHours( detalles.dateFinish,true, "numeral") }</br>`;
+  if(detalles.details.diagnostico!= undefined){
+    htmlSelect += `Dignóstico: ${detalles.details.diagnostico}</br>`;
+    htmlSelect += `Tratamiento: ${detalles.details.tratamiento}</br>`;   
+  }
+  
   $("#modalBodyMedicalResume").html(htmlSelect);
 }

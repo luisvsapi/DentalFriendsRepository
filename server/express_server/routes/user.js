@@ -280,7 +280,7 @@ router.post("/medicalResume/details", async (req, res, next) => {
   try {
     let requestBody = req.body;
     const detalles = await appointment.findOne({
-      attributes: ["details"],
+      /*attributes: ["details"],*/
       where: {
         id: requestBody.idAppointment,
       },
