@@ -1,20 +1,18 @@
 import 'package:dental_friends_app/constants/enums.dart';
 import 'package:dental_friends_app/constants/theme.dart';
 import 'package:dental_friends_app/models/appointment.dart';
+import 'package:dental_friends_app/screens/manageAppointment.dart';
 import 'package:dental_friends_app/utils/utils.dart';
 import 'package:dental_friends_app/widgets/bottom-navigation-bar.dart';
 import 'package:dental_friends_app/widgets/drawer.dart';
 import 'package:dental_friends_app/widgets/navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class AppointmentScreen extends StatefulWidget {
   @override
   State createState() => new StateAppointment();
-
-  Future<String> initClass() async {
-    return "";
-  }
 }
 
 class StateAppointment extends State<AppointmentScreen> {
@@ -30,26 +28,6 @@ class StateAppointment extends State<AppointmentScreen> {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
-  void onRefresh() async {
-    clearScreen();
-    await Future.delayed(Duration(milliseconds: 1000));
-    refreshController.refreshCompleted();
-  }
-
-  void clearScreen() {
-    setState(() {
-      filterMode = 0;
-    });
-    controllerNamePacient.text = '';
-    controllerCardPacient.text = '';
-    controllerDate = DateTime.now();
-  }
-
-  void onLoading() async {
-    await Future.delayed(Duration(milliseconds: 1000));
-    refreshController.loadComplete();
-  }
-
   @override
   void dispose() {
     controllerCardPacient.dispose();
@@ -60,21 +38,45 @@ class StateAppointment extends State<AppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     print('BUILD StateAppointment');
-    return Scaffold(
-      appBar: Navbar(title: "Citas"),
-      backgroundColor: MaterialColors.bgColorScreen,
-      drawer: MaterialDrawer(currentPage: "Citas"),
-      body: Container(
-        padding: EdgeInsets.only(left: 16.0, right: 16.0),
-        child: contentScreen(context),
+    return SafeArea(
+      child: Scaffold(
+        appBar: Navbar(title: "Citas"),
+        backgroundColor: MaterialColors.bgColorScreen,
+        drawer: MaterialDrawer(currentPage: "Citas"),
+        body: Container(
+          padding: EdgeInsets.only(left: 16.0, right: 16.0),
+          child: contentScreen(context),
+        ),
+        bottomNavigationBar: BottonNavigationBar(option: 1),
+        floatingActionButton: FloatingActionButton(
+            tooltip: 'Filtros para cita',
+            onPressed: () {
+              filterForm();
+            },
+            child: Icon(Icons.search)),
       ),
-      bottomNavigationBar: BottonNavigationBar(option: 1),
-      floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            filterForm();
-          },
-          child: Icon(Icons.search)),
     );
+  }
+
+
+  void onRefresh() async {
+    clearScreen();
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.refreshCompleted();
+  }
+
+  void onLoading() async {
+    await Future.delayed(Duration(milliseconds: 1000));
+    refreshController.loadComplete();
+  }
+
+  void clearScreen() {
+    setState(() {
+      filterMode = 0;
+    });
+    controllerNamePacient.text = '';
+    controllerCardPacient.text = '';
+    controllerDate = DateTime.now();
   }
 
   contentScreen(BuildContext context) {
@@ -87,12 +89,13 @@ class StateAppointment extends State<AppointmentScreen> {
         onLoading: onLoading,
         child: new Column(
           children: <Widget>[
-            Text(
-              "AGENDAMIENTO",
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
+            ListTile(
+              title: Text('Solicitudes',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  )),
+              leading: Icon(Icons.arrow_downward_sharp),
             ),
             loadAppointmentByDayScreen(context),
           ],
@@ -131,7 +134,7 @@ class StateAppointment extends State<AppointmentScreen> {
                             onPressed: () => printInfo(context, item)),
                         trailing: PopupMenuButton<popupButtonDecisition>(
                           onSelected: (popupButtonDecisition result) {
-                            executeDecisiton(result, item.id);
+                            executeDecisiton(result, item);
                           },
                           itemBuilder: (BuildContext context) =>
                               <PopupMenuEntry<popupButtonDecisition>>[
@@ -182,16 +185,19 @@ class StateAppointment extends State<AppointmentScreen> {
   /**
    * En caso de presionar los 3 puntos muestra distintas opciones
    */
-  void executeDecisiton(popupButtonDecisition result, int id) {
+  void executeDecisiton(
+      popupButtonDecisition result, AppointmentModel element) {
     switch (result) {
       case popupButtonDecisition.accept:
-        AppointmentModel.acceptAppointment(id);
+        //AppointmentModel.acceptAppointment(element.id);
+        Get.to(() => ManageAppoinment(appointmenSelect: element));
         break;
       case popupButtonDecisition.reject:
-        AppointmentModel.deleteAppointment(id).then((value) {
+        AppointmentModel.deleteAppointment(element.id).then((value) {
           if (value['message'] == 1) {
             setState(() {});
-            showCenterShortToast('La cita #${id} se elimino correctamente');
+            showCenterShortToast(
+                'La cita #${element.id} se elimino correctamente');
           }
         });
         break;
@@ -274,15 +280,7 @@ class StateAppointment extends State<AppointmentScreen> {
                 onPressed: () {
                   filterAppointment = [];
                   listAppointmentLoad.forEach((element) {
-                    if ((element.pacient.namePacient
-                                .contains(controllerNamePacient.text) &&
-                            controllerNamePacient.text != '') ||
-                        (element.pacient.idCardPacient
-                                .contains(controllerCardPacient.text) &&
-                            controllerCardPacient.text != '') ||
-                        (controllerDate != null &&
-                            controllerDate.day ==
-                                DateTime.parse(element.dateBegin).day)) {
+                    if (conditionsToFilter(element)) {
                       filterAppointment.add(element);
                     }
                   });
@@ -309,5 +307,18 @@ class StateAppointment extends State<AppointmentScreen> {
             ],
           );
         });
+  }
+
+  bool conditionsToFilter(AppointmentModel element) {
+    var nameValidation = stringFilterFormat(
+                element.pacient.namePacient + element.pacient.lastnamePacient)
+            .contains(stringFilterFormat(controllerNamePacient.text)) &&
+        controllerNamePacient.text != '';
+    var cardValidation = (stringFilterFormat(element.pacient.idCardPacient)
+            .contains(stringFilterFormat(controllerCardPacient.text)) &&
+        controllerCardPacient.text != '');
+    var calendarValidation = (controllerDate != null &&
+        controllerDate.day == DateTime.parse(element.dateBegin).day);
+    return nameValidation || cardValidation || calendarValidation;
   }
 }

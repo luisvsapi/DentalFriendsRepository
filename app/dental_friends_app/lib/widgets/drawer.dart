@@ -17,7 +17,6 @@ class MaterialDrawer extends StatelessWidget {
         DrawerHeader(
             decoration: BoxDecoration(color: MaterialColors.drawerHeader),
             child: Container(
-                // padding: EdgeInsets.symmetric(horizontal: 28.0),
                 child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -68,3 +68,17 @@ Future<DateTime> datePickerLimits(BuildContext ctx,
     initialDate: now,
   );
 }
+
+String stringFilterFormat(String value) {
+  return value?.toLowerCase()?.trim() ?? '';
+}
+
+List<Duration> timeInSlot({int startHour, int endHour, int slotDuration}) {
+  List<Duration> list = [];
+  for (var hour = startHour; hour < endHour; hour++) {
+    for (var minute = 0; minute < 60; minute += slotDuration) {
+      list.add(Duration(hours: hour, minutes: minute));
+    }
+  }
+  return list;
+}
