@@ -82,3 +82,7 @@ List<Duration> timeInSlot({int startHour, int endHour, int slotDuration}) {
   }
   return list;
 }
+
+String dateFromDatetime(DateTime date) {
+  return date != null ? date.toString().substring(0, 10) : '';
+}

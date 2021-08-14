@@ -43,6 +43,35 @@ router.get(
       });
   }
 );
+
+router.get(
+  "/stateAndDate/:state/:dateStart/:dateFinal",
+  jwtSecurity.authenticateJWT,
+  async function (req, res, next) {  
+    if(!req.params.state || !req.params.date) {
+      res.json([])
+      return
+    }      
+    console.log(req.params)
+    await appointment
+      .findAll({
+        where: {
+          state: req.params.state, 
+          idUser: req.user.details.split(",")[0],
+          dateBegin: {             
+            [Op.gt]: req.params.dateStart,
+            [Op.lt]: req.params.dateFinal,
+          },
+        },
+        include: [ { model: pacient } ],
+      })
+      .then((data) => { res.json(data); })
+      .catch((err) => {
+        console.log(err.message);
+        res.status(500).send({ message: err.message || "Failure server", });
+      });
+  }
+);
 /**
  * This method receives state, idAppointment, dateBegin, dateFinish to
  * changue the appointment status.

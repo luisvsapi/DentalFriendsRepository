@@ -35,9 +35,13 @@ class AppointmentModel {
       _$AppointmentModelFromJson(json);
   Map<String, dynamic> toJson() => _$AppointmentModelToJson(this);
 
-  static Future<List<AppointmentModel>> getByState({int state = 1}) async {
-    List<dynamic> response = await DioClient().getJsonListRequest(
-        '/appointment/state/$state',
+  static Future<List<AppointmentModel>> getByState({int state = 1, DateTime dateStart,
+    DateTime dateFinal, int mode = 0}) async {
+    String query = '${"/appointment/state/$state"}';
+    if(mode == 1)
+      query = '${"/appointment/stateAndDate/$state/$dateStart/$dateFinal"}';
+    print(query);
+    List<dynamic> response = await DioClient().getJsonListRequest(query,
         tokenValue: await getSecureStorage("token"));
     List<AppointmentModel> result =
         response.map((entry) => AppointmentModel.fromJson(entry)).toList();

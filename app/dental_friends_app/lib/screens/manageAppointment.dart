@@ -26,7 +26,7 @@ class _ManageAppoinmentState extends State<ManageAppoinment> {
       slotDuration: slotCalendarTime.inMinutes);
 
   Duration selectHour;
-  DateTime selectDate;
+  DateTime selectDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _ManageAppoinmentState extends State<ManageAppoinment> {
                   Divider(),
                   Text('Seleccione las opciones para agendar:', style: boldStyle()),
                   Divider(),
-                  Text('${selectDate} ${selectHour}'),
+                  Text('${dateFromDatetime(selectDate) ?? '-'} a las ${selectHour.toString()?.replaceAll(':00.000000', '') ?? '-'}'),
                   Divider(),
                   ExpansionPanelList(
                     expandedHeaderPadding: EdgeInsets.all(10),
@@ -88,7 +88,9 @@ class _ManageAppoinmentState extends State<ManageAppoinment> {
 
   FutureBuilder<List<AppointmentModel>> loadAppointmentByDayScreen(BuildContext context) {
     return FutureBuilder<List<AppointmentModel>>(
-        future: AppointmentModel.getByState(state: 2),
+        future: AppointmentModel.getByState(state: 2, mode: 1,
+            dateStart: selectDate.subtract(Duration(days: 1)),
+            dateFinal: selectDate.add(Duration(days: 1))),
         builder: (context, request) {
           if (request.hasData) {
             List<AppointmentModel> dataRequest = request.data;
