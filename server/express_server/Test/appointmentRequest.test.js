@@ -5,8 +5,9 @@ const api = supertest(app)
 
 let date = new Date('2021-11-03');
 date.setDate(date.getDate()+1);
+//enviar a cambiar el state de la cita previamente para que no sea dependiente
 const appointment = {
-    idCardPacient: "2200723344",
+    idCardPacient: "2200777098",
     namePacient: "Test Name",
     lastnamePacient: "Test Lastname",
     agePacient: 22,
@@ -23,8 +24,8 @@ const appointment = {
 /**
  * Test Cuando se envia valores correctos y el paciente no tiene citas agendadas
  */
+jest.setTimeout(30000);
 test('La solicitud de cita se agenda correctamente', async () =>{
-    
     await api
         .post('/appointment/setAppointment/')
         .send(appointment)
@@ -37,6 +38,7 @@ test('La solicitud de cita se agenda correctamente', async () =>{
 /**
  * Test Cuando se envia valores correctos y el paciente  tiene citas agendadas
  */
+ jest.setTimeout(30000);
 test('La solicitud de cita se rechaza correctamente por cédula repetida', async () =>{
     await api
         .post('/appointment/setAppointment/')

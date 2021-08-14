@@ -24,13 +24,39 @@ async function loadUserData(){
 
 $("#formProfile").submit(function (e) {
   e.preventDefault();
-  var form = document.getElementById("formProfile");
+  /*var form = document.getElementById("formProfile");
+  console.log(form);
   postFileFetch("/user/formProfile", form)
     .then((res) => {
       if (res.message == 1) {
         alertify.success("Datos Guardados Satisfactoriamente");
       } else {
         alertify.error("Hubo un error al guardar los datos!!");
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+   */
+    const data = {
+      name: $("#name").val(),
+      age: $("#age").val(),
+      phone: $("#phone").val(),
+      recognitions: $("#recognitions").val(),
+      university: $("#school").val(),
+      frase: $("#phrase").val(),
+      identityCard: $("#idCard").val(),
+      address: $("#address").val(),
+      speciality: $("#degree").val(),
+    }; 
+    console.log("data",data);
+    postFetch("/user/formProfile", data)
+    .then((res) => {
+      if (res.message == 1) {
+        console.log("res:", res);
+        alertify.success("Datos actualizados correctamente!!");
+      } else {
+        alertify.error("Hubo un error al guardar!!");
       }
     })
     .catch((err) => {

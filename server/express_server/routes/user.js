@@ -132,13 +132,14 @@ router.post(
   jwtSecurity.authenticateJWT,
   async (req, res, next) => {
     let requestBody = req.body;
+    console.log(requestBody);
     let dict = {
       name: requestBody.name,
       age: requestBody.age,
       phone: requestBody.phone,
       recognitions: [requestBody.recognitions],
-      university: requestBody.school,
-      frase: requestBody.phrase,
+      university: requestBody.university,
+      frase: requestBody.frase,
     };
     await userModel
       .findOne({
@@ -149,9 +150,9 @@ router.post(
           userDetailsModel
             .update(
               {
-                identityCard: requestBody.idCard,
+                identityCard: requestBody.identityCard,
                 address: requestBody.address,
-                speciality: requestBody.degree,
+                speciality: requestBody.speciality,
                 details: dict,
                 /*pictureUrl: req.file.path,*/
               },
@@ -218,8 +219,8 @@ router.post(
 /***
  * This method filter the medical appointments that had been succesful completed (code 2)
  */
-//jwtSecurity.authenticateJWT,
-router.post("/medicalResume", async (req, res, next) => {
+
+router.post("/medicalResume", jwtSecurity.authenticateJWT, async (req, res, next) => {
   try {
     let requestBody = req.body;
     const medicalResume = await appointment.findAll({
