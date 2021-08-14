@@ -3,47 +3,45 @@ const { testing } = require('googleapis/build/src/apis/testing')
 const supertest = require('supertest')
 const api = supertest(app)
 
-let date = new Date('2021-11-03');
-date.setDate(date.getDate()+1);
-const appointment = {
-    idCardPacient: "2200723344",
-    namePacient: "Test Name",
-    lastnamePacient: "Test Lastname",
-    agePacient: 22,
-    genderPacient: "M",
-    addressPacient: "av del ejercito",
-    phonePacient: "0123456789",
-    emailPacient: "rogwinalex2@hotmail.com",
-    detailsPacient: {},
-    date: date,
-    treat: "Restauraciones dentales",
-    doctor: 22
-}
-
 /**
  * Test Cuando se envia valores correctos y el paciente no tiene citas agendadas
  */
-test('La solicitud de cita se agenda correctamente', async () =>{
+test('Recupera exitosamente el historial de los pacientes por atributo', async () =>{
     
-    await api
-        .post('/appointment/setAppointment/')
-        .send(appointment)
-        .set('Accept', 'application/json')
-        //.expect('Content-Type', /application\json/)
-        //.expect(200)
-        .expect({ message: 1, infoAppointment: "Ok" })
-        
+    const respuestaTest = await api
+        .post('/user/medicalResume/')
+        .set('Content-Type', 'application/json')
+        .send({
+            "filterMedicalResume": "2200723338"
+        })
+        .timeout(30000)
+        .expect(200);
+    expect(respuestaTest.body).toStrictEqual(
+        [
+            {
+                "id": 154,
+                "dateBegin": "2021-11-04T00:00:00.000Z",
+                "state": "2",
+                "pacient": {
+                    "namePacient": "Test Name",
+                    "lastnamePacient": "Test Lastname"
+                }
+            }
+        ]
+    );
 })
+
 /**
  * Test Cuando se envia valores correctos y el paciente  tiene citas agendadas
  */
-test('La solicitud de cita se rechaza correctamente por cédula repetida', async () =>{
-    await api
-        .post('/appointment/setAppointment/')
-        .send(appointment)
-        .set('Accept', 'application/json')
-        //.expect('Content-Type', /application\json/)
-        //.expect(200)
-        .expect({message: 2, infoAppointment: "Ya existe una cita a su nombre!"})
-        
+test('No recupera el historial de los pacientes por atributo vacio', async () =>{
+    const respuestaTest = await api
+        .post('/user/medicalResume/')
+        .set('Content-Type', 'application/json')
+        .send({
+            "filterMedicalResume": "0"
+        })
+        .timeout(30000)
+        .expect(200);
+    expect(respuestaTest.body).toStrictEqual([]);
 })
