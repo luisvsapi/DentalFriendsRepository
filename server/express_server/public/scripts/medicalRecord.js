@@ -3,6 +3,9 @@ $("#myForm a").click(function (e) {
   $(this).tab("show");
 });
 
+document.addEventListener("DOMContentLoaded",  function () {
+  validateCredentials();
+});
 
 $("#formRecord").submit(function (e) {
   e.preventDefault();

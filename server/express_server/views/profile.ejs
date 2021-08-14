@@ -76,6 +76,11 @@
             <h2>Mi Perfil</h2>
             <p>Por favor, ingrese los siguientes datos</p>
           </div>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <h4 class="col-md-8">Datos Generales:</h4>
+            <div class="col-md-2"></div>
+          </div>
 
           <div class="mt-5 mt-lg-0">
             <form id="formProfile" enctype="multipart/form-data">
@@ -137,15 +142,6 @@
               </div><br>
               <div class="form-row">
                 <div class="col-md-2"></div>
-                <label for="pictureUrl" class="col-form-label col-md-2">Subir imagen de perfil (Se mostrará en la
-                  sección de
-                  Profesionales):</label>
-                <input class="form-control col-md-6" type="file" name="pictureUrl" id="pictureUrl"
-                  accept="image/png, image/jpeg" required />
-                <div class="col-md-2"></div>
-              </div><br>
-              <div class="form-row">
-                <div class="col-md-2"></div>
                 <label for="address" class="col-form-label col-md-2">Dirección:</label>
                 <input class="form-control col-md-6" type="text" name="address"
                   placeholder="ej: Ciudad, Calle, Edificio, Nro casa" id="address" required />
@@ -153,9 +149,29 @@
               </div><br>
 
               <div class="form-row">
+                <div class="col-md-4"></div>
+                <button type="submit" class="btn btn-info center col-md-4" id="save"> Actualizar Datos</button>
+                <div class="col-md-4"></div>
+              </div>
+            </form><br>
+            
+            <div class="row">
+              <div class="col-md-2"></div>
+              <h4 class="col-md-8">Imagen de Perfil:</h4>
+              <div class="col-md-2"></div>
+            </div>
+            <form id="formPictureProfile" enctype="multipart/form-data">
+              <div class="form-row">
                 <div class="col-md-2"></div>
-                <button type="submit" class="btn btn-info center col-md-8" id="save"> Guardar</button>
+                <label for="pictureUrl" class="col-form-label col-md-2">Subir imagen de perfil:</label>
+                <input class="form-control col-md-6" type="file" name="pictureUrl" id="pictureUrl"
+                  accept="image/png, image/jpeg" required />
                 <div class="col-md-2"></div>
+              </div><br>
+              <div class="form-row">
+                <div class="col-md-4"></div>
+                <button type="submit" class="btn btn-info center col-md-4" id="savePicture"> Actualizar Foto </button>
+                <div class="col-md-4"></div>
               </div>
             </form><br>
 
@@ -188,6 +204,7 @@
       <script src="../scripts/alertify.min.js"></script>
       <script src="../scripts/utils.js"></script>
       <script src="../scripts/profile.js"></script>
+      <script src="../scripts/session.js"></script>
 
 
 
