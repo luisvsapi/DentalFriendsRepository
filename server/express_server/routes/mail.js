@@ -13,8 +13,7 @@ router.post("/send", async (req, res, next) => {
       id: appointmentId,
     },
   });
-  const appointmentObject = appointmentResult.dataValues;
-  console.log(appointmentObject);
+  const appointmentObject = appointmentResult.dataValues; 
   const pacientResult = await pacientModel.findOne({
     where: {
       id: appointmentObject.idPacient,
@@ -26,19 +25,14 @@ router.post("/send", async (req, res, next) => {
     },
   });
   const pacientObject = pacientResult.dataValues;
-  const userObject = userResult.dataValues;
-  console.log(pacientObject);
-  console.log(userObject);
+  const userObject = userResult.dataValues; 
   const userDetailsResult = await userDetailsModel.findOne({
     where: {
       idDetails: userObject.idDetails,
     },
   });
-  const userDetailsObject = userDetailsResult.dataValues;
-  console.log(userDetailsObject);
-  const userDetails = userDetailsObject.details;
-  console.log(userDetails);
-
+  const userDetailsObject = userDetailsResult.dataValues; 
+  const userDetails = userDetailsObject.details; 
   sendMail(pacientObject, userDetails, appointmentObject);
 });
 

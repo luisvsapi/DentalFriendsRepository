@@ -61,8 +61,7 @@ router.get(
  * This router renders the principal view of the user. Which shows the appointment requests from pacients.
  */
 router.get(
-  "/home", function (req, res, next) {
-    console.log(req);
+  "/home", function (req, res, next) { 
     res.render(`homeUser`, {});
   }
 );
@@ -286,8 +285,7 @@ router.post("/medicalResume/details", async (req, res, next) => {
       },
     });
     res.send(detalles);
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -299,8 +297,7 @@ router.get("/all", jwtSecurity.authenticateJWT, async (req, res, next) => {
       include: [userDetailsModel],
     });
     res.send(users);
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -314,8 +311,7 @@ router.get(
         attributes: { exclude: ["password"] },
       });
       res.send(users);
-    } catch (error) {
-      console.log(error);
+    } catch (error) { 
       res.sendStatus(500);
     }
   }
@@ -336,8 +332,7 @@ router.get("/allDoctors", async (req, res, next) => {
       ],
     });
     res.send(users);
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -347,8 +342,7 @@ router.get("/allDoctors", async (req, res, next) => {
 router.get("/allTreatments", async (req, res, next) => {
   try {
     res.send(treatments);
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -364,8 +358,7 @@ router.get("/:id", jwtSecurity.authenticateJWT, async (req, res, next) => {
       });
       res.json(userTmp);
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -432,8 +425,7 @@ router.post("/setRecord", async (req, res, next) => {
         where: { id: appointmentData[0].appointments[0].id}
       }
     )
-  } catch (err) {
-    console.log(err);
+  } catch (err) { 
     res.send({ message: 0 });
   }
   res.send({ message: 1 });
@@ -458,8 +450,7 @@ router.get("/byUser/data", jwtSecurity.authenticateJWT, async (req, res, next) =
       });
       res.json(userData[0]);
     }
-  } catch (error) {
-    console.log(error) 
+  } catch (error) { 
     res.send({message: 0});
   }
 });
