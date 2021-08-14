@@ -14,7 +14,7 @@ function modificateActualTime(mode = "day", value = 1) {
       break;
     default:
       break;
-  }
+  } 
   return date;
 }
 

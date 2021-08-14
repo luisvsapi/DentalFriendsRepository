@@ -15,6 +15,7 @@ router.get(
   "/state/:state",
   jwtSecurity.authenticateJWT,
   async function (req, res, next) {
+    console.log("/state/:state");
     let value = req.params.state;
     let user = req.user.details.split(",")[0];
     await appointment
@@ -44,32 +45,31 @@ router.get(
   }
 );
 
-router.get(
-  "/stateAndDate/:state/:dateStart/:dateFinal",
+router.post(
+  "/stateAndDate",
   jwtSecurity.authenticateJWT,
-  async function (req, res, next) {  
-    if(!req.params.state || !req.params.date) {
-      res.json([])
-      return
-    }      
-    console.log(req.params)
-    await appointment
+  async function (req, res, next) {       
+    try {
+      let requestBody = req.body;  
+      console.log('stateAndDate ', new Date(requestBody.dateStart), ' ', new Date(requestBody.dateFinal));
+      await appointment
       .findAll({
         where: {
-          state: req.params.state, 
+          state: `${requestBody.state}`, 
           idUser: req.user.details.split(",")[0],
           dateBegin: {             
-            [Op.gt]: req.params.dateStart,
-            [Op.lt]: req.params.dateFinal,
+            [Op.between]: [ new Date(requestBody.dateStart), new Date(requestBody.dateFinal)]
           },
         },
         include: [ { model: pacient } ],
       })
-      .then((data) => { res.json(data); })
-      .catch((err) => {
-        console.log(err.message);
+      .then((data) =>  { res.json(data); })
+      .catch((err) => { 
         res.status(500).send({ message: err.message || "Failure server", });
       });
+    } catch (error) {
+      res.status(500).send({ message: err.message || "Failure server", });
+    }   
   }
 );
 /**
@@ -82,6 +82,7 @@ router.put(
   jwtSecurity.authenticateJWT,
   async function (req, res, next) {
     let requestBody = req.body;
+    console.log('requestBody ', requestBody);
     try {
       await appointment
         .update(
@@ -94,6 +95,7 @@ router.put(
         )
         .then((dbresponse) => {
           if (dbresponse) {
+            console.log('dbresponse ', dbresponse);
             res.send({ message: 1 });
           }
         });

@@ -27,6 +27,24 @@ class DioClient {
     return [];
   }
 
+  /// Obtener una lista de json en POST
+  Future<List<dynamic>> postJsonListRequest(String method, dynamic dataValue,
+      {String url, String tokenValue}) async {
+    try {
+      Dio client = this.init();
+      client.options.baseUrl = url ?? apiUrl;
+      final response = await client.post(method,
+          data: dataValue,
+          options: Options(
+            headers: {"token": tokenValue},
+          ));
+      return (response.data as List).map((x) => x).toList();
+    } on DioError catch (ex) {
+      print("postJsonObjectRequest " + ex.message);
+    }
+    return [];
+  }
+
   /// Obtener un json en POST
   Future<Map<String, dynamic>> postJsonRequest(String method, dynamic dataValue,
       {String url, String tokenValue}) async {
@@ -38,7 +56,6 @@ class DioClient {
           options: Options(
             headers: {"token": tokenValue},
           ));
-      print("postJsonRequest ${response}");
       return json.decode(response.toString());
     } on DioError catch (ex) {
       print("postJsonRequest " + ex.message);
@@ -47,7 +64,8 @@ class DioClient {
   }
 
   /// Obtener un json en DELETE
-  Future<Map<String, dynamic>> deleteJsonRequest(String method, dynamic dataValue,
+  Future<Map<String, dynamic>> deleteJsonRequest(
+      String method, dynamic dataValue,
       {String url, String tokenValue}) async {
     try {
       Dio client = this.init();
@@ -57,7 +75,6 @@ class DioClient {
           options: Options(
             headers: {"token": tokenValue},
           ));
-      print("deleteJsonRequest ${response}");
       return json.decode(response.toString());
     } on DioError catch (ex) {
       print("postJsonRequest " + ex.message);
@@ -73,12 +90,28 @@ class DioClient {
       client.options.baseUrl = url ?? apiUrl;
       final response = await client.get(method,
           options: Options(headers: {"token": tokenValue}));
-      print("*** postJsonRequest ***");
-      print(response);
-      print("**********************");
       return json.decode(response.toString());
     } on DioError catch (ex) {
       print("getJsonRequest " + ex.message);
+    }
+    return null;
+  }
+
+  /// Obtener un json en PUT
+  Future<Map<String, dynamic>> putJsonRequest(
+      String method, dynamic dataValue,
+      {String url, String tokenValue}) async {
+    try {
+      Dio client = this.init();
+      client.options.baseUrl = url ?? apiUrl;
+      final response = await client.put(method,
+          data: dataValue,
+          options: Options(
+            headers: {"token": tokenValue},
+          ));
+      return json.decode(response.toString());
+    } on DioError catch (ex) {
+      print("putJsonRequest " + ex.message);
     }
     return null;
   }

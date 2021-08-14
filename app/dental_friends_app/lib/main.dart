@@ -1,6 +1,6 @@
 import 'package:dental_friends_app/screens/appointment.dart';
 import 'package:dental_friends_app/screens/components.dart';
-import 'package:dental_friends_app/screens/home.dart';
+import 'package:dental_friends_app/screens/infoAppointment.dart';
 import 'package:dental_friends_app/screens/login.dart';
 import 'package:dental_friends_app/screens/onboarding.dart';
 import 'package:dental_friends_app/screens/profile.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         initialRoute: "/appointment",
         routes: <String, WidgetBuilder>{
           "/onBoarding": (BuildContext context) => new Onboarding(),
-          "/home": (BuildContext context) => new Home(),
+          "/home": (BuildContext context) => new InfoAppoinment(),
           "/components": (BuildContext context) => new Components(),
           "/profile": (BuildContext context) => new Profile(),
           "/settings": (BuildContext context) => new Settings(),
