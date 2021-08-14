@@ -82,3 +82,37 @@ List<Duration> timeInSlot({int startHour, int endHour, int slotDuration}) {
   }
   return list;
 }
+
+String dateFromDatetime(DateTime date) {
+  return date != null ? date.toString().substring(0, 10) : '';
+}
+
+DateTime nowUntil({String mode = 'ALL'}) {
+  final now = DateTime.now();
+  switch(mode) {
+    case 'ALL':
+      return DateTime.utc(now.year, now.month, now.day, now.hour);
+      break;
+    case 'YEAR':
+      return DateTime.utc(now.year, 1, 0, 0);
+      break;
+    case 'MONTH':
+      return DateTime.utc(now.year, now.month, 0, 0);
+      break;
+    case 'DAY':
+      return DateTime.utc(now.year, now.month, now.day, 0);
+      break;
+    case 'HOUR':
+      return DateTime.utc(now.year, now.month, now.day, now.hour);
+      break;
+    default:
+      return now;
+      break;
+  }
+}
+
+List<DateTime> limitDay(DateTime date) {
+  DateTime tmpStart = DateTime.utc(date.year, date.month, date.day, 0, 0);
+  DateTime tmpFinal = DateTime.utc(date.year, date.month, date.day, 23, 59);
+  return [tmpStart, tmpFinal];
+}

@@ -14,7 +14,7 @@ const pacient = require("../models/pacient");
 router.get(
   "/state/:state",
   jwtSecurity.authenticateJWT,
-  async function (req, res, next) {
+  async function (req, res, next) { 
     let value = req.params.state;
     let user = req.user.details.split(",")[0];
     await appointment
@@ -43,6 +43,33 @@ router.get(
       });
   }
 );
+
+router.post(
+  "/stateAndDate",
+  jwtSecurity.authenticateJWT,
+  async function (req, res, next) {       
+    try {
+      let requestBody = req.body;        
+      await appointment
+      .findAll({
+        where: {
+          state: `${requestBody.state}`, 
+          idUser: req.user.details.split(",")[0],
+          dateBegin: {             
+            [Op.between]: [ new Date(requestBody.dateStart), new Date(requestBody.dateFinal)]
+          },
+        },
+        include: [ { model: pacient } ],
+      })
+      .then((data) =>  { res.json(data); })
+      .catch((err) => { 
+        res.status(500).send({ message: err.message || "Failure server", });
+      });
+    } catch (error) {
+      res.status(500).send({ message: err.message || "Failure server", });
+    }   
+  }
+);
 /**
  * This method receives state, idAppointment, dateBegin, dateFinish to
  * changue the appointment status.
@@ -52,7 +79,7 @@ router.put(
   "/changeState",
   jwtSecurity.authenticateJWT,
   async function (req, res, next) {
-    let requestBody = req.body;
+    let requestBody = req.body; 
     try {
       await appointment
         .update(
@@ -64,7 +91,7 @@ router.put(
           { returning: true, where: { id: requestBody.id } }
         )
         .then((dbresponse) => {
-          if (dbresponse) {
+          if (dbresponse) { 
             res.send({ message: 1 });
           }
         });
@@ -178,8 +205,7 @@ router.post("/insert", jwtSecurity.authenticateJWT, async (req, res, next) => {
 router.delete(
   "/delete",
   jwtSecurity.authenticateJWT,
-  async (req, res, next) => {
-    console.log(req.body);
+  async (req, res, next) => { 
     let requestBody = req.body;
     try {
       await appointment.destroy({
