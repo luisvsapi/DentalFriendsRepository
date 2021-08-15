@@ -6,7 +6,7 @@ const api = supertest(app)
 let date = new Date('2021-11-03');
 date.setDate(date.getDate()+1);
 const appointment = {
-    idCardPacient: "2200723333",
+    idCardPacient: "3200723338",
     namePacient: "Test Name",
     lastnamePacient: "Test Lastname",
     agePacient: 22,
