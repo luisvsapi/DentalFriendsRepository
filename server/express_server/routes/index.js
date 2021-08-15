@@ -50,8 +50,7 @@ router.get("/professional", function (req, res, next) {
         required: true,
       },
     })
-    .then((data) => {
-      console.log(data);
+    .then((data) => { 
       res.render(`professional`, { title: "profesionales", docs: data });
     })
     .catch((err) => {

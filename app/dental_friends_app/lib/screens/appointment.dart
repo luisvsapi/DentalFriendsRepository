@@ -37,7 +37,6 @@ class StateAppointment extends State<AppointmentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('BUILD StateAppointment');
     return SafeArea(
       child: Scaffold(
         appBar: Navbar(title: "Citas"),
@@ -49,6 +48,7 @@ class StateAppointment extends State<AppointmentScreen> {
         ),
         bottomNavigationBar: BottonNavigationBar(option: 1),
         floatingActionButton: FloatingActionButton(
+            mini: true,
             tooltip: 'Filtros para cita',
             onPressed: () {
               filterForm();
@@ -117,7 +117,6 @@ class StateAppointment extends State<AppointmentScreen> {
                 child: ListView.builder(
                   itemCount: dataLen,
                   scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
                   itemBuilder: (context, index) {
                     AppointmentModel item = tmpAppointmentLoad[index];
                     return Card(
@@ -189,7 +188,6 @@ class StateAppointment extends State<AppointmentScreen> {
       popupButtonDecisition result, AppointmentModel element) {
     switch (result) {
       case popupButtonDecisition.accept:
-        //AppointmentModel.acceptAppointment(element.id);
         Get.to(() => ManageAppoinment(appointmenSelect: element));
         break;
       case popupButtonDecisition.reject:

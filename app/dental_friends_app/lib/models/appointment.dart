@@ -33,26 +33,41 @@ class AppointmentModel {
 
   factory AppointmentModel.fromJson(Map<String, dynamic> json) =>
       _$AppointmentModelFromJson(json);
+
   Map<String, dynamic> toJson() => _$AppointmentModelToJson(this);
 
   static Future<List<AppointmentModel>> getByState({int state = 1}) async {
     List<dynamic> response = await DioClient().getJsonListRequest(
-        '/appointment/state/$state',
+        '${"/appointment/state/$state"}',
         tokenValue: await getSecureStorage("token"));
     List<AppointmentModel> result =
         response.map((entry) => AppointmentModel.fromJson(entry)).toList();
     return result;
   }
 
+  static Future<List<AppointmentModel>> getByStateAndDate(
+      {int state = 1, DateTime dateStart, DateTime dateFinal}) async {
+    List<dynamic> response = await DioClient().postJsonListRequest(
+        '/appointment/stateAndDate',
+        {'state': "$state", 'dateStart': dateStart.toString(), 'dateFinal': dateFinal.toString()},
+        tokenValue: await getSecureStorage("token"));
+    return response.map((entry) => AppointmentModel.fromJson(entry)).toList();
+  }
+
   static Future<Map<String, dynamic>> deleteAppointment(int id) async {
     Map<String, dynamic> response = await DioClient().deleteJsonRequest(
-      '/appointment/delete', {'id': id}, tokenValue: await getSecureStorage("token"));
-    if (response != null)
-      return response;
+        '/appointment/delete', {'id': id},
+        tokenValue: await getSecureStorage("token"));
+    if (response != null) return response;
     return {'message': 0};
   }
 
-  static void acceptAppointment(int id) {
-
+  static Future<Map<String, dynamic>> updateAppointment(AppointmentModel appointment) async {
+    Map<String, dynamic> response = await DioClient().putJsonRequest(
+        '/appointment/changeState', {'id': appointment.id, 'state': '${appointment.state}',
+        'dateBegin': appointment.dateBegin, 'dateFinish': appointment.dateFinish},
+        tokenValue: await getSecureStorage("token"));
+    if (response != null) return response;
+    return {'message': 0};
   }
 }

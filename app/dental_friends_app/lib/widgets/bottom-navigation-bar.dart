@@ -10,7 +10,7 @@ class BottonNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConvexAppBar(
       items: [
-        TabItem(icon: Icons.home, title: 'Home'),
+        TabItem(icon: Icons.home, title: 'Agenda'),
         TabItem(icon: Icons.assignment_sharp, title: 'Citas'),
       ],
       initialActiveIndex: this.option,
@@ -19,7 +19,6 @@ class BottonNavigationBar extends StatelessWidget {
   }
 
   void tapBottonBar(BuildContext ctx, int i) {
-    print('click index=$i');
     switch (i) {
       case 0:
         Navigator.pushNamed(ctx, '/home');

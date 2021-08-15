@@ -13,8 +13,9 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterLogin(
+      theme: LoginTheme(pageColorLight: Colors.teal),
       title: nameApp,
-      logo: 'assets/img/onboard-background.jpg',
+      //logo: 'assets/img/onboard-background.jpg',
       messages: LoginMessages(
           usernameHint: 'Usuario',
           passwordHint: 'Contraseña',
@@ -40,6 +41,7 @@ class Login extends StatelessWidget {
       emailValidator: (value) {
         return null;
       },
+
     );
   }
 

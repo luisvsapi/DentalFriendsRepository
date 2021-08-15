@@ -1,14 +1,14 @@
 const app = require('../app')
 const { testing } = require('googleapis/build/src/apis/testing')
-const supertest = require('supertest')
+const supertest = require('supertest');
 const api = supertest(app)
 
 let date = new Date('2021-11-03');
 date.setDate(date.getDate()+1);
 const appointment = {
-    idCardPacient: "3200723338",
-    namePacient: "Test Name",
-    lastnamePacient: "Test Lastname",
+    idCardPacient: "2200723367",
+    namePacient: "Rogwi",
+    lastnamePacient: "Correa",
     agePacient: 22,
     genderPacient: "M",
     addressPacient: "av del ejercito",
@@ -19,23 +19,11 @@ const appointment = {
     treat: "Restauraciones dentales",
     doctor: 22
 }
-/**
- * Test Cuando se envia valores incorrectos
- */
-/*
- test('La solicitud de cita se rechaza por fecha igual o anterior', async () =>{
-    const incorrect = appointment;
-    incorrect.date = "2020/12/03"
-    await api
-        .post('/appointment/setAppointment/')
-        .send(appointment)
-        .set('Accept', 'application/json')
-        //.expect('Content-Type', /application\json/)
-        //.expect(200)
-        .expect({ message: 1, infoAppointment: "Ok" })
-        
+
+beforeEach(async () => {
+    jest.setTimeout(15000);
 })
-*/
+
 /**
  * Test Cuando se envia valores correctos y el paciente no tiene citas agendadas
  */
@@ -53,7 +41,7 @@ test('La solicitud de cita se agenda correctamente', async () =>{
 /**
  * Test Cuando se envia valores correctos y el paciente  tiene citas agendadas
  */
-test('La solicitud de cita se rechaza correctamente ', async () =>{
+test('La solicitud de cita se rechaza correctamente por cédula repetida', async () =>{
     await api
         .post('/appointment/setAppointment/')
         .send(appointment)
