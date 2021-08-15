@@ -7,7 +7,7 @@ let date = new Date('2021-11-03');
 date.setDate(date.getDate()+1);
 //enviar a cambiar el state de la cita previamente para que no sea dependiente
 const appointment = {
-    idCardPacient: "2200777098",
+    idCardPacient: "3200723338",
     namePacient: "Test Name",
     lastnamePacient: "Test Lastname",
     agePacient: 22,

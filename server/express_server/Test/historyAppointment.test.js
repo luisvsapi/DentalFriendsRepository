@@ -4,12 +4,13 @@ const supertest = require('supertest')
 const api = supertest(app)
 
 /**
- * Test Cuando se envia valores correctos y el paciente no tiene citas agendadas
+ * Test Cuando recupera exitosamente el historial de los pacientes por atributo
  */
 test('Recupera exitosamente el historial de los pacientes por atributo', async () =>{
     
     const respuestaTest = await api
         .post('/user/medicalResume/')
+        .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
         .set('Content-Type', 'application/json')
         .send({
             "filterMedicalResume": "2200723338"
@@ -32,11 +33,12 @@ test('Recupera exitosamente el historial de los pacientes por atributo', async (
 })
 
 /**
- * Test Cuando se envia valores correctos y el paciente  tiene citas agendadas
+ * Test Cuando no recupera el historial de los pacientes por atributo vacio
  */
 test('No recupera el historial de los pacientes por atributo vacio', async () =>{
     const respuestaTest = await api
         .post('/user/medicalResume/')
+        .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
         .set('Content-Type', 'application/json')
         .send({
             "filterMedicalResume": "0"
