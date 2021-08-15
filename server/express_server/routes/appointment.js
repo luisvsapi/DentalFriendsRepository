@@ -81,6 +81,9 @@ router.put(
   async function (req, res, next) {
     let requestBody = req.body; 
     try {
+      if (requestBody.state >3 || requestBody.state<0){
+        throw err;
+      }
       await appointment
         .update(
           {
@@ -91,8 +94,10 @@ router.put(
           { returning: true, where: { id: requestBody.id } }
         )
         .then((dbresponse) => {
-          if (dbresponse) { 
+          if (dbresponse[0]>0) { 
             res.send({ message: 1 });
+          }else {
+            res.send({message: 0});
           }
         });
     } catch (error) {

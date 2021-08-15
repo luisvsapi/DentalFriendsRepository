@@ -82,7 +82,7 @@ router.get(
           { returning: true, where: { id: req.params.id } }
         )
         .then((dbresponse) => {
-          if (dbresponse) {
+          if (dbresponse[0]>0) {
             res.send({ message: 1 });
           } else {
             res.send({ message: 0 });
@@ -100,7 +100,7 @@ router.get(
           { returning: true, where: { id: req.params.id } }
         )
         .then((dbresponse) => {
-          if (dbresponse) {
+          if (dbresponse[0]>0) {
             res.send({ message: 1 });
           } else {
             res.send({ message: 0 });
@@ -111,6 +111,8 @@ router.get(
             message: err.message || "Database failure.",
           });
         });
+    }else{
+      res.status(400).send({message: 0});
     }
   }
 );

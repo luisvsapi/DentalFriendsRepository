@@ -141,7 +141,7 @@ async function confirmate(id, state, dateBegin, dateFinish){
   }
   await putFetch(`/appointment/changeState`, body)
   .then((res) => {
-    if(res){
+    if(res.message == 1){
       sendNotification(id);
       confirmation.style.display= 'none';
       location.replace('./../../home');
