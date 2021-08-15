@@ -450,6 +450,13 @@
             </list>
           </value>
         </entry>
+        <entry key="searchable_dropdown">
+          <value>
+            <list>
+              <option value="C:/Programs/flutter_windows_2.2.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/searchable_dropdown-1.1.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="shelf">
           <value>
             <list>
@@ -654,6 +661,7 @@
       <root url="file://C:/Programs/flutter_windows_2.2.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/pull_to_refresh-2.0.0/lib" />
       <root url="file://C:/Programs/flutter_windows_2.2.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-3.0.1/lib" />
       <root url="file://C:/Programs/flutter_windows_2.2.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/scrollable_positioned_list-0.1.10/lib" />
+      <root url="file://C:/Programs/flutter_windows_2.2.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/searchable_dropdown-1.1.3/lib" />
       <root url="file://C:/Programs/flutter_windows_2.2.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/shelf-1.2.0/lib" />
       <root url="file://C:/Programs/flutter_windows_2.2.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/shelf_web_socket-0.2.4+1/lib" />
       <root url="file://C:/Programs/flutter_windows_2.2.0-stable/flutter/.pub-cache/hosted/pub.dartlang.org/simple_gesture_detector-0.2.0/lib" />

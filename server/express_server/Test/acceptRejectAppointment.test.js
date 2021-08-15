@@ -1,14 +1,14 @@
 const app = require('../app')
 const { testing } = require('googleapis/build/src/apis/testing')
-const supertest = require('supertest')
+const supertest = require('supertest');
 const api = supertest(app)
 
 let date = new Date('2021-11-03');
 date.setDate(date.getDate()+1);
 const appointment = {
-    idCardPacient: "2200723344",
-    namePacient: "Test Name",
-    lastnamePacient: "Test Lastname",
+    idCardPacient: "2200723367",
+    namePacient: "Rogwi",
+    lastnamePacient: "Correa",
     agePacient: 22,
     genderPacient: "M",
     addressPacient: "av del ejercito",
@@ -19,6 +19,10 @@ const appointment = {
     treat: "Restauraciones dentales",
     doctor: 22
 }
+
+beforeEach(async () => {
+    jest.setTimeout(15000);
+})
 
 /**
  * Test Cuando se envia valores correctos y el paciente no tiene citas agendadas

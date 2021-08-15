@@ -61,8 +61,7 @@ router.get(
  * This router renders the principal view of the user. Which shows the appointment requests from pacients.
  */
 router.get(
-  "/home", function (req, res, next) {
-    console.log(req);
+  "/home", function (req, res, next) { 
     res.render(`homeUser`, {});
   }
 );
@@ -132,13 +131,14 @@ router.post(
   jwtSecurity.authenticateJWT,
   async (req, res, next) => {
     let requestBody = req.body;
+    console.log(requestBody);
     let dict = {
       name: requestBody.name,
       age: requestBody.age,
       phone: requestBody.phone,
       recognitions: [requestBody.recognitions],
-      university: requestBody.school,
-      frase: requestBody.phrase,
+      university: requestBody.university,
+      frase: requestBody.frase,
     };
     await userModel
       .findOne({
@@ -149,9 +149,9 @@ router.post(
           userDetailsModel
             .update(
               {
-                identityCard: requestBody.idCard,
+                identityCard: requestBody.identityCard,
                 address: requestBody.address,
-                speciality: requestBody.degree,
+                speciality: requestBody.speciality,
                 details: dict,
                 /*pictureUrl: req.file.path,*/
               },
@@ -218,8 +218,8 @@ router.post(
 /***
  * This method filter the medical appointments that had been succesful completed (code 2)
  */
-//jwtSecurity.authenticateJWT,
-router.post("/medicalResume", async (req, res, next) => {
+
+router.post("/medicalResume", jwtSecurity.authenticateJWT, async (req, res, next) => {
   try {
     let requestBody = req.body;
     const medicalResume = await appointment.findAll({
@@ -286,8 +286,7 @@ router.post("/medicalResume/details", async (req, res, next) => {
       },
     });
     res.send(detalles);
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -299,8 +298,7 @@ router.get("/all", jwtSecurity.authenticateJWT, async (req, res, next) => {
       include: [userDetailsModel],
     });
     res.send(users);
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -314,8 +312,7 @@ router.get(
         attributes: { exclude: ["password"] },
       });
       res.send(users);
-    } catch (error) {
-      console.log(error);
+    } catch (error) { 
       res.sendStatus(500);
     }
   }
@@ -336,8 +333,7 @@ router.get("/allDoctors", async (req, res, next) => {
       ],
     });
     res.send(users);
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -347,8 +343,7 @@ router.get("/allDoctors", async (req, res, next) => {
 router.get("/allTreatments", async (req, res, next) => {
   try {
     res.send(treatments);
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -364,8 +359,7 @@ router.get("/:id", jwtSecurity.authenticateJWT, async (req, res, next) => {
       });
       res.json(userTmp);
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error) { 
     res.sendStatus(500);
   }
 });
@@ -432,8 +426,7 @@ router.post("/setRecord", async (req, res, next) => {
         where: { id: appointmentData[0].appointments[0].id}
       }
     )
-  } catch (err) {
-    console.log(err);
+  } catch (err) { 
     res.send({ message: 0 });
   }
   res.send({ message: 1 });
@@ -458,8 +451,7 @@ router.get("/byUser/data", jwtSecurity.authenticateJWT, async (req, res, next) =
       });
       res.json(userData[0]);
     }
-  } catch (error) {
-    console.log(error) 
+  } catch (error) { 
     res.send({message: 0});
   }
 });

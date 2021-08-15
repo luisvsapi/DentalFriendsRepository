@@ -13,6 +13,5 @@ module.exports = {
   dialectOptions: {
     useUTC: true,
   },
-  timezone: "-05:00",
-  logging: false,
+  timezone: "-05:00" 
 };
