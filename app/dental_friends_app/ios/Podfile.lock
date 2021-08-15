@@ -5,15 +5,15 @@ PODS:
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
-  - Toast (4.0.0)
-  - webview_flutter (0.0.1):
+  - searchable_dropdown (1.1.1):
     - Flutter
+  - Toast (4.0.0)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
-  - webview_flutter (from `.symlinks/plugins/webview_flutter/ios`)
+  - searchable_dropdown (from `.symlinks/plugins/searchable_dropdown/ios`)
 
 SPEC REPOS:
   trunk:
@@ -26,15 +26,15 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
-  webview_flutter:
-    :path: ".symlinks/plugins/webview_flutter/ios"
+  searchable_dropdown:
+    :path: ".symlinks/plugins/searchable_dropdown/ios"
 
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
+  searchable_dropdown: 5058be32fdc5e0481d300ff2087129072e71bd62
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
-  webview_flutter: 3603125dfd3bcbc9d8d418c3f80aeecf331c068b
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
