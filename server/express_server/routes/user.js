@@ -71,7 +71,7 @@ router.get(
  */
 router.get(
   "/appointments/:action/:id",
-  /*  jwtSecurity.authenticateJWT, */ async function (req, res, next) {
+    jwtSecurity.authenticateJWT,  async function (req, res, next) {
     let action = req.params.action;
     if (action === "Accept") {
       res.render(`appointmentUser`, { id: req.params.id }); //refator needed

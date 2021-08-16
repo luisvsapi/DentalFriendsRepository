@@ -3,14 +3,24 @@ const { testing } = require('googleapis/build/src/apis/testing')
 const supertest = require('supertest')
 const api = supertest(app)
 
+let token;
+
+beforeAll( (done) => {
+    api.post('/login')
+    .send({username: 'doctorDemo' , password: 'demo'})
+    .end((err, response) => {
+        token = response.body.token;
+        done();
+    })
+} )
 /**
  * Test Cuando recupera exitosamente el historial de los pacientes por atributo
  */
-test('Recupera exitosamente el historial de los pacientes por atributo', async () =>{
+test('T01: Recupera exitosamente el historial de los pacientes por atributo', async () =>{
     
     const respuestaTest = await api
         .post('/user/medicalResume/')
-        .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
+        .set('token', token)
         .set('Content-Type', 'application/json')
         .send({
             "filterMedicalResume": "2200723338"
@@ -35,10 +45,10 @@ test('Recupera exitosamente el historial de los pacientes por atributo', async (
 /**
  * Test Cuando no recupera el historial de los pacientes por atributo vacio
  */
-test('No recupera el historial de los pacientes por atributo vacio', async () =>{
+test('T01: No recupera el historial de los pacientes por atributo vacio', async () =>{
     const respuestaTest = await api
         .post('/user/medicalResume/')
-        .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
+        .set('token', token)
         .set('Content-Type', 'application/json')
         .send({
             "filterMedicalResume": "0"

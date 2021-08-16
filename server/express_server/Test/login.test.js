@@ -3,27 +3,10 @@ const { testing } = require('googleapis/build/src/apis/testing')
 const supertest = require('supertest')
 const api = supertest(app)
 
-let date = new Date('2021-11-03');
-date.setDate(date.getDate()+1);
-const appointment = {
-    idCardPacient: "2200723344",
-    namePacient: "Test Name",
-    lastnamePacient: "Test Lastname",
-    agePacient: 22,
-    genderPacient: "M",
-    addressPacient: "av del ejercito",
-    phonePacient: "0123456789",
-    emailPacient: "rogwinalex2@hotmail.com",
-    detailsPacient: {},
-    date: date,
-    treat: "Restauraciones dentales",
-    doctor: 22
-}
-
 /**
  * Test Cuando Loguea exitosamente con credenciales correctas
  */
- test('Loguea exitosamente con credenciales correctas', async () =>{
+ test('T01: Loguea exitosamente con credenciales correctas', async () =>{
     
     await api
         .post('/login/')
@@ -39,7 +22,7 @@ const appointment = {
 /**
  * Test Cuando no loguea exitosamente por credenciales incorrectas
  */
-test('No loguea exitosamente por credenciales incorrectas', async () =>{
+test('T02: No loguea exitosamente por credenciales incorrectas', async () =>{
     const respuestaTest = await api
         .post('/login/')
         .set('Content-Type', 'application/json')
@@ -75,7 +58,7 @@ test('No loguea exitosamente por credenciales incorrectas', async () =>{
 /**
  * Test Cuando no se registra exitosamente por credenciales ya existentes
  */
-test('No se registra exitosamente por credenciales ya existentes', async () =>{
+test('T03: No se registra exitosamente por credenciales ya existentes', async () =>{
     const respuestaTest = await api
         .post('/register/')
         .set('Content-Type', 'application/json')
