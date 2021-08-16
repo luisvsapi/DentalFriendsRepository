@@ -15,5 +15,5 @@ test('Test de finazalizar cita con id no existente', async () =>{
         .get('/user/appointments/Completed/12312/')
         //.expect('Content-Type', /application\/json/)
         .expect(200)
-        .expect({ message: 1})        
+        .expect({ message: 0})        
 })

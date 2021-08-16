@@ -7,7 +7,7 @@ const api = supertest(app)
 /**
  * Test cambiar estado de 0 a 1 para una cita existente
  */
-test('La cita es guardada como aprobada correctamente', async () =>{
+test('T01: La cita es guardada como aprobada correctamente', async () =>{
     
     const respuestaTest = await api
         .put('/appointment/changeState/')
@@ -31,7 +31,7 @@ test('La cita es guardada como aprobada correctamente', async () =>{
 /**
  * Test cambiar estado con una clave de estado incorrecta a una cita existente
  */
-test('La cita no es acceptada porque la clave de estado es diferente de 0,1,2,3', async () =>{
+test('T02: La cita no es acceptada porque la clave de estado es diferente de 0,1,2,3', async () =>{
     const respuestaTest = await api
         .put('/appointment/changeState/')
         .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
@@ -49,7 +49,7 @@ test('La cita no es acceptada porque la clave de estado es diferente de 0,1,2,3'
 /**
  * Test cambiar estado a una cita inexistente
  */
- test('No se acepta cambio a una cita inexistente', async () =>{
+ test('T03: No se acepta cambio a una cita inexistente', async () =>{
     const respuestaTest = await api
         .put('/appointment/changeState/')
         .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
@@ -70,7 +70,7 @@ test('La cita no es acceptada porque la clave de estado es diferente de 0,1,2,3'
 })
 //============================== Reject Test===========
 
-test('Se rechaza correctamente una cita', async () =>{
+test('T04: Se rechaza correctamente una cita', async () =>{
     const respuestaTest = await api
         .get('/user/appointments/Cancel/175')
         .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
@@ -84,7 +84,7 @@ test('Se rechaza correctamente una cita', async () =>{
     )    
 })
 
-test('Se ignora la peticion de rechazo por cita inexistente', async () =>{
+test('T05: Se ignora la peticion de rechazo por cita inexistente', async () =>{
     const respuestaTest = await api
         .get('/user/appointments/Cancel/9999')
         .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
@@ -98,7 +98,7 @@ test('Se ignora la peticion de rechazo por cita inexistente', async () =>{
     )   
 })
 
-test('Se ignora la peticion de rechazo por error en el param de accion', async () =>{
+test('T06: Se ignora la peticion de rechazo por error en el param de accion', async () =>{
     const respuestaTest = await api
         .get('/user/appointments/Cancell/175')
         .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
