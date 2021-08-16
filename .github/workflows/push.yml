@@ -17,9 +17,9 @@ jobs:
         run: npm ci
         working-directory: ./server/express_server
       
-      #- name: Testing
-        #run: npm test
-        #working-directory: ./server/express_server
+      - name: Testing
+        run: npm test
+        working-directory: ./server/express_server
   
   deployJob:
     runs-on: ubuntu-latest
