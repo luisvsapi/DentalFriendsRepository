@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function loadUserData(){
-  let resp = await getFetch(`/user/byUser/data`)
+  await getFetch(`/user/byUser/data`)
     .then((usuario) => {
       document.getElementById('idCard').setAttribute('value', usuario.userDetail.identityCard);
       document.getElementById('name').setAttribute('value', usuario.userDetail.details.name);
@@ -24,20 +24,6 @@ async function loadUserData(){
 
 $("#formProfile").submit(function (e) {
   e.preventDefault();
-  /*var form = document.getElementById("formProfile");
-  console.log(form);
-  postFileFetch("/user/formProfile", form)
-    .then((res) => {
-      if (res.message == 1) {
-        alertify.success("Datos Guardados Satisfactoriamente");
-      } else {
-        alertify.error("Hubo un error al guardar los datos!!");
-      }
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-   */
     const data = {
       name: $("#name").val(),
       age: $("#age").val(),

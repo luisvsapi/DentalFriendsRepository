@@ -11,34 +11,34 @@ $("#formRecord").submit(function (e) {
   e.preventDefault();
   if ($('#embarazo').prop('checked') ) {
     var embarazoValue = true
-  };
+  }
   if ($('#antecedente1').prop('checked') ) {
     var alergiaAntibioticoV = true
-  };
+  }
   if ($('#antecedente2').prop('checked') ) {
     var alergiaAnestesiaV = true
-  };
+  }
   if ($('#antecedente3').prop('checked') ) {
     var hemorragiasV = true
-  };
+  }
   if ($('#antecedente4').prop('checked') ) {
     var SIDAV = true
-  };
+  }
   if ($('#antecedente5').prop('checked') ) {
     var asmaV = true
-  };
+  }
   if ($('#antecedente6').prop('checked') ) {
     var diabetesV = true
-  };
+  }
   if ($('#antecedente7').prop('checked') ) {
     var hipertensionV = true
-  };
+  }
   if ($('#antecedente8').prop('checked') ) {
     var enfermedadCardiacaV = true
-  };
+  }
   if ($('#antecedente9').prop('checked') ) {
     var tuberculosisV = true
-  };
+  }
   const data = {
     idCardPacient: $("#id_card").val(),
     reason: $("#reason").val(),

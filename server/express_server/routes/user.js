@@ -67,14 +67,14 @@ router.get(
 );
 
 /**
- * This router renders the apointment acceptance view
+ * This router renders the apointment acceptance view (needs to be refactored)
  */
 router.get(
   "/appointments/:action/:id",
-  /*  jwtSecurity.authenticateJWT, */ async function (req, res, next) {
+    /*jwtSecurity.authenticateJWT*/  async function (req, res, next) {
     let action = req.params.action;
     if (action === "Accept") {
-      res.render(`appointmentUser`, { id: req.params.id }); //refator needed
+      res.render(`appointmentUser`, { id: req.params.id });
     } else if (action === "Cancel") {
       await appointment
         .update(
@@ -155,7 +155,6 @@ router.post(
                 address: requestBody.address,
                 speciality: requestBody.speciality,
                 details: dict,
-                /*pictureUrl: req.file.path,*/
               },
               { returning: true, where: { idDetails: doc.idDetails } }
             )
@@ -179,6 +178,7 @@ router.post(
 );
 /**
  * This method updates the user profile picture
+ * (needs a refactor)
  */
 router.post(
   "/formPictureProfile",
@@ -254,14 +254,6 @@ router.post("/medicalResume", jwtSecurity.authenticateJWT, async (req, res, next
       ],
     });
     for (element in medicalResume) {
-      /*
-      let dateAppointment = new Date();
-      dateAppointment.setTime(Date.parse(medicalResume[element].dateBegin));
-      var dateToJson = dateAppointment.getDay() + " ";
-      dateToJson = utils.addNameMonth(dateAppointment, dateToJson);
-      dateToJson += " " + dateAppointment.getFullYear();
-      medicalResume[element].dateBegin = dateToJson;*/
-      
       var fullName =
       medicalResume[element]["pacient.namePacient"] +
       " " +
@@ -272,7 +264,6 @@ router.post("/medicalResume", jwtSecurity.authenticateJWT, async (req, res, next
     }
     res.send(medicalResume);
   } catch (error) {
-    // deberia ser este formato res.send({ message: 0 });
     res.sendStatus(500);
   }
 });
@@ -282,7 +273,6 @@ router.post("/medicalResume/details", async (req, res, next) => {
   try {
     let requestBody = req.body;
     const detalles = await appointment.findOne({
-      /*attributes: ["details"],*/
       where: {
         id: requestBody.idAppointment,
       },
@@ -292,7 +282,7 @@ router.post("/medicalResume/details", async (req, res, next) => {
     res.sendStatus(500);
   }
 });
-//¿Donde se usa?
+
 router.get("/all", jwtSecurity.authenticateJWT, async (req, res, next) => {
   try {
     const users = await userModel.findAll({
@@ -319,7 +309,7 @@ router.get(
     }
   }
 );
-//validar que solo se muestren ls doctores con true, y hacder include para sacar name y apellido
+
 router.get("/allDoctors", async (req, res, next) => {
   try {
     const users = await userModel.findAll({

@@ -3,15 +3,26 @@ const { testing } = require('googleapis/build/src/apis/testing')
 const supertest = require('supertest');
 const api = supertest(app)
 
+let token;
+
+beforeAll( (done) => {
+    api.post('/login')
+    .send({username: 'doctorDemo' , password: 'demo'})
+    .end((err, response) => {
+        token = response.body.token;
+        done();
+    })
+} )  
+
 //============================== Accept Test===========
+
 /**
  * Test cambiar estado de 0 a 1 para una cita existente
  */
 test('T01: La cita es guardada como aprobada correctamente', async () =>{
-    
     const respuestaTest = await api
         .put('/appointment/changeState/')
-        .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
+        .set('token', token)
         .set('Accept', 'application/json')
         .send({
             id: 175,
@@ -34,7 +45,7 @@ test('T01: La cita es guardada como aprobada correctamente', async () =>{
 test('T02: La cita no es acceptada porque la clave de estado es diferente de 0,1,2,3', async () =>{
     const respuestaTest = await api
         .put('/appointment/changeState/')
-        .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
+        .set('token', token)
         .set('Accept', 'application/json')
         .send({
             id: 175,
@@ -52,7 +63,7 @@ test('T02: La cita no es acceptada porque la clave de estado es diferente de 0,1
  test('T03: No se acepta cambio a una cita inexistente', async () =>{
     const respuestaTest = await api
         .put('/appointment/changeState/')
-        .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
+        .set('token', token)
         .set('Accept', 'application/json')
         .send({
             id: 9999,
@@ -73,7 +84,7 @@ test('T02: La cita no es acceptada porque la clave de estado es diferente de 0,1
 test('T04: Se rechaza correctamente una cita', async () =>{
     const respuestaTest = await api
         .get('/user/appointments/Cancel/175')
-        .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
+        .set('token', token)
         .set('Accept', 'application/json')
         .timeout(50000)
         .expect(200); 
@@ -87,7 +98,7 @@ test('T04: Se rechaza correctamente una cita', async () =>{
 test('T05: Se ignora la peticion de rechazo por cita inexistente', async () =>{
     const respuestaTest = await api
         .get('/user/appointments/Cancel/9999')
-        .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
+        .set('token', token)
         .set('Accept', 'application/json')
         .timeout(50000)
         .expect(200); 
@@ -101,7 +112,7 @@ test('T05: Se ignora la peticion de rechazo por cita inexistente', async () =>{
 test('T06: Se ignora la peticion de rechazo por error en el param de accion', async () =>{
     const respuestaTest = await api
         .get('/user/appointments/Cancell/175')
-        .set('token','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXRhaWxzIjoiMjMsbGF1emFtbGFyLGxhdXJ2dnpsQGdtYWlsLmNvbSIsInVzZXIiOiJsYXV6YW1sYXIiLCJwYXNzd29yZCI6IiQyYiQxMCRDTVMxSnVoeWpjcGxJaXUuRG5LOS4uRmRIeVNkeWdJYzFEMm1nQzltUzBFeVJtTnY1Lkp5dSIsImlhdCI6MTYyOTAxMzE1MSwiZXhwIjoxNjI5MDk5NTUxfQ.SXU0uGBiVSf4lGxYZWvf4jTj9H6Ve86FbbSWe7SEeAY')
+        .set('token', token)
         .set('Accept', 'application/json')
         .timeout(50000)
         .expect(400); 

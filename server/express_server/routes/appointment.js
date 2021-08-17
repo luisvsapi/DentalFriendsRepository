@@ -173,10 +173,10 @@ router.post("/setAppointment", async (req, res, next) => {
       const dataTemp = {
         state: "1",
         details: {},
-        idUser: requestBody.doctor,//
+        idUser: requestBody.doctor,
         idPacient: pacientTmp.id,
         treatment: requestBody.treat,
-        dateBegin: requestBody.date, //
+        dateBegin: requestBody.date,
       };
       let appointmentNew = await appointment.create(dataTemp);
       await appointmentNew.save();

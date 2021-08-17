@@ -5,12 +5,6 @@ document.addEventListener("DOMContentLoaded",  function () {
   validateCredentials();
 });
 
-$(document).ready(function () {
-  //let htmlSelect = `<tr> <th>Id</th> <th>Fecha</th> <th>Paciente</th> <th>Detalles</th></tr>`;
-  //htmlSelect += `<tr><td>1</td><td>01/06/2021</td><td>Nombre</td><td><button type="button" id=1 onclick="mostrarDetalles(this.id,event)" class="btn btn-primary" data-toggle="modal" data-target="#modalMedicalResume">Detalles</button></td></tr>`;
-  //$("#medicalResumeTable").html(htmlSelect);
-});
-
 $("#searchMedicalResume").submit(async function (e) {
   e.preventDefault();
   resume = await postFetch("/user/medicalResume", {

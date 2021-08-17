@@ -37,10 +37,6 @@ function initializeCalendar(calendarEl){
       meridiem: "short",
     },
     events: [],
-    /* dateClick: function(info){
-        alert("Momento")
-        console.log("Recuperado:",info)
-      }, */
     select: function (info) {
       showConfirmation(info);
     }
@@ -49,7 +45,7 @@ function initializeCalendar(calendarEl){
 }
 
 async function getAvaliablesAppointment() {
-  let resp = await getFetch(`/appointment/byUser`)
+  await getFetch(`/appointment/byUser`)
     .then((res) => {
       res.forEach(element => {
         calendar.addEvent({
@@ -62,63 +58,9 @@ async function getAvaliablesAppointment() {
     })
     .then(()=>{
       calendar.render();
-      //agregar alertify
     })
     .catch(err=>console.log("Error en recuperación de las citas",err));
 }
-
-/* function deleteAppointment(startDate = '') {
-  let startDateTmp = dateToInt(startDate);
-  if (appointmentAvaliable.has(startDateTmp)) {
-      let appointmentSelect = appointmentAvaliable.get(startDateTmp);
-      alertify.confirm('Eliminar cita', `Desea eliminar esta cita? <br>${printUserDetails(appointmentSelect)}`, function () {
-          deleteFetch(`/appointment/delete`, { id: appointmentSelect.id }).then((res) => {
-              alertify.success('Cita eliminada correctamente');
-              fillCalendar();
-          })  
-      }, noActionAllert).set(aceptOrNot);
-  }
-} 
-
-function printUserDetails(userDetails = {}) {
-    if (userDetails.pacient) {
-        return `
-        <br> 
-        <table class="table table-sm table-bordered table-hover">        
-            <tr>
-                <td>Cedula</td>
-                <td>${userDetails.pacient.id_card_pacient} </td>
-            </tr>
-            <tr>
-                <td>Celular</td>
-                <td>${userDetails.pacient.phone_pacient}</td>
-            </tr>
-            <tr>
-                <td>Correo</td>
-                <td>${userDetails.pacient.email_pacient}</td>
-            </tr>
-        </table> 
-            `
-    }
-    return ``
-}
-
-function createAppointment(dateIso = '') {
-    postFetch(`/appointment/insert`, { id_user: document.cookie.user, date: dateIso }).then((res) => {
-        fillCalendar();
-    })
-}
-
-function fillCalendar() {
-    clearCalendar()
-    getAvaliablesAppointment()
-}
-
-function clearCalendar() {
-    calendar.getEvents().forEach(element => {
-        element.remove();
-    });
-} */
 
 async function showConfirmation(content){
   let confirmation = document.getElementById('modalAppointment');

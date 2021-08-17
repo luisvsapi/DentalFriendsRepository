@@ -14,7 +14,7 @@ async function loadDoctors() {
     });
     $("#doctorPac").html(htmlSelect);
   } catch (error) {
-    //
+    alertify.error("Error al cargar Doctores");
   }  
 }
 
