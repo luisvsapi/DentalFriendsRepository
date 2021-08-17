@@ -90,9 +90,9 @@ async function sendMail(pacient, dentistDetails, appointment) {
         mailParams.date = "No asignada.";
     }
     let mailOptions = {
-      from: `Agendamiento DentalFriends.EC <${authOptions.mail}>`, // sender address
-      to: `${pacient.emailPacient}`, // list of receivers
-      subject: `${mailParams.subject}`, // Subject line
+      from: `Agendamiento DentalFriends.EC <${authOptions.mail}>`, 
+      to: `${pacient.emailPacient}`, 
+      subject: `${mailParams.subject}`, 
       html: utils.generateMailTemplate(
         mailParams.subject,
         pacient.namePacient,
@@ -105,7 +105,7 @@ async function sendMail(pacient, dentistDetails, appointment) {
       ),
     };
 
-    // send mail with defined transport object
+    
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log(error);
