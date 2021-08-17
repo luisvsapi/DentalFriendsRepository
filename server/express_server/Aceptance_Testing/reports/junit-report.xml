@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="llegar-a-la-página-de-consejos-de-salud-de-detanlfriendsec;ver-consejos-de-la-pagina-dental-friends" tests="2" failures="0" skipped="0">
+        <properties>
+            <property name="URI" value="C:/Users/isavi/Desktop/Proyecto 2/DentalFriendsRepository/server/express_server/Aceptance_Testing/features/test-consejos.feature">
+            </property>
+        </properties>
+        <testcase name="When Entro en la pagina de consejos" classname="llegar-a-la-página-de-consejos-de-salud-de-detanlfriendsec;ver-consejos-de-la-pagina-dental-friends" time="7.4510674">
+        </testcase>
+        <testcase name="Then Debo ver 3 consejos de salud" classname="llegar-a-la-página-de-consejos-de-salud-de-detanlfriendsec;ver-consejos-de-la-pagina-dental-friends" time="0.0152286">
+        </testcase>
+    </testsuite>
+    <testsuite name="llegar-a-la-página-inicial-de-detanlfriendsec;home-de-la-pagina-dental-friends" tests="2" failures="0" skipped="0">
+        <properties>
+            <property name="URI" value="C:/Users/isavi/Desktop/Proyecto 2/DentalFriendsRepository/server/express_server/Aceptance_Testing/features/test-home.feature">
+            </property>
+        </properties>
+        <testcase name="When Entro en la home" classname="llegar-a-la-página-inicial-de-detanlfriendsec;home-de-la-pagina-dental-friends" time="7.2215627">
+        </testcase>
+        <testcase name="Then Debo ver 6 opciones en el menu" classname="llegar-a-la-página-inicial-de-detanlfriendsec;home-de-la-pagina-dental-friends" time="0.0243955">
+        </testcase>
+    </testsuite>
+    <testsuite name="llegar-a-la-página-de-profesionales-de-detanlfriendsec;ver-perfiles-de-la-pagina-dental-friends" tests="2" failures="0" skipped="0">
+        <properties>
+            <property name="URI" value="C:/Users/isavi/Desktop/Proyecto 2/DentalFriendsRepository/server/express_server/Aceptance_Testing/features/test-profesionales.feature">
+            </property>
+        </properties>
+        <testcase name="When Entro en profesionales" classname="llegar-a-la-página-de-profesionales-de-detanlfriendsec;ver-perfiles-de-la-pagina-dental-friends" time="6.430547">
+        </testcase>
+        <testcase name="Then Debo ver 3 perfiles de doctores y 1 descripcion" classname="llegar-a-la-página-de-profesionales-de-detanlfriendsec;ver-perfiles-de-la-pagina-dental-friends" time="0.013761">
+        </testcase>
+    </testsuite>
+    <testsuite name="llegar-a-la-página-inicial-de-detanlfriendsec;ver-tratamientos-de-la-pagina-dental-friends" tests="2" failures="0" skipped="0">
+        <properties>
+            <property name="URI" value="C:/Users/isavi/Desktop/Proyecto 2/DentalFriendsRepository/server/express_server/Aceptance_Testing/features/test-tratamientos.feature">
+            </property>
+        </properties>
+        <testcase name="When Entro en la pagina de tratamiento" classname="llegar-a-la-página-inicial-de-detanlfriendsec;ver-tratamientos-de-la-pagina-dental-friends" time="6.8738487">
+        </testcase>
+        <testcase name="Then Debo ver 6 tratamientos" classname="llegar-a-la-página-inicial-de-detanlfriendsec;ver-tratamientos-de-la-pagina-dental-friends" time="0.0136437">
+        </testcase>
+    </testsuite>
+</testsuites>

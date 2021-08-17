@@ -1,0 +1,16 @@
+{
+  "name": "selenium-cucumber-js-acceptamce-testing-dentalfriends",
+  "version": "6.14.8",
+  "description": "many test for web aplation",
+  "main": "index.js",
+  "dependencies": {
+    "moment": "^2.22.2",
+    "selenium-cucumber-js": "^1.8.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node ./node_modules/selenium-cucumber-js/index.js -s ./step-definitions"
+  },
+  "author": "Isaac Solis",
+  "license": "Impala-Dev"
+}

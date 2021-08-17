@@ -1,0 +1,238 @@
+[
+  {
+    "description": "  Como usuario para conocer la pagina de los doctores odontologos,\n  quiero entrar en la parte de consejos dentales de DentalFriendsEC y ver los consejos de limpieza dental que me ofrecen.",
+    "elements": [
+      {
+        "id": "llegar-a-la-página-de-consejos-de-salud-de-detanlfriendsec;ver-consejos-de-la-pagina-dental-friends",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Ver Consejos de la pagina Dental Friends",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "name": "Entro en la pagina de consejos",
+            "result": {
+              "status": "passed",
+              "duration": 7451067400
+            },
+            "line": 5,
+            "match": {
+              "location": "2\\DentalFriendsRepository\\server\\express_server\\Aceptance_Testing\\step-definitions\\test-consejos-step.js:3"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "name": "Debo ver 3 consejos de salud",
+            "result": {
+              "status": "passed",
+              "duration": 15228600
+            },
+            "line": 6,
+            "match": {
+              "location": "2\\DentalFriendsRepository\\server\\express_server\\Aceptance_Testing\\step-definitions\\test-consejos-step.js:8"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "After ",
+            "result": {
+              "status": "passed",
+              "duration": 339602700
+            },
+            "hidden": true,
+            "match": {
+              "location": "2\\DentalFriendsRepository\\server\\express_server\\Aceptance_Testing\\node_modules\\selenium-cucumber-js\\runtime\\world.js:250"
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "llegar-a-la-página-de-consejos-de-salud-de-detanlfriendsec",
+    "keyword": "Feature",
+    "line": 1,
+    "name": "Llegar a la página de consejos de salud de DetanlFriendsEc",
+    "tags": [],
+    "uri": "C:/Users/isavi/Desktop/Proyecto 2/DentalFriendsRepository/server/express_server/Aceptance_Testing/features/test-consejos.feature"
+  },
+  {
+    "description": "  Como usuario para conocer la pagina de los doctores odontologos,\n  quiero entrar en la home de DentalFriendsEC y ver el menu que me ofrece.",
+    "elements": [
+      {
+        "id": "llegar-a-la-página-inicial-de-detanlfriendsec;home-de-la-pagina-dental-friends",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Home de la pagina Dental Friends",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "name": "Entro en la home",
+            "result": {
+              "status": "passed",
+              "duration": 7221562700
+            },
+            "line": 5,
+            "match": {
+              "location": "2\\DentalFriendsRepository\\server\\express_server\\Aceptance_Testing\\step-definitions\\test-home-step.js:3"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "name": "Debo ver 6 opciones en el menu",
+            "result": {
+              "status": "passed",
+              "duration": 24395500
+            },
+            "line": 6,
+            "match": {
+              "location": "2\\DentalFriendsRepository\\server\\express_server\\Aceptance_Testing\\step-definitions\\test-home-step.js:8"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "After ",
+            "result": {
+              "status": "passed",
+              "duration": 414758000
+            },
+            "hidden": true,
+            "match": {
+              "location": "2\\DentalFriendsRepository\\server\\express_server\\Aceptance_Testing\\node_modules\\selenium-cucumber-js\\runtime\\world.js:250"
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "llegar-a-la-página-inicial-de-detanlfriendsec",
+    "keyword": "Feature",
+    "line": 1,
+    "name": "Llegar a la página inicial de DetanlFriendsEc",
+    "tags": [],
+    "uri": "C:/Users/isavi/Desktop/Proyecto 2/DentalFriendsRepository/server/express_server/Aceptance_Testing/features/test-home.feature"
+  },
+  {
+    "description": "  Como usuario para conocer la pagina de los doctores odontologos,\n  quiero entrar a la parte de Profesionales de DentalFriendsEC y ver el perfil de los doctores.",
+    "elements": [
+      {
+        "id": "llegar-a-la-página-de-profesionales-de-detanlfriendsec;ver-perfiles-de-la-pagina-dental-friends",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Ver perfiles de la pagina Dental Friends",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "name": "Entro en profesionales",
+            "result": {
+              "status": "passed",
+              "duration": 6430547000
+            },
+            "line": 5,
+            "match": {
+              "location": "2\\DentalFriendsRepository\\server\\express_server\\Aceptance_Testing\\step-definitions\\test-profesionales-step.js:3"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "name": "Debo ver 3 perfiles de doctores y 1 descripcion",
+            "result": {
+              "status": "passed",
+              "duration": 13761000
+            },
+            "line": 6,
+            "match": {
+              "location": "2\\DentalFriendsRepository\\server\\express_server\\Aceptance_Testing\\step-definitions\\test-profesionales-step.js:8"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "After ",
+            "result": {
+              "status": "passed",
+              "duration": 418991000
+            },
+            "hidden": true,
+            "match": {
+              "location": "2\\DentalFriendsRepository\\server\\express_server\\Aceptance_Testing\\node_modules\\selenium-cucumber-js\\runtime\\world.js:250"
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "llegar-a-la-página-de-profesionales-de-detanlfriendsec",
+    "keyword": "Feature",
+    "line": 1,
+    "name": "Llegar a la página de profesionales de DetanlFriendsEc",
+    "tags": [],
+    "uri": "C:/Users/isavi/Desktop/Proyecto 2/DentalFriendsRepository/server/express_server/Aceptance_Testing/features/test-profesionales.feature"
+  },
+  {
+    "description": "  Como usuario para conocer la pagina de los doctores odontologos,\n  quiero entrar en la pagina de tratamientos de DentalFriendsEC y ver lo tratamientos que ofrecen.",
+    "elements": [
+      {
+        "id": "llegar-a-la-página-inicial-de-detanlfriendsec;ver-tratamientos-de-la-pagina-dental-friends",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Ver Tratamientos de la pagina Dental Friends",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "name": "Entro en la pagina de tratamiento",
+            "result": {
+              "status": "passed",
+              "duration": 6873848700
+            },
+            "line": 5,
+            "match": {
+              "location": ".js:3"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "name": "Debo ver 6 tratamientos",
+            "result": {
+              "status": "passed",
+              "duration": 13643700
+            },
+            "line": 6,
+            "match": {
+              "location": ".js:8"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "After ",
+            "result": {
+              "status": "passed",
+              "duration": 445263200
+            },
+            "hidden": true,
+            "match": {
+              "location": "2\\DentalFriendsRepository\\server\\express_server\\Aceptance_Testing\\node_modules\\selenium-cucumber-js\\runtime\\world.js:250"
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "llegar-a-la-página-inicial-de-detanlfriendsec",
+    "keyword": "Feature",
+    "line": 1,
+    "name": "Llegar a la página inicial de DetanlFriendsEc",
+    "tags": [],
+    "uri": "C:/Users/isavi/Desktop/Proyecto 2/DentalFriendsRepository/server/express_server/Aceptance_Testing/features/test-tratamientos.feature"
+  }
+]
