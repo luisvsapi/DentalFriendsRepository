@@ -132,8 +132,7 @@ router.post(
   /*upload.single("pictureUrl"),*/
   jwtSecurity.authenticateJWT,
   async (req, res, next) => {
-    let requestBody = req.body;
-    console.log(requestBody);
+    let requestBody = req.body; 
     let dict = {
       name: requestBody.name,
       age: requestBody.age,
